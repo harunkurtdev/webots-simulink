@@ -24,17 +24,4 @@ The following dependencies should be installed and configured properly:
 - **Webots API** (Ensure Webots' shared libraries are accessible by MATLAB)
 - **MATLAB External Library Support** (Proper setup of `calllib` for Webots' functions)
 
-## Environment Setup
-1. Install Webots and ensure it runs correctly.
-2. Install MATLAB and required toolboxes.
-3. Configure MATLAB to recognize Webots' shared libraries:
-   ```matlab
-   addpath('C:/Program Files/Webots/lib/controller/matlab')
-   ```
-4. Verify that `calllib` can access Webots functions:
-   ```matlab
-   loadlibrary('Controller', 'controller.h')
-   ```
-   Ensure no errors occur.
-
 Once these requirements are met, proceed to the [Setup Guide](setup.md) to configure the bridge.
