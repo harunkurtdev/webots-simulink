@@ -16,6 +16,7 @@ nav:
   - Advanced:
       - Customizing the Bridge: advanced/customization.md
       - Debugging: advanced/debugging.md
+      - Export ROS2 Package: advanced/export-ros2.md
   - Examples:
       - Inverted Pendulum Example: examples/inverted-pendulum.md
       - Wheel Chair Example: examples/wheel-chair.md
