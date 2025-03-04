@@ -1,1 +1,1 @@
- Write inverted pendulum application
+Inverted Pendulum app
