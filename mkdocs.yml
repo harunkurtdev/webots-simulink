@@ -54,7 +54,7 @@ extra:
   social:
     - icon: simple/youtube
       link: https://youtube.com/@harunkurtdev
-    - icon: simple/linkedin
-      link: https://linkedin.com/in/
+    # - icon: simple/linkedin
+      # link: https://linkedin.com/in/
 
 copyright: Copyright &copy; 2025 harunkurtdev
