@@ -5,9 +5,9 @@ site_author: Harun KURT
 site_keywords: Webots, Simulink, Robotics, Simulation, Bridge
 
 nav:
-  - Home: ./docs/index.md
+  - Home: index.md
   - Installation:
-      - Requirements: ./docs/installation/requirements.md
+      - Requirements: installation/requirements.md
       - Setup: installation/setup.md
   - Usage:
       - Connecting Webots and Simulink: usage/connecting.md
@@ -16,6 +16,11 @@ nav:
   - Advanced:
       - Customizing the Bridge: advanced/customization.md
       - Debugging: advanced/debugging.md
+  - Examples:
+      - Inverted Pendulum Example: examples/inverted-pendulum.md
+      - Wheel Chair Example: examples/wheel-chair.md
+      - Crazy Drone Example: examples/crazyflie-drone.md
+      - BlueBoat USV Example: examples/blueboat-usv.md
   - Troubleshooting: troubleshooting.md
   - FAQ: faq.md
   - References: references.md
