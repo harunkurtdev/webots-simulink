@@ -3,7 +3,7 @@
 Before setting up the **Webots-Simulink Bridge**, ensure that your system meets the following requirements.
 
 ## Software Requirements
-- **MATLAB & Simulink** (Recommended: R2021a or later)
+- **MATLAB & Simulink** (Recommended: R2024a or later)
 - **Webots** (Recommended: Latest stable version)
 - **C Compiler** compatible with MATLAB (e.g., MinGW, MSVC)
 
