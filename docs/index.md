@@ -2,7 +2,7 @@
 
 Welcome to the documentation for the **Webots-Simulink Bridge**, a framework that enables communication between the Webots robotic simulator and Simulink. This bridge allows users to simulate and control robotic systems using Simulink while visualizing their behavior in Webots.
 
-![InvertedPendulumVideo](./docs//assets/videos/inverted_pendulum/inverted_pendulum.gif)
+![InvertedPendulumVideo](./assets/videos/inverted_pendulum/inverted_pendulum.gif)
 
 ## Overview
 This project enables real-time interaction between Simulink and Webots allowing:

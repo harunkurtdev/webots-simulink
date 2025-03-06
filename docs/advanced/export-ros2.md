@@ -1,8 +1,6 @@
+ ## Exporting Robot Model in ROS 2 Format
 
- ## Exporting to ROS 2
-
- To export the robot model in ROS 2 format, we need to use the `export_ros2` function. This function takes two arguments: the name of the robot and the path where you want to save the exported file. The exported file will be a URDF (Unified Robot Description Format) file that can be used by other programs such as Gazebo or ROS 2.
-
+In this section, we will learn how to export the robot model in ROS 2 format, we need to use the `export_ros2` function. This function takes two arguments: the name of the robot and the path where you want to save the exported file. The exported file will be a URDF (Unified Robot Description Format) file that can be used by other programs such as Gazebo or ROS 2.
 
 ## Webots Simulation Blocks
 
@@ -37,7 +35,10 @@ We getting from with imu sensor.
 ![image7](../assets/images/advanced/ros2_export/7.png)
 
 
+## Reference
 
-
+- [Webots Documentation](https://www.webots.org/documentation)
+- [Simulink Documentation](https://www.mathworks.com/products/simulink.html)
+- [ROS 2 Documentation](https://docs.ros.org/en/humble/index.html)
 
 
