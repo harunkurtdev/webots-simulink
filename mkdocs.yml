@@ -3,6 +3,8 @@ site_url: https://harunkurtdev.github.io/webots-simulink
 site_description: Documentation for bridging Webots and Simulink for robotics simulation.
 site_author: Harun KURT
 site_keywords: Webots, Simulink, Robotics, Simulation, Bridge
+site_language: en
+
 
 nav:
   - Home: index.md
@@ -12,13 +14,14 @@ nav:
   - Usage:
       - Connecting Webots and Simulink: usage/connecting.md
       - Running Simulations: usage/running.md
-      - Data Exchange: usage/data_exchange.md
+      # - Data Exchange: usage/data_exchange.md
   - Advanced:
       - Customizing the Bridge: advanced/customization.md
       - Debugging: advanced/debugging.md
       - Export ROS2 Package: advanced/export-ros2.md
   - Examples:
       - Inverted Pendulum Example: examples/inverted-pendulum.md
+      - Rotary Inverted Pendulum Example: examples/rotary-inverted-pendulum.md
       - Wheel Chair Example: examples/wheel-chair.md
       - Crazyflie Drone Example: examples/crazyflie-drone.md
       - BlueBoat USV Example: examples/blueboat-usv.md
@@ -54,6 +57,17 @@ theme:
 
 markdown_extensions:
   - attr_list
+  - def_list
+  - fenced_code
+  - footnotes
+  - tables
+  - toc:
+      permalink: true
+      permalink_class: headerlink
+      permalink_title: Permalink
+  - pymdownx.betterem
+  - pymdownx.caret
+  - pymdownx.details
   - pymdownx.emoji:
       emoji_index: !!python/name:material.extensions.emoji.twemoji
       emoji_generator: !!python/name:material.extensions.emoji.to_svg
