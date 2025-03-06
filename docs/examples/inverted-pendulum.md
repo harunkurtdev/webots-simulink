@@ -1,4 +1,4 @@
-# Inverted Pendulum: System Modeling
+# Inverted Pendulum
 
 The inverted pendulum is a classic example in control system literature due to its inherent instability when open loop. In this system, a pendulum is mounted on a motorized cart. The control objective is to balance the pendulum by applying a force to the cart.
 
@@ -33,6 +33,7 @@ The inverted pendulum is a classic example in control system literature due to i
 ## 2. State-Space
 
 ![State-Space Diagram](../assets/images/inverted_pendulum/state_space.png)
+
 ![State-Space Diagram 1](../assets/images/inverted_pendulum/state_space1.png)
 
 **Note:** It is recommended to use PID tuning to further refine the control performance of the inverted pendulum system.
