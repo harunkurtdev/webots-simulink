@@ -20,7 +20,7 @@ nav:
   - Examples:
       - Inverted Pendulum Example: examples/inverted-pendulum.md
       - Wheel Chair Example: examples/wheel-chair.md
-      - Crazy Drone Example: examples/crazyflie-drone.md
+      - Crazyflie Drone Example: examples/crazyflie-drone.md
       - BlueBoat USV Example: examples/blueboat-usv.md
   - Troubleshooting: troubleshooting.md
   - FAQ: faq.md
@@ -72,6 +72,8 @@ markdown_extensions:
       alternate_style: true
   - admonition
   - pymdownx.details
+  - pymdownx.magiclink
+  - pymdownx.tasklist
 
 extra:
   social:

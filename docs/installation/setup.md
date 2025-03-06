@@ -16,6 +16,11 @@ This guide will help you configure the **Webots-Simulink Bridge** to enable seam
 3. If a required toolbox is missing, install it using the MATLAB Add-On Manager.
 
 ## 3. Configure Webots Library in MATLAB
+
+Add Matlab Path
+
+![setup](../assets/images/installation/setup.md.png)
+<!-- 
 1. Add Webots' controller library path to MATLAB:
    ```matlab
    addpath('C:/Program Files/Webots/lib/controller/matlab')
@@ -29,7 +34,8 @@ This guide will help you configure the **Webots-Simulink Bridge** to enable seam
    ```matlab
    libfunctions('Controller')
    ```
-   If the list of functions appears, the library is successfully loaded.
+   If the list of functions appears, the library is successfully loaded. 
+-->
 
 
 ## Next Steps
