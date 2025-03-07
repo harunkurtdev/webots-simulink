@@ -39,4 +39,4 @@ Add Matlab Path
 
 
 ## Next Steps
-After setup, refer to the [Usage Guide](usage/connecting.md) to start running simulations with Webots and Simulink.
+After setup, refer to the [Usage Guide](../usage/connecting.md) to start running simulations with Webots and Simulink.

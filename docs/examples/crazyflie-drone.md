@@ -1,5 +1,8 @@
 ## Crazyflie
 
+
+![Crazyflie](../assets/videos/crazyflie/video1.gif)
+
 The Crazyflie is a small quadcopter developed by Bitcraze that can be used for various applications such as navigation and control experiments.
 ### Specifications
 - Weight: 35g
