@@ -14,9 +14,9 @@ nav:
   - Usage:
       - Connecting Webots and Simulink: usage/connecting.md
       - Running Simulations: usage/running.md
+      - Customizing the Bridge: usage/customization.md
       # - Data Exchange: usage/data_exchange.md
   - Advanced:
-      - Customizing the Bridge: advanced/customization.md
       - Debugging: advanced/debugging.md
       - Export ROS2 Package: advanced/export-ros2.md
   - Examples:

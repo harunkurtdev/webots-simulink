@@ -8,7 +8,7 @@ Welcome to the documentation for the **Webots-Simulink Bridge**, a framework tha
 
 ### Wheel Chair
 
-![WheelChair](../assets/videos/wheel-chair/video1.gif)
+![WheelChair](./assets/videos/wheel-chair/video1.gif)
 
 ## Overview
 This project enables real-time interaction between Simulink and Webots allowing:
