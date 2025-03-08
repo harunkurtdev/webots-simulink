@@ -2,9 +2,8 @@ site_name: Webots Simulink Bridge
 site_url: https://harunkurtdev.github.io/webots-simulink
 site_description: Documentation for bridging Webots and Simulink for robotics simulation.
 site_author: Harun KURT
-site_keywords: Webots, Simulink, Robotics, Simulation, Bridge
-site_language: en
-
+# site_logo: ../assets/images/logo.png
+# site_language: en
 
 nav:
   - Home: index.md

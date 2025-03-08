@@ -2,6 +2,8 @@ Customizing the Bridge
 =====================
 The bridge is a crucial component of Webots, responsible for connecting the simulation environment with your custom code. It allows you to interact with the simulation world and retrieve data from it. The bridge provides an interface between the simulation environment and your custom code.
 
+### This will be Changed
+
 ## Introduction
 In Webots, the bridge plays a vital role in enabling communication between the simulation environment and your custom code. It acts as a conduit for data exchange, allowing you to interact with the simulation world and retrieve information from it. The bridge provides an interface between the simulation environment and your custom code.
 
@@ -19,7 +21,6 @@ To use the bridge effectively, follow these steps:
 
 
 ![connecting1](../assets/images/usage/customization1.png)
-
 ![connecting2](../assets/images/usage/customization2.png)
 ![connecting3](../assets/images/usage/customization3.png)
 ![connecting4](../assets/images/usage/customization4.png)

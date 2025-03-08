@@ -34,5 +34,16 @@ Matlab Desktop Show a workspace with the robot, sensor variable, and actuator va
 The robot is connected to automaticly by using open_system function.
 Simulink Blocks showing a Control Block, and Send Webots Simulation Blocks. The control block is used to send the robot's position and velocity to the webots simulation. The send webots simulation blocks are used to receive the robot's position and velocity from the webots simulation.
 
+## Connect Sensors
+
+if you want to webots simulator a sensor create a new variable in simulink workspace, then connect it with the sensor block.
+We talk about the sensors in the next section.
+![customization](./customization.md) 
+you can find about the this section.
+
+
+
+
+
 
 
