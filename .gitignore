@@ -1,0 +1,8 @@
+.DS_Store
+examples/**/controllers/**/block_images/
+examples/**/controllers/**/block_images/*
+examples/**/controllers/**/block_images/**/*
+examples/**/controllers/**/slprj/**/*
+examples/**/controllers/**/slprj/
+examples/**/controllers/**/**.slxc
+examples/**/controllers/**/**.asv

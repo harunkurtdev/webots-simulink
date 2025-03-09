@@ -1,0 +1,214 @@
+#VRML_SIM R2023a utf8
+
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023a/projects/objects/backgrounds/protos/TexturedBackground.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023a/projects/objects/floors/protos/Floor.proto"
+
+WorldInfo {
+  info [
+    "An example of hot to solve the Inverted Pendulum problem using a PID controller"
+  ]
+  title "Inverted Pendulum"
+  contactProperties [
+    ContactProperties {
+      material1 "robot_basis"
+      material2 "floor"
+      coulombFriction [
+        0.2
+      ]
+    }
+  ]
+}
+Viewpoint {
+  orientation 0.1761098296034019 -0.15124076127180777 -0.972682661533033 3.9184533597772337
+  position 5.474044119388251 -3.894695573276407 3.9355617464968136
+  followType "Mounted Shot"
+}
+TexturedBackground {
+  luminosity 0.5
+}
+Floor {
+  size 4 3
+  appearance PBRAppearance {
+    baseColorMap ImageTexture {
+      url [
+        "https://raw.githubusercontent.com/cyberbotics/webots/R2023a/projects/default/worlds/textures/checkered_marble.jpg"
+      ]
+    }
+    roughness 1
+    metalness 0
+  }
+}
+Robot {
+  translation 0 0 0.75
+  children [
+    Transform {
+      translation 0 0 0.75
+      children [
+        HingeJoint {
+          jointParameters HingeJointParameters {
+            axis 0 0 1
+          }
+          device [
+            RotationalMotor {
+            }
+            PositionSensor {
+            }
+          ]
+          endPoint Solid {
+            translation 0 0 -1.5680463327782945e-05
+            children [
+              Transform {
+                children [
+                  Solid {
+                    translation 0.0004314979185430722 -0.5000032031562428 -0.01885112116736143
+                    rotation 0.9999995786010634 -0.0007475653397349898 0.0005328637333482273 1.572430844325961
+                    children [
+                      Transform {
+                        translation 0 0 0.5
+                        rotation 0 0 1 3.14159
+                        children [
+                          HingeJoint {
+                            jointParameters HingeJointParameters {
+                              position 3.1199042699940627
+                              axis 0 0 1
+                              minStop -10
+                              maxStop 10
+                            }
+                            device [
+                              PositionSensor {
+                                name "position_sensor"
+                              }
+                            ]
+                            endPoint Solid {
+                              translation 1.5296371573164345e-05 0.0008009115360738467 4.1218401092280064e-07
+                              rotation -8.621855825991261e-10 -8.584514940659879e-08 0.9999999999999963 3.1215301250316965
+                              children [
+                                Solid {
+                                  translation 0 -0.499999 -5.09802e-07
+                                  rotation 1 0 0 -1.5707953071795862
+                                  children [
+                                    Transform {
+                                      translation 1.86136e-06 0.000392075 0.5
+                                      rotation 0.7073882252434113 -0.7068252250641434 -3.3891510791584073e-09 3.14159
+                                      children [
+                                        PointLight {
+                                          attenuation 0 0 5
+                                          intensity 4
+                                          location 0 0 1
+                                        }
+                                      ]
+                                    }
+                                    Shape {
+                                      appearance PBRAppearance {
+                                        baseColor 0 1 0
+                                        metalness 0
+                                      }
+                                      geometry DEF pendulum_mass Cylinder {
+                                        height 1
+                                        radius 0.05
+                                      }
+                                    }
+                                  ]
+                                  name "solid(1)"
+                                  boundingObject USE pendulum_mass
+                                  physics Physics {
+                                    density -1
+                                    mass 5
+                                    centerOfMass [
+                                      0 0 0
+                                    ]
+                                    inertiaMatrix [
+                                      0.6594072080191077 0.6594072080191077 0.009817477042468107
+                                      0 0 0
+                                    ]
+                                    damping Damping {
+                                    }
+                                  }
+                                }
+                              ]
+                              physics Physics {
+                                density -1
+                                mass 1
+                                damping Damping {
+                                }
+                              }
+                              linearVelocity -0.003931376643231119 8.375515513449748e-07 1.9987342145816713e-06
+                              angularVelocity 2.013681401760038e-06 0.009415618337695832 1.5240566108282686e-05
+                            }
+                          }
+                        ]
+                      }
+                      Shape {
+                        appearance PBRAppearance {
+                          baseColor 0 1 0
+                          metalness 0
+                        }
+                        geometry DEF r_mass Cylinder {
+                          height 1
+                          radius 0.05
+                        }
+                      }
+                    ]
+                    boundingObject USE r_mass
+                    physics Physics {
+                      density -1
+                      mass 7.853981633974484
+                      centerOfMass [
+                        0 0 0
+                      ]
+                      inertiaMatrix [
+                        0.6594072080191077 0.6594072080191077 0.009817477042468107
+                        0 0 0
+                      ]
+                      damping Damping {
+                      }
+                    }
+                    linearVelocity -2.9446790498357416e-07 6.421212472875636e-11 -7.337221651948535e-10
+                    angularVelocity 3.659380672365647e-10 2.3721264254892244e-10 -1.4676153042532176e-07
+                  }
+                ]
+              }
+            ]
+            name "solid(1)"
+          }
+        }
+      ]
+    }
+    Solid {
+      translation 0 0 -0.001293488648612784
+      children [
+        Transform {
+          translation 0 0 -0.5
+          children [
+            Shape {
+              appearance PBRAppearance {
+                baseColor 0 1 0.498039
+                metalness 0
+              }
+              geometry DEF base Cylinder {
+                height 0.5
+                radius 0.1
+              }
+            }
+          ]
+        }
+        Shape {
+          appearance PBRAppearance {
+            baseColor 0 1 0.498039
+            metalness 0
+          }
+          geometry DEF base Cylinder {
+            height 1.5
+            radius 0.05
+          }
+        }
+      ]
+      boundingObject USE base
+      physics Physics {
+      }
+      linearVelocity 0 0 -1.4237910292583433e-06
+    }
+  ]
+  name "rotary_inverted_pendulum"
+  controller "<none>"
+}
