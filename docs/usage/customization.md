@@ -1,4 +1,3 @@
-
 The bridge is a crucial component of Webots, responsible for connecting the simulation environment with your custom code. It allows you to interact with the simulation world and retrieve data from it. The bridge provides an interface between the simulation environment and your custom code.
 
 ### This will be Changed
@@ -13,21 +12,19 @@ First, we create and define our required variables in Matlab desktop. Then, we a
 
 The required variables include the robot model, simulation environment settings, and other necessary parameters. After defining these variables, we can use them to interact with the simulation world and retrieve data from it.
 
-
 ![connecting2](../assets/images/usage/customization2.png)
 
 We now proceed to translate the functionality of our custom code into a series of function calls that will bridge the gap between our Matlab desktop environment and the Webots simulation engine.
 
 ![connecting3](../assets/images/usage/customization3.png)
 
-Resim 3 de ise, webots TextEditor'ün de tanımladığımız sensör değişkenlerini ve sabit değişkenlerini, Constant olarak Simulink Tarafından çağırmaktayız.
+In Figure 3, we call the sensor variables and constant variables that we defined in the Webots TextEditor as Constant by Simulink.
 
 ![connecting4](../assets/images/usage/customization4.png)
 
-Resim4 içinde, sabit değişkenlerin değerleri webots üzerinden çekilecek ve bu değerlerin atanması sağlanmaktadır.
+In Figure 4, the values ​​of the fixed variables will be pulled from webots and these values ​​are assigned.
 
-Resim 2 de tanımlanan fonksiyonların Simulink tarafından çağrılması sağlanmaktadır. Böylece, wb_robot_step fonksiyonu her çağrıldığında Webots her bir adım işlenmesi sağlanmaktadır. Simulink ile ortak şekilde çalışması sağlanıyor.
-
+The functions defined in Figure 2 are called by Simulink. Thus, each step is processed by Webots every time the wb_robot_step function is called. It is ensured that it works in common with Simulink.
 
 
 

@@ -3,8 +3,11 @@
 
 ![RotaryInvertedPendulum](../assets/images/rotary_inverted_pendulum/image1.png)
 
+### Simulation Video
+
 ![RotaryInvertedPendulumVideo](../assets/videos/rotary_inverted_pendulum/video1.gif)
 
+### Control Video
 
 ### Description of a Rotary Inverted Pendulum System
 
