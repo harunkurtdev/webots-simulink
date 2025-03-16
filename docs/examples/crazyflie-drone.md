@@ -1,6 +1,11 @@
+
 ## Crazyflie Drone
 
 ![Crazyflie](../assets/videos/crazyflie/video1.gif)
+
+## Simulink Architecture
+
+![Crazyflie2](../assets/videos/crazyflie/video2.gif)
 
 We can simulate a Crazyflie drone in Webots by following with Simulink Based Simulation.
 
