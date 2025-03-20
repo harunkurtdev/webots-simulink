@@ -46,39 +46,37 @@ m4_motor = wb_robot_get_device('m4_motor');
 
 %% https://www.mathworks.com/matlabcentral/fileexchange/65469-crazyflie-quadcopter-simulation-using-simmechanics
 
-% --- crazyflie parameters
+% Parametreler
 g = 9.80665;
-l1 = 4.65; %cm  1/2 of length of body
-l2 = 4.5;
-%Rotor/Propeller parameters
-m = 0.00020; %propellor mass  kg
-J = 1/12*m*(0.1^2+0.01^2); %moment of inertia from mass, kgm^2
-b = 3.5077E-10; %motor viscous friction constant Nms
-%drone parameters
-m_drone = 0.03097;   % kg
-Ix = 1.112951*10^-5;  % kg*m^2
-Iy = 1.1143608*10^-5;  % kg*m^2
-Iz = 2.162056*10^-5;  % kg*m^2
-b_drone = 1*10^-9; % kg*m^2 drone's x,y,z translational drag coefficient
+l1 = 0.0465; % m (cm'den dönüştürüldü)
+l2 = 0.045;   % m
+m_drone = 0.03097; % kg
+Ix = 1.112951e-5; % kg*m²
+Iy = 1.1143608e-5;
+Iz = 2.162056e-5;
+b_roll = 1e-5; % Tahmini açısal sönümleme
+b_pitch = 1e-5;
+b_yaw = 1e-5;
+b_drone = 1e-9; % Translasyonel sönüm
+km = 3.5077E-10; % Motor thrust coefficient
 
+% State-Space Matrisleri
+A = zeros(8,8);
+A(1:3,4:6) = eye(3);
+A(4,4) = -b_roll/Ix;
+A(5,5) = -b_pitch/Iy;
+A(6,6) = -b_yaw/Iz;
+A(7,8) = 1;
+A(8,8) = -b_drone/m_drone;
 
-l = 0.0465; % m (Arm length)
-k = 3.5077E-10; % Motor thrust coefficient
+B = zeros(8,4);
+B(4,2) = l1/Ix;   % Roll momenti
+B(5,3) = l2/Iy;    % Pitch momenti
+B(6,4) = 1/Iz;    % Yaw momenti
+B(8,1) = 1/m_drone;% Thrust
 
-% State Variables: [x, y, z, phi, theta, psi, dx, dy, dz, dphi, dtheta, dpsi]
-A = zeros(12,12);
-A(1,7) = 1; A(2,8) = 1; A(3,9) = 1;
-A(4,10) = 1; A(5,11) = 1; A(6,12) = 1;
-A(7,5) = g; A(8,4) = -g;
-
-B = zeros(12,4);
-B(9,:) = k/m_drone; % Thrust input to acceleration in z
-B(10,1) = l/Ix; B(10,3) = -l/Ix; % Torque in x
-B(11,2) = l/Iy; B(11,4) = -l/Iy; % Torque in y
-B(12,1) = k/Iz; B(12,2) = -k/Iz; B(12,3) = k/Iz; B(12,4) = -k/Iz; % Torque in z
-
-C = eye(12); % All states are observable
-D = zeros(12,4);
+C = eye(8);
+D = zeros(8,4);
 
 
 open_system('simulink_control');
