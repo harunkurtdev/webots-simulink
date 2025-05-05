@@ -12,9 +12,13 @@ Welcome to the documentation for the **Webots-Simulink Bridge**, a framework tha
 ![RotaryInvertedPendulumVideo](./assets/videos/rotary_inverted_pendulum/video1.gif)
 
 
+## Crazyflie 
+
+![Crazyflie](./assets/videos/crazyflie/video2.gif)
+
 ## BlutBoat 
 
-![Blueboat](./assets/videos/blueboat/video2.gif)
+![Blueboat](./assets/videos/blueboat/video3.gif)
 
 
 ### Wheel Chair

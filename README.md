@@ -19,7 +19,7 @@ Documentation Website Bellow
 
 ## BlutBoat 
 
-![Blueboat](./docs/assets/videos/blueboat/video2.gif)
+![Blueboat](./docs/assets/videos/blueboat/video3.gif)
 
 
 ## wheelChair 
