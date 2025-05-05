@@ -17,7 +17,12 @@ Documentation Website Bellow
 ![RotaryInvertedPendulumVideo](./docs/assets/videos/rotary_inverted_pendulum/video1.gif)
 
 
-## BlutBoat 
+## Crazyflie 
+
+![Crazyflie](./docs/assets/videos/crazyflie/video2.gif)
+
+
+## BlueBoat 
 
 ![Blueboat](./docs/assets/videos/blueboat/video3.gif)
 
