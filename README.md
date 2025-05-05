@@ -28,13 +28,19 @@ Documentation Website Bellow
 
 after setup, refer to the [Usage Guide](../usage/connecting.md) to start running simulations with Webots and Simulink.
 
-
-@misc{webots-simulink,
-  author       = {Harun KURT (student), Ahmet CAYIR(student), Prof. Dr. Kadir ERKAN},
+<!-- @misc{webots-simulink,
+  author       = {Harun Kurt and Ahmet Çayır and Kadir Erkan},
   title        = {Webots Simulink Bridge},
   year         = {2025},
-  publisher    = {arxiv.org},
-  version      = {X.X},
-  doi          = {https://doi.org/xx.xxxx/xxxx},
-  howpublished = {\url{https://github.com/harunkurtdev/webots-simulink}}
+  publisher    = {arXiv},
+  howpublished = {\url{https://github.com/harunkurtdev/webots-simulink}},
+  note         = {Version X.X. \newline Available at: \url{https://doi.org/xx.xxxx/xxxx}},
+} -->
+
+@online{webots-simulink,
+  author       = {Harun Kurt and Ahmet Çayır and Kadir Erkan},
+  title        = {Simulation Based Control Architecture Using Webots and Simulink},
+  year         = {2025},
+  url          = {https://github.com/harunkurtdev/webots-simulink},
+  note         = {Version X.X. Available at: \url{https://doi.org/xx.xxxx/xxxx}},
 }

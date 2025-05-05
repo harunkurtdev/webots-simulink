@@ -9,7 +9,13 @@ Welcome to the documentation for the **Webots-Simulink Bridge**, a framework tha
 
 ## Rotary Inverted Pendulum System
 
-![RotaryInvertedPendulumVideo](./docs/assets/videos/rotary_inverted_pendulum/video1.gif)
+![RotaryInvertedPendulumVideo](./assets/videos/rotary_inverted_pendulum/video1.gif)
+
+
+## BlutBoat 
+
+![Blueboat](./assets/videos/blueboat/video2.gif)
+
 
 ### Wheel Chair
 
