@@ -3,6 +3,8 @@
 
 Webots2023a bridge Matlab/Simulink
 
+
+Documentation Website Bellow 
 [documentation](https://harunkurtdev.github.io/webots-simulink/)
 
 
@@ -15,6 +17,11 @@ Webots2023a bridge Matlab/Simulink
 ![RotaryInvertedPendulumVideo](./docs/assets/videos/rotary_inverted_pendulum/video1.gif)
 
 
+## BlutBoat 
+
+![Blueboat](./docs/assets/videos/blueboat/video2.gif)
+
+
 ## wheelChair 
 
 ![WheelChair](./docs/assets/videos/wheel-chair/video1.gif)
@@ -23,10 +30,10 @@ after setup, refer to the [Usage Guide](../usage/connecting.md) to start running
 
 
 @misc{webots-simulink,
-  author       = {Harun KURT, Ahmet Cayir},
+  author       = {Harun KURT (student), Ahmet CAYIR(student), Prof. Dr. Kadir ERKAN},
   title        = {Webots Simulink Bridge},
-  year         = {Year},
-  publisher    = {GitHub},
+  year         = {2025},
+  publisher    = {arxiv.org},
   version      = {X.X},
   doi          = {https://doi.org/xx.xxxx/xxxx},
   howpublished = {\url{https://github.com/harunkurtdev/webots-simulink}}

@@ -7,6 +7,7 @@ examples/**/controllers/**/slprj/
 examples/**/controllers/**/**.slxc
 examples/**/controllers/**/**.slx.autosave
 examples/**/controllers/**/**.slx.original
+examples/**/controllers/**/**.mexmaca64
 examples/**/controllers/**/**.r*
 examples/**/controllers/**/**.asv
 

@@ -1,6 +1,7 @@
 # BlueBoat USV
 
 ![BlueBoatUSV](../assets/videos/blueboat/video1.gif)
+![BlueBoatUSV2](../assets/videos/blueboat/video2.gif)
 
 BlueBoat is a small unmanned surface vehicle developed by Blue Robotics. It is designed to be used for various applications such as navigation and control experiments.
 

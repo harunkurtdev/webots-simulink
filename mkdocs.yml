@@ -2,8 +2,6 @@ site_name: Webots Simulink Bridge
 site_url: https://harunkurtdev.github.io/webots-simulink
 site_description: Documentation for bridging Webots and Simulink for robotics simulation.
 site_author: Harun KURT
-# site_logo: ../assets/images/logo.png
-# site_language: en
 
 nav:
   - Home: index.md
@@ -26,6 +24,7 @@ nav:
       - BlueBoat USV Example: examples/blueboat-usv.md
   - Troubleshooting: troubleshooting.md
   - FAQ: faq.md
+  - Contributors: contributors.md
   - References: references.md
 
 theme:
@@ -33,7 +32,7 @@ theme:
   font:
     text: Merriweather Sans
     code: Red Hat Mono
-  # logo: assets/logo.png
+  logo: assets/logo.png
   # favicon: assets/favicon.ico
   features:
     - navigation.footer

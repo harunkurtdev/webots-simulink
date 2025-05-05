@@ -1,17 +1,15 @@
-#VRML_SIM R2024a utf8
+#VRML_SIM R2023a utf8
 
-
-EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2024a/projects/objects/backgrounds/protos/TexturedBackground.proto"
-EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2024a/projects/objects/backgrounds/protos/TexturedBackgroundLight.proto"
-EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2024a/projects/objects/obstacles/protos/OilBarrel.proto"
-
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023a/projects/objects/backgrounds/protos/TexturedBackground.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023a/projects/objects/backgrounds/protos/TexturedBackgroundLight.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023a/projects/objects/obstacles/protos/OilBarrel.proto"
 EXTERNPROTO "../protos/BlueBoat.proto"
 
 WorldInfo {
 }
 Viewpoint {
-  orientation -0.08243571741517809 0.5239196373800011 0.8477691702709252 0.8949155144371996
-  position -17.38767035031243 -15.030895298292753 11.238623733421315
+  orientation -0.38010115917661147 0.22462522292294912 0.897255046249065 1.3086696502115756
+  position -1.6859030846937557 -4.225163882407911 4.067484885348631
 }
 TexturedBackground {
 }
@@ -40,11 +38,44 @@ DEF WATER Fluid {
   locked TRUE
 }
 BlueBoat {
-  translation 0 0 0.5
-  rotation 0 0 1 2.61799
+  translation 0 0 0.6
+  rotation 0 0 1 3.14
+  controller "simulink_control_app"
+  bodySlot [
+    InertialUnit {
+      name "inertial_unit"
+    }
+    Transform {
+      children [
+        DEF left_transform Transform {
+          children [
+            DistanceSensor {
+              translation 0.58 0.29 0
+              name "left_ir"
+            }
+          ]
+        }
+        DEF right_transform Transform {
+          children [
+            DistanceSensor {
+              translation 0.63 -0.38 0
+              name "right_ir"
+            }
+          ]
+        }
+      ]
+    }
+    Accelerometer {
+    }
+    GPS {
+    }
+    Gyro {
+    }
+  ]
 }
 OilBarrel {
-  translation 1.00864 7.46399 0.566329
+  hidden linearVelocity_0 0 0 -1.213627376753162e-15
+  translation 1.00864 7.46399 0.5595498919704248
   rotation -0.17000006110990545 -0.9047921649529348 0.39044989110308337 1.752814691517513
   physics Physics {
     density 100
@@ -60,7 +91,8 @@ OilBarrel {
   ]
 }
 OilBarrel {
-  translation -10.052079249302796 2.4814946123187727 0.5595498919704249
+  hidden linearVelocity_0 0 0 1.649305869306847e-15
+  translation -10.052079249302796 2.4814946123187727 0.5595498919704248
   rotation -0.2751145870612612 -0.6601107052655578 0.6989748355841716 -2.843723472604472
   name "oil barrel(1)"
   physics Physics {
@@ -77,7 +109,8 @@ OilBarrel {
   ]
 }
 OilBarrel {
-  translation -3.54718 -2.19833 1.05429
+  hidden linearVelocity_0 0 0 1.4387456326881762e-15
+  translation -3.54718 -2.19833 0.5595498919704248
   rotation 0.9914248557443196 0.045597095586811014 0.12246493492588871 1.5859460279251565
   name "oil barrel(2)"
   physics Physics {
@@ -94,8 +127,10 @@ OilBarrel {
   ]
 }
 OilBarrel {
-  translation -2.90734 1.30062 0.563657
-  rotation 0.737839555282382 0.1439329283223751 -0.6594513650036995 -2.4506597166551938
+  hidden linearVelocity_0 3.1607910100151556e-12 3.0158882827110094e-13 -1.664411428969703e-07
+  hidden angularVelocity_0 0.00035277822028776225 0.00032872800068724364 -3.2496594712506712e-12
+  translation -2.4770273240214453 1.3446629520609124 0.5595498889828006
+  rotation 0.8273507462317385 0.0038163784766944565 -0.5616726608667256 -2.0484933495917224
   name "oil barrel(3)"
   physics Physics {
     density 100
