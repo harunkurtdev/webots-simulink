@@ -1,6 +1,10 @@
+
 # webots-simulink
 
 Webots2023a bridge Matlab/Simulink
+
+[documentation](https://harunkurtdev.github.io/webots-simulink/)
+
 
 ## Inverted Pendulum System
 
@@ -12,3 +16,13 @@ Webots2023a bridge Matlab/Simulink
 
 after setup, refer to the [Usage Guide](../usage/connecting.md) to start running simulations with Webots and Simulink.
 
+
+@misc{webots-simulink,
+  author       = {Harun KURT, Ahmet Cayir},
+  title        = {Webots Simulink Bridge},
+  year         = {Year},
+  publisher    = {GitHub},
+  version      = {X.X},
+  doi          = {https://doi.org/xx.xxxx/xxxx},
+  howpublished = {\url{https://github.com/harunkurtdev/webots-simulink}}
+}

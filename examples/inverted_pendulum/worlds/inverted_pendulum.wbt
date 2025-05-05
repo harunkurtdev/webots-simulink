@@ -1,0 +1,131 @@
+#VRML_SIM R2023a utf8
+
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023a/projects/objects/backgrounds/protos/TexturedBackground.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023a/projects/objects/floors/protos/Floor.proto"
+
+WorldInfo {
+  info [
+    "An example of hot to solve the Inverted Pendulum problem using a PID controller"
+  ]
+  title "Inverted Pendulum"
+  contactProperties [
+    ContactProperties {
+      material1 "robot_basis"
+      material2 "floor"
+      coulombFriction [
+        0.2
+      ]
+    }
+  ]
+}
+Viewpoint {
+  orientation 0.35329291856998934 0.191440739716509 -0.9157153252321896 1.479015270507092
+  position 161.27699357761145 4.62128100290583 2.774153134567332
+  followType "Mounted Shot"
+}
+TexturedBackground {
+  luminosity 0.5
+}
+Floor {
+  size 1000 2
+  appearance PBRAppearance {
+    baseColorMap ImageTexture {
+      url [
+        "https://raw.githubusercontent.com/cyberbotics/webots/R2023a/projects/default/worlds/textures/checkered_marble.jpg"
+      ]
+    }
+    roughness 1
+    metalness 0
+  }
+}
+Robot {
+  translation 161.5509960485203 8.625878885561284e-05 0.004177792872475042
+  rotation -2.2082632668028973e-08 -2.145378825746727e-05 0.9999999997698673 3.1415909512795244
+  children [
+    SliderJoint {
+      jointParameters JointParameters {
+        axis 1 0 0
+        dampingConstant 1.5
+      }
+      device [
+        LinearMotor {
+          name "horizontal_motor"
+          maxForce 100
+        }
+        PositionSensor {
+          name "horizontal position sensor"
+        }
+      ]
+      endPoint Solid {
+        translation -4.1592329580453224e-10 0 0.0457589
+        rotation -1.8080830124826195e-05 -0.9999969224881206 0.0024808642388303923 0.00033458140511480626
+        children [
+          DEF ROBOT_SHAPE Shape {
+            appearance PBRAppearance {
+              baseColor 0.2443427176317998 0.704051270313573 0.1756923781185626
+              roughness 1
+              metalness 0
+            }
+            geometry Box {
+              size 0.3 0.1 0.1
+            }
+          }
+          DEF HIP HingeJoint {
+            jointParameters HingeJointParameters {
+              axis 0 1 0
+              anchor 0 0 0.03
+            }
+            device [
+              PositionSensor {
+                name "hip"
+              }
+            ]
+            endPoint DEF THIGH_BB Solid {
+              translation -4.842063939516916e-05 -0.06099999999999994 0.3299999960924026
+              rotation 0 -1 0 0.0001614021254472171
+              children [
+                Shape {
+                  appearance PBRAppearance {
+                    baseColor 0.8496833752956435 0.07072556649118791 0.09393453879606317
+                    roughness 1
+                    metalness 0
+                  }
+                  geometry DEF THIGH_BOX Box {
+                    size 0.05 0.02 0.6
+                  }
+                }
+              ]
+              boundingObject USE THIGH_BOX
+              physics Physics {
+                density -1
+                mass 0.05
+                centerOfMass [
+                  0 0.061 -0.27
+                ]
+              }
+            }
+          }
+          PointLight {
+            attenuation 0 0 1
+            intensity 5
+            location 0 0 2
+          }
+        ]
+        contactMaterial "robot_basis"
+        boundingObject USE ROBOT_SHAPE
+        physics Physics {
+          density -1
+          mass 1
+        }
+      }
+    }
+  ]
+  boundingObject Box {
+    size 200 0.1 0.01
+  }
+  physics Physics {
+    density -1
+    mass 1.05
+  }
+  controller "inverted_pendulum_noncart"
+}
