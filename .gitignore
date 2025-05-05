@@ -6,6 +6,7 @@ examples/**/controllers/**/slprj/**/*
 examples/**/controllers/**/slprj/
 examples/**/controllers/**/**.slxc
 examples/**/controllers/**/**.slx.autosave
+examples/**/controllers/**/**.slx.original
 examples/**/controllers/**/**.r*
 examples/**/controllers/**/**.asv
 
