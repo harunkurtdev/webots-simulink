@@ -44,10 +44,22 @@ after setup, refer to the [Usage Guide](../usage/connecting.md) to start running
   note         = {Version X.X. \newline Available at: \url{https://doi.org/xx.xxxx/xxxx}},
 } -->
 
-@online{webots-simulink,
-  author       = {Harun Kurt and Ahmet Çayır and Kadir Erkan},
-  title        = {Simulation Based Control Architecture Using Webots and Simulink},
-  year         = {2025},
-  url          = {https://github.com/harunkurtdev/webots-simulink},
-  note         = {Version 1.0. Available at: \url{https://doi.org/10.48550/arXiv.2505.02081}},
+## Citation
+
+If you use this work in your research, please cite the following publication:
+
+> Kurt, H., Cayir, A., & Erkan, K. (2025). *Simulation Based Control Architecture Using Webots and Simulink* (Version 1). arXiv. https://doi.org/10.48550/ARXIV.2505.02081
+
+Or use the following BibTeX entry:
+
+```bibtex
+@misc{kurt2025simulation,
+  title={Simulation Based Control Architecture Using Webots and Simulink},
+  author={Kurt, H. and Cayir, A. and Erkan, K.},
+  year={2025},
+  eprint={2505.02081},
+  archivePrefix={arXiv},
+  primaryClass={cs.RO},
+  doi={10.48550/ARXIV.2505.02081}
 }
+```
