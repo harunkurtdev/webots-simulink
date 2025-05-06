@@ -53,7 +53,7 @@ If you use this work in your research, please cite the following publication:
 Or use the following BibTeX entry:
 
 ```bibtex
-@misc{kurt2025simulation,
+@misc{
   title={Simulation Based Control Architecture Using Webots and Simulink},
   author={Kurt, H. and Cayir, A. and Erkan, K.},
   year={2025},
@@ -62,3 +62,4 @@ Or use the following BibTeX entry:
   primaryClass={cs.RO},
   doi={10.48550/ARXIV.2505.02081}
 }
+```
