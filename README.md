@@ -62,4 +62,3 @@ Or use the following BibTeX entry:
   primaryClass={cs.RO},
   doi={10.48550/ARXIV.2505.02081}
 }
-```
