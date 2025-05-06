@@ -49,5 +49,5 @@ after setup, refer to the [Usage Guide](../usage/connecting.md) to start running
   title        = {Simulation Based Control Architecture Using Webots and Simulink},
   year         = {2025},
   url          = {https://github.com/harunkurtdev/webots-simulink},
-  note         = {Version X.X. Available at: \url{https://doi.org/xx.xxxx/xxxx}},
+  note         = {Version 1.0. Available at: \url{https://doi.org/10.48550/arXiv.2505.02081}},
 }
