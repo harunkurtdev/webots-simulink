@@ -22,6 +22,7 @@ nav:
       - Wheel Chair Example: examples/wheel-chair.md
       - Crazyflie Drone Example: examples/crazyflie-drone.md
       - BlueBoat USV Example: examples/blueboat-usv.md
+      - Turtlebot3 Example: examples/turtlebot3.md
   - Troubleshooting: troubleshooting.md
   - FAQ: faq.md
   - Contributors: contributors.md
