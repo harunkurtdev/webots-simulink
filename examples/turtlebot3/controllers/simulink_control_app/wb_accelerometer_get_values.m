@@ -10,7 +10,7 @@ coder.extrinsic('libpointer');
 
 %obj=libpointer("doublePtr",[0,0,0])
 obj =calllib('libController', 'wb_accelerometer_get_values', tag);
-disp(class(obj));
+
 
 %setdatatype(obj,'doublePtr', 1, 3);
 %disp(obj(1));

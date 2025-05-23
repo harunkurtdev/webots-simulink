@@ -26,8 +26,9 @@ wb_compass_enable(compass_sensor,TIME_STEP);
 gyro_sensor=wb_robot_get_device('gyro');
 wb_gyro_enable(gyro_sensor,TIME_STEP);
 
-right_wheel_sensor=wb_robot_get_device('right wheel sensor');
-left_wheel_sensor=wb_robot_get_device('left wheel sensor');
+right_wheel_sensor=wb_robot_get_device('right_wheel_sensor');
+left_wheel_sensor=wb_robot_get_device('left_wheel_sensor');
+
 wb_position_sensor_enable(left_wheel_sensor,TIME_STEP);
 wb_position_sensor_enable(right_wheel_sensor,TIME_STEP);
 

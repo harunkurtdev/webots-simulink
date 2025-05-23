@@ -11,15 +11,11 @@ coder.extrinsic('libpointer');
 
 %obj=libpointer("doublePtr",[0,0,0])
 obj =calllib('libController', 'wb_inertial_unit_get_roll_pitch_yaw', tag);
-disp(class(obj));
 
-%setdatatype(obj,'doublePtr', 1, 3);
-%disp(obj(1));
-%disp(get(obj))
+
 setdatatype(obj, 'doublePtr', 1, 3);  % 3 elemanlı bir double dizisi
 
 values = get(obj,"Value");  % Verileri al
 
-% disp(values);
 result = values;
 %result = get(obj, 'Value');  % Değerleri al

@@ -1,0 +1,62 @@
+#VRML_SIM R2023a utf8
+
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023a/projects/objects/backgrounds/protos/TexturedBackground.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023a/projects/objects/backgrounds/protos/TexturedBackgroundLight.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023a/projects/objects/floors/protos/Floor.proto"
+EXTERNPROTO "C:/Users/Harun/Desktop/projects/scout_navigation/scout_webots_sim/webots_setup/protos/ScoutV2.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023a/projects/devices/slamtec/protos/RpLidarA2.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023a/projects/devices/sick/protos/SickLms291.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023a/projects/objects/obstacles/protos/Ramp30deg.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023a/projects/objects/obstacles/protos/OilBarrel.proto"
+
+WorldInfo {
+}
+Viewpoint {
+  orientation 0.2232343362034314 -0.3867929247859852 -0.8947388806100453 5.377737762716318
+  position -10.377745588579026 -16.39326357879992 9.344845483932891
+}
+TexturedBackground {
+}
+TexturedBackgroundLight {
+}
+Floor {
+  size 100 100
+}
+Ramp30deg {
+  translation 11.37 0 0
+}
+OilBarrel {
+  translation 2.11 1.92 0.44
+}
+OilBarrel {
+  translation 4.1 -1.79 0.44
+  name "oil barrel(1)"
+}
+OilBarrel {
+  translation 5.56 1.77 0.44
+  name "oil barrel(2)"
+}
+ScoutV2 {
+  translation -5.953067814747511e-10 0.22988715158741033 0.2242304135191477
+  rotation 0.9999999964053201 3.0198363934206255e-05 -7.923016205958824e-05 1.6237626100551315e-05
+  controller "simulink_control_app"
+  controllerArgs []
+  extensionSlot [
+    RpLidarA2 {
+      translation 0.25 0 0.151
+    }
+    SickLms291 {
+      translation 0.55 0 -0.02
+    }
+    GPS {
+      rotation 0.9999999999999994 -6.426058697139492e-11 2.6894796567933362e-08 3.14
+    }
+    Gyro {
+    }
+    Accelerometer {
+    }
+    InertialUnit {
+      rotation 0.9999999999999994 -6.426106287038507e-11 2.6894995744553603e-08 3.14
+    }
+  ]
+}

@@ -3,14 +3,14 @@
 EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023a/projects/objects/backgrounds/protos/TexturedBackground.proto"
 EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023a/projects/objects/backgrounds/protos/TexturedBackgroundLight.proto"
 EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023a/projects/objects/floors/protos/RectangleArena.proto"
-EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023a/projects/robots/robotis/turtlebot/protos/TurtleBot3Burger.proto"
+EXTERNPROTO "../protos/TurtleBot3Burger.proto"
 EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023a/projects/objects/solids/protos/SolidBox.proto"
 
 WorldInfo {
 }
 Viewpoint {
   orientation -0.2248183000727301 0.9133044492175115 0.3396052340466882 0.8051745693396386
-  position -3.4021412008502168 0.20586260142216212 3.8737432299275176
+  position -11.151448271395292 -1.78259362837503 11.331955601052654
 }
 TexturedBackground {
 }
@@ -39,12 +39,9 @@ SolidBox {
   name "box(3)"
 }
 TurtleBot3Burger {
-  hidden translation_8 0 -0.08 0.033
   hidden rotation_8 0 -1 0 4.2122689555155794
-  hidden translation_9 0 0.08 0.033
   hidden rotation_9 0.17542312103082167 1.331151383978876e-06 0.9844931328384338 3.1415964704002333
-  hidden translation_10 -0.081 0 0.004
-  hidden rotation_10 0.6276564599393316 0.5326477973092998 -0.5677443899484848 4.280867463226994
+  hidden rotation_10 0.6276564599393317 0.5326477973092999 -0.5677443899484849 4.280867463226994
   rotation 0 0 1 1.57
   controller "simulink_control_app"
 }
