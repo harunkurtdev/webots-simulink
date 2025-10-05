@@ -1,0 +1,217 @@
+#VRML_SIM R2023a utf8
+
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023a/projects/objects/backgrounds/protos/TexturedBackground.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023a/projects/objects/backgrounds/protos/TexturedBackgroundLight.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023a/projects/objects/obstacles/protos/OilBarrel.proto"
+
+WorldInfo {
+}
+Viewpoint {
+  orientation 0.3103397025527527 -0.0938962421073051 -0.9459771481053839 3.3875303430988293
+  position 6.7151390658785335 -9.77232466587338 5.219273356567895
+}
+TexturedBackground {
+}
+TexturedBackgroundLight {
+}
+DEF WATER Fluid {
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 0.0626841 0.552224 0.723339
+        transparency 0.7
+        roughness 1
+        metalness 0
+      }
+      geometry DEF WATER_BOX Box {
+        size 1000 1000 0.7
+      }
+    }
+  ]
+  viscosity 0.01
+  boundingObject USE WATER_BOX
+  locked TRUE
+}
+Robot {
+  translation -1.0271094117233903 -6.281181190586357 0.39708306434143675
+  rotation -0.04112406359764606 -0.008642520100641107 0.9991166689829205 2.9373240196686736
+  children [
+    Transform {
+      children [
+        GPS {
+        }
+        Gyro {
+        }
+        Compass {
+        }
+        InertialUnit {
+          name "inertial_unit"
+        }
+        Accelerometer {
+        }
+      ]
+    }
+    DEF MOTOR Transform {
+      translation 0 0.5 -0.1
+      children [
+        HingeJoint {
+          jointParameters HingeJointParameters {
+            position -0.20000000401496226
+            axis 0 0 1
+          }
+          device [
+            RotationalMotor {
+              name "rotational_motor"
+            }
+            PositionSensor {
+              name "position_sensor"
+            }
+          ]
+          endPoint Solid {
+            translation 1.1101822372918954e-06 9.564089537738206e-08 -2.9639525098046386e-05
+            rotation 0.6541337916230384 0.5348405098269777 0.5348407348967408 1.9830439611535415
+            children [
+              Propeller {
+                shaftAxis -1 0 0
+                device RotationalMotor {
+                  name "rotational_motor_propeller"
+                }
+                fastHelix Solid {
+                  rotation 0 1 0 1.5708
+                  children [
+                    Shape {
+                      appearance PBRAppearance {
+                        baseColor 0.653452 0.16199 0.817517
+                        emissiveColor 0.190295 0.593332 0.943358
+                      }
+                      geometry Cylinder {
+                        height 0.1
+                        radius 0.02
+                      }
+                    }
+                  ]
+                }
+              }
+            ]
+            physics Physics {
+              density 450
+              damping Damping {
+              }
+            }
+            linearVelocity 0.0013593120457684041 -3.9167138830450445e-05 0.0005390123596287647
+            angularVelocity 0.00013034719193687178 0.0036616347208983987 -8.137227583023237e-05
+          }
+        }
+      ]
+    }
+    DEF OBJ Transform {
+      children [
+        CadShape {
+          url [
+            "/Users/harunkurtdev/Desktop/pirana.dae"
+          ]
+        }
+      ]
+    }
+  ]
+  name "pirana"
+  immersionProperties [
+    ImmersionProperties {
+      fluidName "fluid"
+    }
+  ]
+  boundingObject Transform {
+    translation 0 -0.008 0.015
+    children [
+      Mesh {
+        url [
+          "/Users/harunkurtdev/Desktop/pirana.stl"
+        ]
+      }
+    ]
+  }
+  physics Physics {
+    density 450
+    centerOfMass [
+      0 0 -0.5
+    ]
+    damping Damping {
+      linear 0.5
+      angular 0.6
+    }
+  }
+  controller "simulink_control_app"
+  linearVelocity -1.3149305569937298e-05 2.0914151915886845e-07 0.00010932928552261266
+  angularVelocity 0.00012660918764383875 0.003556095889494056 -7.8922244824847e-05
+}
+OilBarrel {
+  hidden linearVelocity_0 0 0 1.3759457899879975e-15
+  translation -5.769041604986175 5.7137363726152754 0.5595498919704248
+  rotation -0.17000006110990562 -0.9047921649529347 0.3904498911030836 1.7528146915175131
+  physics Physics {
+    density 100
+    damping Damping {
+      linear 0.5
+      angular 0.5
+    }
+  }
+  immersionProperties [
+    ImmersionProperties {
+      fluidName "fluid"
+    }
+  ]
+}
+OilBarrel {
+  hidden linearVelocity_0 0 0 1.9120926573571087e-15
+  translation -10.052079249302796 2.4814946123187727 0.5595498919704248
+  rotation -0.27511458706126113 -0.6601107052655578 0.6989748355841718 -2.843723472604469
+  name "oil barrel(1)"
+  physics Physics {
+    density 100
+    damping Damping {
+      linear 0.5
+      angular 0.5
+    }
+  }
+  immersionProperties [
+    ImmersionProperties {
+      fluidName "fluid"
+    }
+  ]
+}
+OilBarrel {
+  hidden linearVelocity_0 0 0 -1.3093641645307959e-15
+  translation -9.806804324970415 -3.2705951440882433 0.5595498919704249
+  rotation 0.9914248557443196 0.045597095586811014 0.12246493492588871 1.5859460279251565
+  name "oil barrel(2)"
+  physics Physics {
+    density 100
+    damping Damping {
+      linear 0.5
+      angular 0.5
+    }
+  }
+  immersionProperties [
+    ImmersionProperties {
+      fluidName "fluid"
+    }
+  ]
+}
+OilBarrel {
+  hidden linearVelocity_0 0 0 -1.3093641645307959e-15
+  translation -9.046348837161165 3.2463636605243056 0.5595498919704249
+  rotation 0.7378395552823825 0.14393292832237503 -0.6594513650036993 -2.4506597166551907
+  name "oil barrel(3)"
+  physics Physics {
+    density 100
+    damping Damping {
+      linear 0.5
+      angular 0.5
+    }
+  }
+  immersionProperties [
+    ImmersionProperties {
+      fluidName "fluid"
+    }
+  ]
+}
