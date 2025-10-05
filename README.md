@@ -19,6 +19,11 @@ Documentation Website Bellow
 ![RotaryInvertedPendulumVideo](./docs/assets/videos/rotary_inverted_pendulum/video1.gif)
 
 
+## Turtlebot3 
+
+![Turtlebot3](./docs/assets/images/turtlebot3/image.png)
+
+
 ## Crazyflie 
 
 ![Crazyflie](./docs/assets/videos/crazyflie/video2.gif)
@@ -27,6 +32,11 @@ Documentation Website Bellow
 ## BlueBoat 
 
 ![Blueboat](./docs/assets/videos/blueboat/video3.gif)
+
+
+## Pirana USV 
+
+![PiranaUSV](./docs/assets/videos/pirana/video1.gif)
 
 
 ## wheelChair 
