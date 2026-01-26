@@ -1,0 +1,1475 @@
+#VRML_SIM R2023a utf8
+
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023a/projects/objects/backgrounds/protos/TexturedBackground.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023a/projects/objects/backgrounds/protos/TexturedBackgroundLight.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023a/projects/objects/buildings/protos/Barn.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023a/projects/objects/garden/protos/PicketFence.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023a/projects/objects/garden/protos/DogHouse.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023a/projects/objects/buildings/protos/HouseWithGarage.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023a/projects/objects/animals/protos/Dog.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023a/projects/objects/trees/protos/Forest.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023a/projects/objects/animals/protos/Fox.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023a/projects/objects/animals/protos/Deer.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023a/projects/objects/animals/protos/Rabbit.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023a/projects/objects/animals/protos/Cat.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023a/projects/objects/animals/protos/Horse.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023a/projects/objects/animals/protos/Cow.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023a/projects/objects/animals/protos/Sheep.proto"
+
+WorldInfo {
+  info [
+    "Boomer 3050 Tractor"
+  ]
+  title "Boomer 3050 Tractor"
+  ERP 0.7
+  basicTimeStep 20
+  lineScale 1
+  contactProperties [
+    ContactProperties {
+      softCFM 0.0001
+    }
+  ]
+}
+Viewpoint {
+  orientation -0.13246437308462222 0.45932975482605887 0.8783332887889032 0.6573230669072261
+  position 0.3313581881207561 -22.640679793496027 4.503417001894107
+  follow "vehicle"
+  followSmoothness 0
+}
+TexturedBackground {
+}
+TexturedBackgroundLight {
+}
+DEF FLOOR Solid {
+  children [
+    DEF PLANE_SHAPE Shape {
+      appearance PBRAppearance {
+        baseColorMap ImageTexture {
+          url [
+            "https://raw.githubusercontent.com/cyberbotics/webots/R2023a/projects/default/worlds/textures/dry_grass.jpg"
+          ]
+        }
+        roughness 1
+        metalness 0
+        textureTransform TextureTransform {
+          scale 200 200
+        }
+      }
+      geometry Plane {
+        size 1000 1000
+      }
+      castShadows FALSE
+    }
+  ]
+  boundingObject USE PLANE_SHAPE
+}
+Sheep {
+  translation 6.24 -4.94 0
+  rotation 0 0 1 -0.785395307179586
+}
+Sheep {
+  translation 6.51322 -7.23816 -4.44089e-16
+  rotation 0 0 1 -2.6179953071795863
+  name "sheep(1)"
+}
+Sheep {
+  translation 7.42149 -5.22196 2.4869e-14
+  rotation 0 0 -1 2.0944
+  name "sheep(2)"
+  color 0.596078 0.415686 0.266667
+}
+Transform {
+  translation 50.51 -11.2 0.0025
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColorMap ImageTexture {
+          url [
+            "https://raw.githubusercontent.com/cyberbotics/webots/R2023a/projects/default/worlds/textures/water.jpg"
+          ]
+        }
+        roughness 1
+        textureTransform TextureTransform {
+          scale 10 10
+        }
+      }
+      geometry Cylinder {
+        height 0.005
+        radius 3
+      }
+    }
+    Transform {
+      translation 0 2.51 -0.001
+      children [
+        Shape {
+          appearance PBRAppearance {
+            baseColorMap ImageTexture {
+              url [
+                "https://raw.githubusercontent.com/cyberbotics/webots/R2023a/projects/default/worlds/textures/water.jpg"
+              ]
+            }
+            roughness 1
+            textureTransform TextureTransform {
+              scale 10 10
+            }
+          }
+          geometry Cylinder {
+            height 0.005
+            radius 2
+          }
+        }
+      ]
+    }
+  ]
+}
+Cow {
+  translation 47.1433 -8.2976 -7.10543e-15
+  rotation 0 0 1 -0.523595307179586
+}
+Cow {
+  translation 46.698 -11.4412 2.66454e-15
+  name "cow(1)"
+  patchColor "black"
+}
+Cow {
+  translation 45.4948 -9.61262 8.88178e-16
+  rotation 0 0 1 0.261799
+  name "cow(2)"
+}
+Cat {
+  translation 13.8363 -23.9936 5.03952
+  rotation -0.12449200268796913 0.30054800648928237 0.9456070204170742 0.82573
+}
+Rabbit {
+  translation -2.7 -11.64 0
+}
+Rabbit {
+  translation -1.25518 -11.8123 0
+  rotation 0 0 1 2.35619
+  name "rabbit(1)"
+}
+Rabbit {
+  translation -2.7 -11.64 0
+  name "rabbit(2)"
+}
+Rabbit {
+  translation -2.78383 -12.7498 0
+  rotation 0 0 1 -1.047195307179586
+  name "rabbit(3)"
+  color 0.709804 0.513726 0.352941
+}
+Forest {
+  translation -20.19 -13.7 0
+  shape [
+    -20 -10
+    15 -10
+    13 14
+    13 20
+    17 28
+    -25 37
+  ]
+  groundTexture []
+}
+Fox {
+  translation -7.75 -13.05 0
+  rotation 0 0 1 0.261799
+}
+DogHouse {
+  translation 2.97042 -24.3142 1.77636e-14
+  rotation 0 0 1 1.5708
+}
+Dog {
+  translation 3.11157 -23.1606 0
+  rotation 0 0 1 0.785398
+}
+PicketFence {
+  translation -0.08 -10.11 0
+  numberOfSegments 2
+}
+PicketFence {
+  translation -3.52 -13.59 0
+  rotation 0 0 1 3.14159
+  name "picket fence(2)"
+  numberOfSegments 2
+}
+PicketFence {
+  translation -0.0499873 -13.56 0
+  rotation 0 0 1 -1.5707953071795862
+  name "picket fence(1)"
+  numberOfSegments 2
+}
+Barn {
+  translation 0 -6.47 0
+  rotation 0 0 1 4.692820414042842e-06
+}
+DEF BOOMER_T3050 Robot {
+  translation 6.2413372467928765 -17.80000000447309 0.5043819147116797
+  rotation 9.370045609231604e-08 0.9999999999999957 -2.5808976542195444e-09 0.08623352441035134
+  children [
+    Transform {
+      translation 1.76 0.7 0
+      rotation 0 0 1 -1.5708
+      children [
+        DEF LEFT_STEER_HINGE2 Hinge2Joint {
+          jointParameters HingeJointParameters {
+            position -5.102082861398109e-05
+            axis 0 0 -1
+            suspensionSpringConstant 200000
+            suspensionDampingConstant 4000
+            suspensionAxis 0 0 1
+          }
+          jointParameters2 JointParameters {
+            position 8.931327350435533
+            axis -1 0 0
+            dampingConstant 5
+          }
+          device [
+            RotationalMotor {
+              name "left_steer"
+              minPosition -0.94
+              maxPosition 0.94
+              maxTorque 10000
+              sound ""
+            }
+            PositionSensor {
+              name "left_steer_sensor"
+            }
+          ]
+          device2 [
+            RotationalMotor {
+              name "left_front_wheel"
+              acceleration 3.654970760233918
+              maxVelocity 131.57894736842104
+              maxTorque 100000000
+              sound ""
+            }
+            PositionSensor {
+              name "left_front_sensor"
+            }
+            Brake {
+              name "left_front_brake"
+            }
+          ]
+          endPoint Slot {
+            type "vehicle wheel"
+            endPoint Slot {
+              type "vehicle wheel"
+              endPoint Solid {
+                rotation 0.9999999996539692 2.5510414303697057e-05 -6.424966715413724e-06 3.6350432637597367
+                children [
+                  Transform {
+                    translation 0.041 0 0
+                    rotation 0 -1 0 1.5708
+                    children [
+                      Shape {
+                        appearance PBRAppearance {
+                          baseColorMap ImageTexture {
+                            url [
+                              "https://raw.githubusercontent.com/cyberbotics/webots/R2023a/projects/vehicles/protos/generic/textures/tractor_tire_tread_base_color.jpg"
+                            ]
+                          }
+                          roughness 0.4
+                          metalness 0
+                          normalMap ImageTexture {
+                            url [
+                              "https://raw.githubusercontent.com/cyberbotics/webots/R2023a/projects/vehicles/protos/generic/textures/tractor_tire_tread_normal.jpg"
+                            ]
+                          }
+                          occlusionMap ImageTexture {
+                            url [
+                              "https://raw.githubusercontent.com/cyberbotics/webots/R2023a/projects/vehicles/protos/generic/textures/tractor_tire_tread_occlusion.jpg"
+                            ]
+                          }
+                          textureTransform TextureTransform {
+                            rotation 1.5708
+                            scale 1 7
+                          }
+                        }
+                        geometry Cylinder {
+                          bottom FALSE
+                          height 0.19
+                          radius 0.38
+                          top FALSE
+                          subdivision 24
+                        }
+                      }
+                      Shape {
+                        appearance PBRAppearance {
+                          baseColorMap ImageTexture {
+                            url [
+                              "https://raw.githubusercontent.com/cyberbotics/webots/R2023a/projects/vehicles/protos/generic/textures/tractor_front_tire_side_base_color.jpg"
+                            ]
+                          }
+                          roughnessMap ImageTexture {
+                            url [
+                              "https://raw.githubusercontent.com/cyberbotics/webots/R2023a/projects/vehicles/protos/generic/textures/tractor_front_tire_side_roughness.jpg"
+                            ]
+                          }
+                          normalMap ImageTexture {
+                            url [
+                              "https://raw.githubusercontent.com/cyberbotics/webots/R2023a/projects/vehicles/protos/generic/textures/tractor_front_tire_side_normal.jpg"
+                            ]
+                          }
+                          occlusionMap ImageTexture {
+                            url [
+                              "https://raw.githubusercontent.com/cyberbotics/webots/R2023a/projects/vehicles/protos/generic/textures/tractor_front_tire_side_occlusion.jpg"
+                            ]
+                          }
+                        }
+                        geometry Cylinder {
+                          height 0.19
+                          radius 0.38
+                          side FALSE
+                          subdivision 24
+                        }
+                      }
+                    ]
+                  }
+                ]
+                name "front left wheel"
+                model "tractor front wheel"
+                boundingObject Group {
+                  children [
+                    Transform {
+                      translation 0.04 0 0
+                      rotation 0 1 0 1.5708
+                      children [
+                        Cylinder {
+                          height 0.19
+                          radius 0.38
+                          subdivision 24
+                        }
+                      ]
+                    }
+                  ]
+                }
+                physics Physics {
+                  density -1
+                  mass 30
+                }
+              }
+            }
+          }
+        }
+      ]
+    }
+    Transform {
+      translation 1.76 -0.7 0
+      rotation 0 0 1 1.5708
+      children [
+        DEF RIGHT_STEER_HINGE2 Hinge2Joint {
+          jointParameters HingeJointParameters {
+            position 5.102083105781486e-05
+            axis 0 0 -1
+            suspensionSpringConstant 200000
+            suspensionDampingConstant 4000
+            suspensionAxis 0 0 1
+          }
+          jointParameters2 JointParameters {
+            position 8.931327350629633
+            axis 1 0 0
+            dampingConstant 5
+          }
+          device [
+            RotationalMotor {
+              name "right_steer"
+              minPosition -0.94
+              maxPosition 0.94
+              maxTorque 10000
+              sound ""
+            }
+            PositionSensor {
+              name "right_steer_sensor"
+            }
+          ]
+          device2 [
+            RotationalMotor {
+              name "right_front_wheel"
+              acceleration 3.654970760233918
+              maxVelocity 131.57894736842104
+              maxTorque 100000000
+              sound ""
+            }
+            PositionSensor {
+              name "right_front_sensor"
+            }
+            Brake {
+              name "right_front_brake"
+            }
+          ]
+          endPoint Slot {
+            type "vehicle wheel"
+            endPoint Slot {
+              type "vehicle wheel"
+              endPoint Solid {
+                translation 4.1136994811949436e-08 6.451310208384787e-05 0.01421176169159718
+                rotation 0.9999999995137153 -2.9600950995545196e-05 9.815957257771999e-06 2.6481420428517572
+                children [
+                  Transform {
+                    translation 0.041 0 0
+                    rotation 0 1 0 1.5708
+                    children [
+                      Shape {
+                        appearance PBRAppearance {
+                          baseColorMap ImageTexture {
+                            url [
+                              "https://raw.githubusercontent.com/cyberbotics/webots/R2023a/projects/vehicles/protos/generic/textures/tractor_tire_tread_base_color.jpg"
+                            ]
+                          }
+                          roughness 0.4
+                          metalness 0
+                          normalMap ImageTexture {
+                            url [
+                              "https://raw.githubusercontent.com/cyberbotics/webots/R2023a/projects/vehicles/protos/generic/textures/tractor_tire_tread_normal.jpg"
+                            ]
+                          }
+                          occlusionMap ImageTexture {
+                            url [
+                              "https://raw.githubusercontent.com/cyberbotics/webots/R2023a/projects/vehicles/protos/generic/textures/tractor_tire_tread_occlusion.jpg"
+                            ]
+                          }
+                          textureTransform TextureTransform {
+                            rotation 1.5708
+                            scale 1 7
+                          }
+                        }
+                        geometry Cylinder {
+                          bottom FALSE
+                          height 0.19
+                          radius 0.38
+                          top FALSE
+                          subdivision 24
+                        }
+                      }
+                      Shape {
+                        appearance PBRAppearance {
+                          baseColorMap ImageTexture {
+                            url [
+                              "https://raw.githubusercontent.com/cyberbotics/webots/R2023a/projects/vehicles/protos/generic/textures/tractor_front_tire_side_base_color.jpg"
+                            ]
+                          }
+                          roughnessMap ImageTexture {
+                            url [
+                              "https://raw.githubusercontent.com/cyberbotics/webots/R2023a/projects/vehicles/protos/generic/textures/tractor_front_tire_side_roughness.jpg"
+                            ]
+                          }
+                          normalMap ImageTexture {
+                            url [
+                              "https://raw.githubusercontent.com/cyberbotics/webots/R2023a/projects/vehicles/protos/generic/textures/tractor_front_tire_side_normal.jpg"
+                            ]
+                          }
+                          occlusionMap ImageTexture {
+                            url [
+                              "https://raw.githubusercontent.com/cyberbotics/webots/R2023a/projects/vehicles/protos/generic/textures/tractor_front_tire_side_occlusion.jpg"
+                            ]
+                          }
+                        }
+                        geometry Cylinder {
+                          height 0.19
+                          radius 0.38
+                          side FALSE
+                          subdivision 24
+                        }
+                      }
+                    ]
+                  }
+                ]
+                name "front right wheel"
+                model "tractor front wheel"
+                boundingObject Group {
+                  children [
+                    Transform {
+                      translation 0.04 0 0
+                      rotation 0 1 0 1.5708
+                      children [
+                        Cylinder {
+                          height 0.19
+                          radius 0.38
+                          subdivision 24
+                        }
+                      ]
+                    }
+                  ]
+                }
+                physics Physics {
+                  density -1
+                  mass 30
+                }
+              }
+            }
+          }
+        }
+      ]
+    }
+    Transform {
+      translation 0 0.7 0
+      rotation 0 0 1 -1.5708
+      children [
+        DEF LEFT_REAR_WHEEL_HINGE HingeJoint {
+          jointParameters HingeJointParameters {
+            position 5.661107753814796
+            axis -1 0 0
+            dampingConstant 5
+            suspensionSpringConstant 30000
+            suspensionDampingConstant 2000
+            suspensionAxis 0 0 1
+          }
+          device [
+            RotationalMotor {
+              name "left_rear_wheel"
+              acceleration 2.314814814814815
+              maxVelocity 83.33333333333334
+              maxTorque 100000000
+              sound ""
+            }
+            PositionSensor {
+              name "left_rear_sensor"
+            }
+            Brake {
+              name "left_rear_brake"
+            }
+          ]
+          endPoint Slot {
+            type "vehicle wheel"
+            endPoint Slot {
+              type "vehicle wheel"
+              endPoint Solid {
+                rotation -1 0 0 5.661107753814796
+                children [
+                  Transform {
+                    translation 0.041 0 0
+                    rotation 0 -1 0 1.5708
+                    children [
+                      Shape {
+                        appearance PBRAppearance {
+                          baseColorMap ImageTexture {
+                            url [
+                              "https://raw.githubusercontent.com/cyberbotics/webots/R2023a/projects/vehicles/protos/generic/textures/tractor_tire_tread_base_color.jpg"
+                            ]
+                          }
+                          roughness 0.4
+                          metalness 0
+                          normalMap ImageTexture {
+                            url [
+                              "https://raw.githubusercontent.com/cyberbotics/webots/R2023a/projects/vehicles/protos/generic/textures/tractor_tire_tread_normal.jpg"
+                            ]
+                          }
+                          occlusionMap ImageTexture {
+                            url [
+                              "https://raw.githubusercontent.com/cyberbotics/webots/R2023a/projects/vehicles/protos/generic/textures/tractor_tire_tread_occlusion.jpg"
+                            ]
+                          }
+                          textureTransform TextureTransform {
+                            rotation 1.5708
+                            scale 1 7
+                          }
+                        }
+                        geometry Cylinder {
+                          bottom FALSE
+                          height 0.37
+                          radius 0.6
+                          top FALSE
+                          subdivision 24
+                        }
+                      }
+                      Shape {
+                        appearance PBRAppearance {
+                          baseColorMap ImageTexture {
+                            url [
+                              "https://raw.githubusercontent.com/cyberbotics/webots/R2023a/projects/vehicles/protos/generic/textures/tractor_rear_tire_side_base_color.jpg"
+                            ]
+                          }
+                          roughnessMap ImageTexture {
+                            url [
+                              "https://raw.githubusercontent.com/cyberbotics/webots/R2023a/projects/vehicles/protos/generic/textures/tractor_rear_tire_side_roughness.jpg"
+                            ]
+                          }
+                          metalnessMap ImageTexture {
+                            url [
+                              "https://raw.githubusercontent.com/cyberbotics/webots/R2023a/projects/vehicles/protos/generic/textures/tractor_rear_tire_side_metalness.jpg"
+                            ]
+                          }
+                          normalMap ImageTexture {
+                            url [
+                              "https://raw.githubusercontent.com/cyberbotics/webots/R2023a/projects/vehicles/protos/generic/textures/tractor_rear_tire_side_normal.jpg"
+                            ]
+                          }
+                          occlusionMap ImageTexture {
+                            url [
+                              "https://raw.githubusercontent.com/cyberbotics/webots/R2023a/projects/vehicles/protos/generic/textures/tractor_rear_tire_side_occlusion.jpg"
+                            ]
+                          }
+                        }
+                        geometry Cylinder {
+                          height 0.37
+                          radius 0.6
+                          side FALSE
+                          subdivision 24
+                        }
+                      }
+                    ]
+                  }
+                ]
+                name "rear left wheel"
+                model "tractor rear wheel"
+                boundingObject Group {
+                  children [
+                    Transform {
+                      translation 0.04 0 0
+                      rotation 0 1 0 1.5708
+                      children [
+                        Cylinder {
+                          height 0.37
+                          radius 0.6
+                          subdivision 24
+                        }
+                      ]
+                    }
+                  ]
+                }
+                physics Physics {
+                  density -1
+                  mass 60
+                }
+              }
+            }
+          }
+        }
+      ]
+    }
+    Transform {
+      translation 0 -0.7 0
+      rotation 0 0 1 1.5708
+      children [
+        DEF RIGHT_REAR_WHEEL_HINGE HingeJoint {
+          jointParameters HingeJointParameters {
+            position 5.661107753643659
+            dampingConstant 5
+            suspensionSpringConstant 30000
+            suspensionDampingConstant 2000
+            suspensionAxis 0 0 1
+          }
+          device [
+            RotationalMotor {
+              name "right_rear_wheel"
+              acceleration 2.314814814814815
+              maxVelocity 83.33333333333334
+              maxTorque 100000000
+              sound ""
+            }
+            PositionSensor {
+              name "right_rear_sensor"
+            }
+            Brake {
+              name "right_rear_brake"
+            }
+          ]
+          endPoint Slot {
+            type "vehicle wheel"
+            endPoint Slot {
+              type "vehicle wheel"
+              endPoint Solid {
+                rotation 1 0 0 5.661107753643659
+                children [
+                  Transform {
+                    translation 0.041 0 0
+                    rotation 0 1 0 1.5708
+                    children [
+                      Shape {
+                        appearance PBRAppearance {
+                          baseColorMap ImageTexture {
+                            url [
+                              "https://raw.githubusercontent.com/cyberbotics/webots/R2023a/projects/vehicles/protos/generic/textures/tractor_tire_tread_base_color.jpg"
+                            ]
+                          }
+                          roughness 0.4
+                          metalness 0
+                          normalMap ImageTexture {
+                            url [
+                              "https://raw.githubusercontent.com/cyberbotics/webots/R2023a/projects/vehicles/protos/generic/textures/tractor_tire_tread_normal.jpg"
+                            ]
+                          }
+                          occlusionMap ImageTexture {
+                            url [
+                              "https://raw.githubusercontent.com/cyberbotics/webots/R2023a/projects/vehicles/protos/generic/textures/tractor_tire_tread_occlusion.jpg"
+                            ]
+                          }
+                          textureTransform TextureTransform {
+                            rotation 1.5708
+                            scale 1 7
+                          }
+                        }
+                        geometry Cylinder {
+                          bottom FALSE
+                          height 0.37
+                          radius 0.6
+                          top FALSE
+                          subdivision 24
+                        }
+                      }
+                      Shape {
+                        appearance PBRAppearance {
+                          baseColorMap ImageTexture {
+                            url [
+                              "https://raw.githubusercontent.com/cyberbotics/webots/R2023a/projects/vehicles/protos/generic/textures/tractor_rear_tire_side_base_color.jpg"
+                            ]
+                          }
+                          roughnessMap ImageTexture {
+                            url [
+                              "https://raw.githubusercontent.com/cyberbotics/webots/R2023a/projects/vehicles/protos/generic/textures/tractor_rear_tire_side_roughness.jpg"
+                            ]
+                          }
+                          metalnessMap ImageTexture {
+                            url [
+                              "https://raw.githubusercontent.com/cyberbotics/webots/R2023a/projects/vehicles/protos/generic/textures/tractor_rear_tire_side_metalness.jpg"
+                            ]
+                          }
+                          normalMap ImageTexture {
+                            url [
+                              "https://raw.githubusercontent.com/cyberbotics/webots/R2023a/projects/vehicles/protos/generic/textures/tractor_rear_tire_side_normal.jpg"
+                            ]
+                          }
+                          occlusionMap ImageTexture {
+                            url [
+                              "https://raw.githubusercontent.com/cyberbotics/webots/R2023a/projects/vehicles/protos/generic/textures/tractor_rear_tire_side_occlusion.jpg"
+                            ]
+                          }
+                        }
+                        geometry Cylinder {
+                          height 0.37
+                          radius 0.6
+                          side FALSE
+                          subdivision 24
+                        }
+                      }
+                    ]
+                  }
+                ]
+                name "rear right wheel"
+                model "tractor rear wheel"
+                boundingObject Group {
+                  children [
+                    Transform {
+                      translation 0.04 0 0
+                      rotation 0 1 0 1.5708
+                      children [
+                        Cylinder {
+                          height 0.37
+                          radius 0.6
+                          subdivision 24
+                        }
+                      ]
+                    }
+                  ]
+                }
+                physics Physics {
+                  density -1
+                  mass 60
+                }
+              }
+            }
+          }
+        }
+      ]
+    }
+    Speaker {
+      translation 1.76 0 0
+      name "engine_speaker"
+    }
+    Group {
+      children [
+        DEF FRONT_AXLE_CYL Transform {
+          translation 0.05 0 0.07
+          rotation -0.6058148817925031 0.6058168817921129 0.5157268993706037 -2.189295
+          children [
+            Solid {
+              translation 0 -0.34 -1.68
+              rotation -0.5773489358556708 -0.5773509358554485 0.5773509358554485 2.094397
+              children [
+                Shape {
+                  appearance DEF FRAME_APP PBRAppearance {
+                    baseColor 0.129412 0.129412 0.129412
+                    roughness 0.5
+                    metalness 0
+                  }
+                  geometry DEF FRONT_AXLE_CYL Cylinder {
+                    bottom FALSE
+                    height 1.3
+                    radius 0.06
+                    top FALSE
+                  }
+                }
+                Transform {
+                  translation 0.280006 -1.74 0.43
+                  rotation 0 0 1 1.5708
+                  children [
+                    DEF FRONT_AXLE_DIR_SHAPE Shape {
+                      appearance USE FRAME_APP
+                      geometry Cylinder {
+                        height 0.35
+                        radius 0.05
+                      }
+                    }
+                  ]
+                }
+                Transform {
+                  translation 0.05 0 0.52
+                  rotation 0 -1 0 1.5708
+                  children [
+                    USE FRONT_AXLE_DIR_SHAPE
+                  ]
+                }
+                Transform {
+                  translation 0.05 0 -0.52
+                  rotation 0 -1 0 1.5708
+                  children [
+                    DEF FRONT_AXLE_DIR_SHAPE Shape {
+                      appearance USE FRAME_APP
+                      geometry Cylinder {
+                        height 0.35
+                        radius 0.05
+                      }
+                    }
+                  ]
+                }
+                Transform {
+                  translation 0.280006 -1.74 -0.43
+                  rotation 0 0 1 1.5708
+                  children [
+                    USE FRONT_AXLE_DIR_SHAPE
+                  ]
+                }
+              ]
+              boundingObject Group {
+                children [
+                  USE FRONT_AXLE_CYL
+                  Transform {
+                    translation 0.280006 -1.74 -0.43
+                    children [
+                      USE FRONT_AXLE_DIR_SHAPE
+                    ]
+                  }
+                  Transform {
+                    translation 0.05 0 0.52
+                    rotation 0 -1 0 1.5708
+                    children [
+                      USE FRONT_AXLE_DIR_SHAPE
+                    ]
+                  }
+                  Transform {
+                    translation 0.05 0 -0.52
+                    rotation 0 -1 0 1.5708
+                    children [
+                      USE FRONT_AXLE_DIR_SHAPE
+                    ]
+                  }
+                  Transform {
+                    translation 0.280006 -1.74 0.43
+                    children [
+                      USE FRONT_AXLE_DIR_SHAPE
+                    ]
+                  }
+                ]
+              }
+              physics Physics {
+              }
+            }
+          ]
+        }
+        Transform {
+          translation 0.05 0 0.07
+          rotation -0.6058148817925031 0.6058168817921129 0.5157268993706037 -2.189295
+          children [
+            DEF FRAME Shape {
+              appearance USE FRAME_APP
+              geometry IndexedFaceSet {
+                coord Coordinate {
+                  point [
+                    0.281886 -0.0418124 -2.33788, 0.281886 0.0558351 -2.33788, 0.392808 0.0540268 -1.98707, 0.392808 0.274638 -1.93644, 0.392808 0.421109 -1.64712, 0.392808 0.453658 -1.33428, 0.392808 0.477166 -1.0323, 0.392808 0.486207 -0.838812, 0.392808 0.191456 -0.853278, 0.392808 0.195073 -0.522282, 0.392808 0.511343 -0.452703, 0.392808 0.514506 -0.152246, 0.392808 0.713757 -0.0984799, 0.392808 0.707431 0.246255, 0.156461 -0.161753 0.243209, 0.156461 -0.161753 -0.224988, 0.156461 -0.161753 -1.56281, 0.156461 -0.161753 -1.8316, 0.392808 -0.0452925 -1.92652, -0.392808 -0.0452925 -1.92652, -0.392808 -0.161753 -1.8316, 0.392808 -0.161753 -1.8316, -0.392808 -0.161753 0.243209, 0.392808 -0.161753 0.243209, -0.392808 0.707431 0.246255, -0.392808 0.713757 -0.0984799, -0.392808 0.514506 -0.152246, -0.392808 0.511343 -0.452703, -0.392808 0.195073 -0.522282, -0.392808 0.191456 -0.853278, -0.392808 0.486207 -0.838812, -0.392808 0.477166 -1.0323, -0.392808 0.453658 -1.33428, -0.392808 0.421109 -1.64712, -0.392808 0.274638 -1.93644, -0.392808 0.0540268 -1.98707, -0.281886 0.0558351 -2.33788, -0.281886 -0.0418124 -2.33788, -0.156461 -0.161753 -1.56281, -0.156461 -0.161753 -0.224988, -0.156461 -0.161753 0.243209, -0.156461 -0.161753 -1.8316, -0.806926 0.0522188 -0.670415, 0.806926 0.0522188 -0.670415, -0.806926 0.0648768 -0.941884, 0.806926 0.0648768 -0.941884, -0.806926 0.213157 -1.08655, 0.806926 0.213157 -1.08655, -0.806926 0.243019 -1.05484, 0.806926 0.243019 -1.05484, -0.806926 0.10373 -0.921063, 0.806926 0.10373 -0.921063, -0.806926 0.0892632 -0.662917, 0.806926 0.0892632 -0.662917, -0.156461 -0.425865 0.243209, 0.156461 -0.425865 0.243209, -0.156461 -0.425865 -0.224988, 0.156461 -0.425865 -0.224988, -0.156461 -0.425864 -1.8316, 0.156461 -0.425864 -1.8316, -0.156461 -0.425864 -1.56281, 0.156461 -0.425864 -1.56281
+                  ]
+                }
+                coordIndex [
+                  8, 6, 7, -1, 8, 5, 6, -1, 8, 4, 5, -1, 8, 3, 4, -1, 2, 0, 1, -1, 37, 0, 18, 19, -1, 12, 25, 24, 13, -1, 11, 26, 25, 12, -1, 7, 30, 29, 8, -1, 6, 31, 30, 7, -1, 5, 32, 31, 6, -1, 4, 33, 32, 5, -1, 3, 34, 33, 4, -1, 2, 35, 34, 3, -1, 1, 36, 35, 2, -1, 0, 37, 36, 1, -1, 26, 24, 25, -1, 26, 22, 24, -1, 27, 22, 26, -1, 28, 22, 27, -1, 31, 29, 30, -1, 32, 29, 31, -1, 33, 29, 32, -1, 34, 29, 33, -1, 35, 29, 34, -1, 29, 22, 28, -1, 35, 22, 29, -1, 37, 35, 36, -1, 37, 19, 35, -1, 19, 22, 35, -1, 20, 22, 19, -1, 23, 21, 18, -1, 39, 22, 20, -1, 21, 23, 15, -1, 15, 39, 20, -1, 22, 39, 40, -1, 22, 40, 24, -1, 50, 48, 46, -1, 47, 49, 51, -1, 50, 46, 44, -1, 45, 47, 51, -1, 52, 50, 44, -1, 45, 51, 53, -1, 42, 52, 44, -1, 45, 53, 43, -1, 52, 42, 43, 53, -1, 50, 52, 53, 51, -1, 48, 50, 51, 49, -1, 46, 48, 49, 47, -1, 44, 46, 47, 45, -1, 42, 44, 45, 43, -1, 15, 20, 38, -1, 40, 54, 55, 14, -1, 39, 56, 54, 40, -1, 15, 57, 56, 39, -1, 55, 54, 56, 57, -1, 18, 41, 20, 19, -1, 20, 41, 38, -1, 41, 17, 59, 58, -1, 38, 41, 58, 60, -1, 16, 38, 60, 61, -1, 59, 61, 60, 58, -1, 17, 41, 18, -1, 17, 18, 21, -1, 16, 61, 59, 17, -1, 16, 17, 21, -1, 15, 16, 21, -1, 15, 38, 16, -1, 14, 55, 57, 15, -1, 14, 15, 23, -1, 13, 24, 40, 14, -1, 13, 14, 23, -1, 11, 12, 13, 23, -1, 10, 11, 23, -1, 9, 10, 23, -1, 10, 9, 28, 27, -1, 11, 10, 27, 26, -1, 8, 29, 28, 9, -1, 8, 9, 23, -1, 8, 23, 18, -1, 3, 8, 18, -1, 2, 3, 18, -1, 0, 2, 18, -1
+                ]
+              }
+            }
+            DEF MUDGUARD Shape {
+              appearance DEF BLUE_MATERIAL PBRAppearance {
+                baseColor 0.24 0.53 0.79
+                baseColorMap ImageTexture {
+                  url [
+                    "https://raw.githubusercontent.com/cyberbotics/webots/R2023a/projects/appearances/protos/textures/matte_car_paint/matte_car_paint_base_color.jpg"
+                  ]
+                  filtering 5
+                }
+                roughnessMap ImageTexture {
+                  url [
+                    "https://raw.githubusercontent.com/cyberbotics/webots/R2023a/projects/appearances/protos/textures/matte_car_paint/matte_car_paint_roughness.jpg"
+                  ]
+                  filtering 5
+                }
+                metalness 0
+                normalMapFactor 0.5
+                textureTransform TextureTransform {
+                  scale 10 10
+                }
+              }
+              geometry IndexedFaceSet {
+                coord Coordinate {
+                  point [
+                    -0.419982 0.122792 -0.674648, 0.419982 0.122792 -0.674648, -0.419982 0.26876 -0.643369, 0.419982 0.26876 -0.643369, -0.419982 0.418638 -0.569082, 0.419982 0.418638 -0.569082, -0.419982 0.556786 -0.450483, 0.419982 0.556786 -0.450483, -0.419982 0.662352 -0.292786, 0.419982 0.662352 -0.292786, -0.419982 0.70927 -0.133785, 0.419982 0.70927 -0.133785, -0.419982 0.722303 0.047372, 0.419982 0.722303 0.047372, -0.419982 0.689721 0.220709, 0.419982 0.689721 0.220709, -0.419982 0.62977 0.365373, 0.419982 0.62977 0.365373, -0.419982 0.588915 0.437791, 0.419982 0.588915 0.437791, -0.419982 0.553896 0.433711, 0.419982 0.553896 0.433711, -0.419982 0.0499529 -0.680647, 0.419982 0.0499529 -0.680647, -0.419982 0.556163 0.116389, 0.419982 0.556163 0.116389, -0.419982 0.516497 -0.135201, 0.419982 0.516497 -0.135201, -0.419982 0.4349 -0.285929, 0.419982 0.4349 -0.285929, -0.419982 0.339704 -0.386792, 0.419982 0.339704 -0.386792, -0.419982 0.160644 -0.477455, 0.419982 0.160644 -0.477455, -0.419982 0.0495813 -0.502388, 0.419982 0.0495813 -0.502388, -0.501272 0.0495813 -0.502388, 0.501272 0.0495813 -0.502388, -0.501272 0.160644 -0.477455, 0.501272 0.160644 -0.477455, -0.501272 0.339704 -0.386792, 0.501272 0.339704 -0.386792, -0.501272 0.4349 -0.285929, 0.501272 0.4349 -0.285929, -0.501272 0.516497 -0.135201, 0.501272 0.516497 -0.135201, -0.501272 0.556163 0.116389, 0.501272 0.556163 0.116389, -0.501272 0.0518609 -0.657705, 0.501272 0.0518609 -0.657705, -0.501272 0.103243 -0.653796, 0.501272 0.103243 -0.653796, -0.501272 0.224448 -0.62382, 0.501272 0.224448 -0.62382, -0.501272 0.337834 -0.583418, 0.501272 0.337834 -0.583418, -0.501272 0.44731 -0.509131, 0.501272 0.44731 -0.509131, -0.501272 0.569819 -0.382712, 0.501272 0.569819 -0.382712, -0.501272 0.646713 -0.241957, 0.501272 0.646713 -0.241957, -0.501272 0.678785 0.118486, 0.501272 0.678785 0.118486, -0.501272 0.619344 0.308029, 0.501272 0.619344 0.308029, -0.501272 0.553896 0.433711, 0.501272 0.553896 0.433711, -0.844185 0.122792 -0.674648, 0.844185 0.122792 -0.674648, -0.844185 0.26876 -0.643369, 0.844185 0.26876 -0.643369, -0.844185 0.418638 -0.569082, 0.844185 0.418638 -0.569082, -0.844185 0.556786 -0.450483, 0.844185 0.556786 -0.450483, -0.844185 0.662352 -0.292786, 0.844185 0.662352 -0.292786, -0.844185 0.70927 -0.133785, 0.844185 0.70927 -0.133785, -0.844185 0.722303 0.047372, 0.844185 0.722303 0.047372, -0.844185 0.689721 0.220709, 0.844185 0.689721 0.220709, -0.844185 0.62977 0.365373, 0.844185 0.62977 0.365373, -0.844185 0.588915 0.437791, 0.844185 0.588915 0.437791, -0.844185 0.678785 0.118486, 0.844185 0.678785 0.118486, -0.844185 0.684791 -0.0750803, 0.844185 0.684791 -0.0750803, -0.844185 0.646713 -0.241957, 0.844185 0.646713 -0.241957, -0.844185 0.569819 -0.382712, 0.844185 0.569819 -0.382712, -0.844185 0.44731 -0.509131, 0.844185 0.44731 -0.509131, -0.844185 0.337834 -0.583418, 0.844185 0.337834 -0.583418, -0.844185 0.224448 -0.62382, 0.844185 0.224448 -0.62382, -0.844185 0.103243 -0.653796, 0.844185 0.103243 -0.653796, -0.844185 0.0518609 -0.657705, 0.844185 0.0518609 -0.657705, -0.844185 0.0499529 -0.680647, 0.844185 0.0499529 -0.680647, -0.844185 0.553896 0.433711, 0.844185 0.553896 0.433711, -0.844185 0.619344 0.308029, 0.844185 0.619344 0.308029, -0.501272 0.684791 -0.0750803, 0.501272 0.684791 -0.0750803
+                  ]
+                }
+                coordIndex [
+                  28, 4, 6, -1, 5, 29, 7, -1, 30, 4, 28, -1, 5, 31, 29, -1, 32, 4, 30, -1, 5, 33, 31, -1, 32, 2, 4, -1, 3, 33, 5, -1, 32, 0, 2, -1, 33, 3, 1, -1, 34, 0, 32, -1, 35, 33, 1, -1, 22, 0, 34, -1, 23, 35, 1, -1, 18, 66, 20, -1, 67, 19, 21, -1, 60, 64, 62, -1, 65, 61, 63, -1, 58, 64, 60, -1, 65, 59, 61, -1, 58, 66, 64, -1, 67, 59, 65, -1, 56, 44, 58, -1, 45, 57, 59, -1, 44, 46, 58, -1, 47, 45, 59, -1, 46, 66, 58, -1, 67, 47, 59, -1, 56, 42, 44, -1, 43, 57, 45, -1, 54, 42, 56, -1, 43, 55, 57, -1, 54, 40, 42, -1, 41, 55, 43, -1, 54, 38, 40, -1, 39, 55, 41, -1, 52, 38, 54, -1, 39, 53, 55, -1, 50, 38, 52, -1, 39, 51, 53, -1, 50, 36, 38, -1, 37, 51, 39, -1, 48, 36, 50, -1, 37, 49, 51, -1, 76, 90, 78, -1, 91, 77, 79, -1, 76, 92, 90, -1, 93, 77, 91, -1, 74, 92, 76, -1, 93, 75, 77, -1, 74, 94, 92, -1, 95, 75, 93, -1, 74, 96, 94, -1, 97, 75, 95, -1, 72, 96, 74, -1, 97, 73, 75, -1, 72, 98, 96, -1, 99, 73, 97, -1, 70, 98, 72, -1, 99, 71, 73, -1, 70, 100, 98, -1, 101, 71, 99, -1, 68, 100, 70, -1, 101, 69, 71, -1, 68, 102, 100, -1, 103, 69, 101, -1, 106, 102, 68, -1, 103, 107, 69, -1, 106, 104, 102, -1, 105, 107, 103, -1, 110, 86, 84, -1, 87, 111, 85, -1, 108, 86, 110, -1, 87, 109, 111, -1, 8, 10, 26, -1, 11, 9, 27, -1, 12, 14, 24, -1, 15, 13, 25, -1, 14, 16, 24, -1, 17, 15, 25, -1, 82, 110, 84, -1, 111, 83, 85, -1, 82, 88, 110, -1, 89, 83, 111, -1, 80, 88, 82, -1, 89, 81, 83, -1, 80, 90, 88, -1, 91, 81, 89, -1, 78, 90, 80, -1, 91, 79, 81, -1, 60, 62, 112, -1, 63, 61, 113, -1, 62, 90, 112, -1, 91, 63, 113, -1, 62, 88, 90, -1, 89, 63, 91, -1, 60, 90, 92, -1, 91, 61, 93, -1, 60, 112, 90, -1, 113, 61, 91, -1, 16, 20, 24, -1, 21, 17, 25, -1, 16, 18, 20, -1, 19, 17, 21, -1, 10, 12, 26, -1, 13, 11, 27, -1, 26, 12, 24, -1, 13, 27, 25, -1, 6, 8, 28, -1, 9, 7, 29, -1, 28, 8, 26, -1, 9, 29, 27, -1, 18, 86, 66, -1, 87, 19, 67, -1, 66, 86, 108, -1, 87, 67, 109, -1, 64, 88, 62, -1, 89, 65, 63, -1, 64, 110, 88, -1, 111, 65, 89, -1, 66, 110, 64, -1, 111, 67, 65, -1, 66, 108, 110, -1, 109, 67, 111, -1, 48, 106, 22, -1, 107, 49, 23, -1, 48, 104, 106, -1, 105, 49, 107, -1, 68, 0, 22, -1, 69, 23, 1, -1, 22, 106, 68, -1, 107, 23, 69, -1, 18, 84, 86, -1, 85, 19, 87, -1, 18, 16, 84, -1, 17, 19, 85, -1, 14, 84, 16, -1, 85, 15, 17, -1, 14, 82, 84, -1, 83, 15, 85, -1, 12, 82, 14, -1, 83, 13, 15, -1, 12, 80, 82, -1, 81, 13, 83, -1, 10, 80, 12, -1, 81, 11, 13, -1, 10, 78, 80, -1, 79, 11, 81, -1, 8, 78, 10, -1, 79, 9, 11, -1, 8, 76, 78, -1, 77, 9, 79, -1, 6, 76, 8, -1, 77, 7, 9, -1, 6, 74, 76, -1, 75, 7, 77, -1, 4, 74, 6, -1, 75, 5, 7, -1, 4, 72, 74, -1, 73, 5, 75, -1, 2, 72, 4, -1, 73, 3, 5, -1, 2, 70, 72, -1, 71, 3, 73, -1, 0, 70, 2, -1, 71, 1, 3, -1, 0, 68, 70, -1, 69, 1, 71, -1, 60, 94, 58, -1, 95, 61, 59, -1, 60, 92, 94, -1, 93, 61, 95, -1, 58, 96, 56, -1, 97, 59, 57, -1, 58, 94, 96, -1, 95, 59, 97, -1, 56, 98, 54, -1, 99, 57, 55, -1, 56, 96, 98, -1, 97, 57, 99, -1, 54, 100, 52, -1, 101, 55, 53, -1, 54, 98, 100, -1, 99, 55, 101, -1, 52, 102, 50, -1, 103, 53, 51, -1, 52, 100, 102, -1, 101, 53, 103, -1, 50, 104, 48, -1, 105, 51, 49, -1, 50, 102, 104, -1, 103, 51, 105, -1, 20, 46, 24, -1, 47, 21, 25, -1, 20, 66, 46, -1, 67, 21, 47, -1, 24, 44, 26, -1, 45, 25, 27, -1, 24, 46, 44, -1, 47, 25, 45, -1, 26, 42, 28, -1, 43, 27, 29, -1, 26, 44, 42, -1, 45, 27, 43, -1, 28, 40, 30, -1, 41, 29, 31, -1, 28, 42, 40, -1, 43, 29, 41, -1, 30, 38, 32, -1, 39, 31, 33, -1, 30, 40, 38, -1, 41, 31, 39, -1, 32, 36, 34, -1, 37, 33, 35, -1, 32, 38, 36, -1, 39, 33, 37, -1, 34, 48, 22, -1, 49, 35, 23, -1, 34, 36, 48, -1, 37, 35, 49, -1
+                ]
+                creaseAngle 1
+              }
+            }
+            DEF BONNET Shape {
+              appearance USE BLUE_MATERIAL
+              geometry IndexedFaceSet {
+                coord DEF coord_Bonnet Coordinate {
+                  point [
+                    -0.417245 0.156612 -2.11852, 0.417245 0.156612 -2.11852, -0.417245 0.697761 -1.12232, 0.417245 0.697761 -1.12232, -0.417245 0.662499 -1.59234, 0.417245 0.662499 -1.59234, -0.417245 0.636053 -0.923973, 0.417245 0.636053 -0.923973, -0.417245 0.598019 -1.87919, 0.417245 0.598019 -1.87919, -0.417245 0.607683 -0.779289, 0.417245 0.607683 -0.779289, -0.392726 0.715487 -1.1793, 0.392726 0.715487 -1.1793, -0.392726 0.698465 -1.31831, 0.392726 0.698465 -1.31831, -0.385068 0.0686666 -2.1427, 0.385068 0.0686666 -2.1427, -0.192534 0.0686666 -2.18572, 0.192534 0.0686666 -2.18572, -0.417245 0.0691422 -2.11053, 0.417245 0.0691422 -2.11053, -0.385195 0.667259 -1.71264, 0.385195 0.667259 -1.71264, -0.417245 0.78495 -1.00201, 0.417245 0.78495 -1.00201, -0.417245 0.738182 -0.960853, 0.417245 0.738182 -0.960853, -0.385068 0.809106 -1.02327, 0.385068 0.809106 -1.02327, -0.157172 0.156612 -2.21301, 0.157172 0.156612 -2.21301, 0 0.156612 -2.21761, 0 0.0686666 -2.19492, 0 0.437468 -2.16939, -0.161138 0.226826 -2.19981, 0.161138 0.226826 -2.19981, -0.175104 0.29704 -2.1866, 0.175104 0.29704 -2.1866, -0.199069 0.367254 -2.17339, 0.199069 0.367254 -2.17339, -0.243035 0.437468 -2.16018, 0.243035 0.437468 -2.16018, -0.417245 0.148101 -1.5254, 0.417245 0.148101 -1.5254, -0.417245 0.0771774 -1.61902, 0.417245 0.0771774 -1.61902, -0.417245 0.437468 -0.804822, 0.417245 0.437468 -0.804822, -0.417245 0.2786 -1.53108, 0.417245 0.2786 -1.53108, -0.417245 0.35236 -0.943831, 0.417245 0.35236 -0.943831, -0.207478 0.156612 -2.20527, 0.207478 0.156612 -2.20527, 0 0.715487 -1.1793, 0 0.667259 -1.71264, -0.385195 0.604847 -1.9271, 0.385195 0.604847 -1.9271, -0.417245 0.525491 -2.00419, 0.417245 0.525491 -2.00419, -0.385068 0.528249 -2.04341, 0.385068 0.528249 -2.04341, -0.192598 0.604847 -1.97011, 0.192598 0.604847 -1.97011, -0.192534 0.528249 -2.08642, 0.192534 0.528249 -2.08642, 0 0.528249 -2.09563, 0 0.604847 -1.97931, -0.386683 0.156612 -2.1654, 0.386683 0.156612 -2.1654, 0 0.636053 -0.923973, 0 0.738182 -0.960853, 0 0.607683 -0.779289, 0 0.437468 -0.804822, 0 0.35236 -0.943831, 0 0.2786 -1.53108, 0 0.148101 -1.5254, 0 0.0771774 -1.61902, 0 0.809106 -1.02327, -0.417245 0.488192 -2.04745, 0.417245 0.488192 -2.04745, -0.383261 0.475868 -2.08942, 0.383261 0.475868 -2.08942, -0.256055 0.156612 -2.19446, 0.256055 0.156612 -2.19446, -0.29082 0.384894 -2.15483, 0.29082 0.384894 -2.15483, -0.335729 0.437468 -2.13211, 0.335729 0.437468 -2.13211, -0.417245 0.266604 -2.08322, 0.417245 0.266604 -2.08322, -0.417245 0.169133 -2.07258, 0.417245 0.169133 -2.07258, -0.239505 0.298168 -2.17956, 0.239505 0.29704 -2.17956, -0.417245 0.381821 -2.07245, 0.417245 0.381821 -2.07245, -0.417245 0.181965 -2.00911, 0.417245 0.181965 -2.00911, -0.417245 0.268209 -2.02004, 0.417245 0.268209 -2.02004, -0.417245 0.490318 -1.97838, 0.417245 0.490318 -1.97838, -0.417245 0.161017 -1.86144, 0.417245 0.161017 -1.86144, -0.417245 0.211597 -1.86252, 0.417245 0.211597 -1.86252, -0.417245 0.271579 -1.85422, 0.417245 0.271579 -1.85422, -0.417245 0.410482 -1.80015, 0.417245 0.410482 -1.80015, -0.417245 0.534901 -1.70937, 0.417245 0.534901 -1.70937, -0.417245 0.382694 -2.0122, 0.417245 0.382694 -2.0122, -0.417245 0.353919 -1.82727, 0.417245 0.353919 -1.82727, -0.417245 0.293993 -2.08066, 0.417245 0.293993 -2.08066
+                  ]
+                }
+                coordIndex [
+                  2, 12, 14, -1, 15, 13, 3, -1, 16, 18, 20, -1, 21, 19, 17, -1, 4, 22, 8, -1, 9, 23, 5, -1, 2, 14, 4, -1, 5, 15, 3, -1, 14, 22, 4, -1, 5, 23, 15, -1, 24, 26, 28, -1, 29, 27, 25, -1, 30, 32, 33, -1, 33, 32, 31, -1, 43, 20, 45, -1, 46, 21, 44, -1, 20, 18, 33, -1, 33, 19, 21, -1, 37, 35, 53, -1, 54, 36, 38, -1, 35, 30, 53, -1, 54, 31, 36, -1, 41, 39, 37, -1, 38, 40, 42, -1, 41, 37, 53, -1, 54, 38, 42, -1, 22, 14, 55, -1, 55, 15, 23, -1, 22, 55, 56, -1, 56, 55, 23, -1, 28, 2, 24, -1, 25, 3, 29, -1, 12, 2, 28, -1, 29, 3, 13, -1, 8, 57, 59, -1, 60, 58, 9, -1, 57, 61, 59, -1, 60, 62, 58, -1, 57, 63, 61, -1, 62, 64, 58, -1, 63, 65, 61, -1, 62, 66, 64, -1, 18, 53, 30, -1, 31, 54, 19, -1, 18, 30, 33, -1, 33, 31, 19, -1, 67, 34, 65, -1, 66, 34, 67, -1, 34, 41, 65, -1, 66, 42, 34, -1, 68, 67, 65, -1, 66, 67, 68, -1, 68, 65, 63, -1, 64, 66, 68, -1, 22, 56, 63, -1, 64, 56, 23, -1, 56, 68, 63, -1, 64, 68, 56, -1, 63, 57, 22, -1, 23, 58, 64, -1, 57, 8, 22, -1, 23, 9, 58, -1, 2, 26, 24, -1, 25, 27, 3, -1, 26, 2, 6, -1, 7, 3, 27, -1, 61, 65, 41, -1, 42, 66, 62, -1, 69, 16, 20, -1, 21, 17, 70, -1, 18, 16, 69, -1, 70, 17, 19, -1, 26, 6, 71, -1, 71, 7, 27, -1, 26, 71, 72, -1, 72, 71, 27, -1, 6, 10, 73, -1, 73, 11, 7, -1, 6, 73, 71, -1, 71, 73, 7, -1, 10, 47, 74, -1, 74, 48, 11, -1, 10, 74, 73, -1, 73, 74, 11, -1, 51, 74, 47, -1, 48, 74, 52, -1, 51, 75, 74, -1, 74, 75, 52, -1, 49, 75, 51, -1, 52, 75, 50, -1, 49, 76, 75, -1, 75, 76, 50, -1, 49, 43, 77, -1, 77, 44, 50, -1, 49, 77, 76, -1, 76, 77, 50, -1, 45, 77, 43, -1, 44, 77, 46, -1, 45, 78, 77, -1, 77, 78, 46, -1, 28, 55, 12, -1, 13, 55, 29, -1, 28, 79, 55, -1, 55, 79, 29, -1, 12, 55, 14, -1, 15, 55, 13, -1, 20, 78, 45, -1, 46, 78, 21, -1, 20, 33, 78, -1, 78, 33, 21, -1, 26, 72, 28, -1, 29, 72, 27, -1, 28, 72, 79, -1, 79, 72, 29, -1, 82, 80, 61, -1, 62, 81, 83, -1, 18, 84, 53, -1, 54, 85, 19, -1, 18, 69, 84, -1, 85, 70, 19, -1, 86, 88, 41, -1, 42, 89, 87, -1, 0, 69, 20, -1, 21, 70, 1, -1, 94, 41, 53, -1, 54, 42, 95, -1, 94, 86, 41, -1, 42, 87, 95, -1, 80, 59, 61, -1, 62, 60, 81, -1, 88, 82, 61, -1, 62, 83, 89, -1, 88, 61, 41, -1, 42, 62, 89, -1, 80, 96, 59, -1, 60, 97, 81, -1, 92, 0, 20, -1, 21, 1, 93, -1, 98, 92, 20, -1, 21, 93, 99, -1, 106, 49, 108, -1, 109, 50, 107, -1, 102, 112, 59, -1, 60, 113, 103, -1, 43, 104, 20, -1, 21, 105, 44, -1, 104, 98, 20, -1, 21, 99, 105, -1, 114, 59, 90, -1, 91, 60, 115, -1, 100, 114, 90, -1, 91, 115, 101, -1, 114, 102, 59, -1, 60, 103, 115, -1, 110, 116, 49, -1, 50, 117, 111, -1, 116, 108, 49, -1, 50, 109, 117, -1, 6, 47, 10, -1, 11, 48, 7, -1, 112, 8, 59, -1, 60, 9, 113, -1, 6, 51, 47, -1, 48, 52, 7, -1, 2, 51, 6, -1, 7, 52, 3, -1, 2, 49, 51, -1, 52, 50, 3, -1, 4, 49, 2, -1, 3, 50, 5, -1, 112, 110, 49, -1, 50, 111, 113, -1, 4, 112, 49, -1, 50, 113, 5, -1, 8, 112, 4, -1, 5, 113, 9, -1, 96, 118, 59, -1, 60, 119, 97, -1, 118, 90, 59, -1, 60, 91, 119, -1, 106, 98, 104, -1, 105, 99, 107, -1, 49, 106, 43, -1, 44, 107, 50, -1, 106, 104, 43, -1, 44, 105, 107, -1, 92, 98, 100, -1, 101, 99, 93, -1, 92, 100, 90, -1, 91, 101, 93, -1
+                ]
+                creaseAngle 1.5
+              }
+            }
+            DEF RADIATOR Shape {
+              appearance DEF RADIATOR_APP PBRAppearance {
+                baseColor 0.301961 0.301961 0.301961
+                roughness 0.5
+              }
+              geometry IndexedFaceSet {
+                coord Coordinate {
+                  point [
+                    0.417245 0.353919 -1.82727, -0.417245 0.353919 -1.82727, 0.417245 0.382694 -2.0122, -0.417245 0.382694 -2.0122, 0.417245 0.534901 -1.70937, -0.417245 0.534901 -1.70937, 0.417245 0.410482 -1.80015, -0.417245 0.410482 -1.80015, 0.417245 0.271579 -1.85422, -0.417245 0.271579 -1.85422, 0.417245 0.211597 -1.86252, -0.417245 0.211597 -1.86252, 0.417245 0.490318 -1.97838, -0.417245 0.490318 -1.97838, 0.417245 0.268209 -2.02004, -0.417245 0.268209 -2.02004, 0.417245 0.181965 -2.00911, -0.417245 0.181965 -2.00911, 0.243035 0.437468 -2.16018, -0.243035 0.437468 -2.16018, 0.199069 0.367254 -2.17339, -0.199069 0.367254 -2.17339, 0.175104 0.29704 -2.1866, -0.175104 0.29704 -2.1866, 0.161138 0.226826 -2.19981, -0.161138 0.226826 -2.19981, 0 0.437468 -2.16939, 0 0.156612 -2.21761, 0.157172 0.156612 -2.21301, -0.157172 0.156612 -2.21301
+                  ]
+                }
+                coordIndex [
+                  14, 8, 10, -1, 11, 9, 15, -1, 14, 10, 16, -1, 17, 11, 15, -1, 14, 2, 8, -1, 9, 3, 15, -1, 2, 0, 8, -1, 9, 1, 3, -1, 12, 0, 2, -1, 1, 13, 3, -1, 6, 0, 12, -1, 1, 7, 13, -1, 6, 12, 4, -1, 5, 13, 7, -1, 24, 28, 27, -1, 27, 29, 25, -1, 24, 27, 26, -1, 26, 27, 25, -1, 18, 20, 26, -1, 26, 21, 19, -1, 20, 22, 26, -1, 26, 23, 21, -1, 22, 24, 26, -1, 26, 25, 23, -1
+                ]
+                creaseAngle 0.2
+              }
+            }
+            DEF ROPS Transform {
+              translation 0 0 -0.1
+              rotation 1 0 0 0.17
+              children [
+                DEF ROPS_TOP_BAR Transform {
+                  translation 0 1.7 0
+                  rotation -0.5773489358556708 -0.5773509358554485 0.5773509358554485 2.094397
+                  children [
+                    Shape {
+                      appearance DEF ROPS_APPEARANCE PBRAppearance {
+                        roughness 0.4
+                      }
+                      geometry Capsule {
+                        bottom FALSE
+                        height 1.16
+                        radius 0.03
+                        top FALSE
+                      }
+                    }
+                  ]
+                }
+                DEF ROPS_RIGHT_BAR Transform {
+                  translation 0.58 1.2 0
+                  rotation 1 0 0 -1.570796
+                  children [
+                    Shape {
+                      appearance USE ROPS_APPEARANCE
+                      geometry Capsule {
+                        bottom FALSE
+                        height 1
+                        radius 0.03
+                      }
+                    }
+                  ]
+                }
+                DEF ROPS_LEFT_BAR Transform {
+                  translation -0.58 1.2 0
+                  rotation 1 0 0 -1.570796
+                  children [
+                    Shape {
+                      appearance USE ROPS_APPEARANCE
+                      geometry Capsule {
+                        bottom FALSE
+                        height 1
+                        radius 0.03
+                      }
+                    }
+                  ]
+                }
+                DEF ROPS_LEFT_LIGHT_HOLDER Transform {
+                  translation -0.66 0.95 0
+                  rotation 1 0 0 -3.141592
+                  children [
+                    Shape {
+                      appearance USE ROPS_APPEARANCE
+                      geometry Box {
+                        size 0.12 0.25 0.01
+                      }
+                    }
+                  ]
+                }
+                DEF ROPS_LEFT_RIGHT_HOLDER Transform {
+                  translation 0.66 0.95 0
+                  rotation 1 0 0 -3.141592
+                  children [
+                    Shape {
+                      appearance USE ROPS_APPEARANCE
+                      geometry Box {
+                        size 0.12 0.25 0.01
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+            DEF LEFT_FLASHER LED {
+              translation -0.69 1.02 0.08
+              rotation 1 0 0 0.17
+              children [
+                Shape {
+                  appearance PBRAppearance {
+                    baseColor 1 0 0
+                    roughness 0.3
+                    metalness 0
+                  }
+                  geometry Box {
+                    size 0.08 0.12 0.05
+                  }
+                }
+                Transform {
+                  translation 0 0 -0.01
+                  children [
+                    Shape {
+                      appearance USE ROPS_APPEARANCE
+                      geometry Box {
+                        size 0.1 0.14 0.04
+                      }
+                    }
+                  ]
+                }
+              ]
+              name "left_flasher"
+            }
+            DEF RIGHT_FLASHER LED {
+              translation 0.69 1.02 0.08
+              rotation 1 0 0 0.17
+              children [
+                Shape {
+                  appearance PBRAppearance {
+                    baseColor 1 0 0
+                    roughness 0.3
+                    metalness 0
+                  }
+                  geometry Box {
+                    size 0.08 0.12 0.05
+                  }
+                }
+                Transform {
+                  translation 0 0 -0.01
+                  children [
+                    Shape {
+                      appearance USE ROPS_APPEARANCE
+                      geometry Box {
+                        size 0.1 0.14 0.04
+                      }
+                    }
+                  ]
+                }
+              ]
+              name "right_flasher"
+            }
+            DEF TAIL_LIGHTS LED {
+              translation 0 0.85 0.05
+              rotation 1 0 0 0.17
+              children [
+                Group {
+                  children [
+                    Transform {
+                      translation -0.69 0 0
+                      children [
+                        Shape {
+                          appearance PBRAppearance {
+                            baseColor 1 0 0
+                            roughness 0.3
+                            metalness 0
+                          }
+                          geometry Box {
+                            size 0.08 0.12 0.05
+                          }
+                        }
+                      ]
+                    }
+                    Transform {
+                      translation 0.69 0 0
+                      children [
+                        Shape {
+                          appearance PBRAppearance {
+                            baseColor 1 0 0
+                            roughness 0.3
+                            metalness 0
+                          }
+                          geometry Box {
+                            size 0.08 0.12 0.05
+                          }
+                        }
+                      ]
+                    }
+                  ]
+                }
+                Transform {
+                  translation -0.69 0 -0.01
+                  children [
+                    Shape {
+                      appearance USE ROPS_APPEARANCE
+                      geometry Box {
+                        size 0.1 0.14 0.04
+                      }
+                    }
+                  ]
+                }
+                Transform {
+                  translation 0.69 0 -0.01
+                  children [
+                    Shape {
+                      appearance USE ROPS_APPEARANCE
+                      geometry Box {
+                        size 0.1 0.14 0.04
+                      }
+                    }
+                  ]
+                }
+              ]
+              name "tail_lights"
+            }
+            DEF WORK_HEAD_LIGHTS LED {
+              children [
+                Shape {
+                  appearance PBRAppearance {
+                    roughness 0.3
+                    metalness 0
+                  }
+                  geometry IndexedFaceSet {
+                    coord Coordinate {
+                      point [
+                        0.27606 0.289107 -2.17166, -0.27606 0.287979 -2.17166, 0.398855 0.291012 -2.12725, -0.398855 0.291012 -2.12725, 0.411119 0.292316 -2.10825, -0.411119 0.292316 -2.10825, 0.417245 0.293993 -2.08066, -0.417245 0.293993 -2.08066, 0.293736 0.28944 -2.17012, -0.293736 0.28944 -2.17012, 0.317291 0.289921 -2.16386, -0.317291 0.289921 -2.16386, 0.385907 0.291583 -2.14065, -0.385907 0.291583 -2.14065, 0.417245 0.293643 -2.09049, -0.417245 0.293643 -2.09049, 0.407078 0.381821 -2.10148, -0.407078 0.381821 -2.10148, 0.417245 0.381821 -2.07245, -0.417245 0.381821 -2.07245, 0.239505 0.29704 -2.17956, -0.239505 0.298168 -2.17956, 0.335729 0.437468 -2.13211, -0.335729 0.437468 -2.13211, 0.29082 0.384894 -2.15483, -0.29082 0.384894 -2.15483, 0.383261 0.475868 -2.08942, -0.383261 0.475868 -2.08942, 0.417245 0.488192 -2.04745, -0.417245 0.488192 -2.04745, 0.417245 0.454546 -2.06364, -0.417245 0.454546 -2.06364, 0.385068 0.437468 -2.1139, -0.385068 0.437468 -2.1139
+                      ]
+                    }
+                    coordIndex [
+                      8, 22, 10, -1, 11, 23, 9, -1, 10, 22, 32, -1, 33, 23, 11, -1, 18, 14, 16, -1, 17, 15, 19, -1, 14, 4, 16, -1, 17, 5, 15, -1, 12, 32, 16, -1, 17, 33, 13, -1, 2, 12, 16, -1, 17, 13, 3, -1, 8, 0, 24, -1, 1, 9, 25, -1, 24, 0, 20, -1, 1, 25, 21, -1, 2, 16, 4, -1, 5, 17, 3, -1, 8, 24, 22, -1, 23, 25, 9, -1, 10, 32, 12, -1, 13, 33, 11, -1, 14, 18, 6, -1, 7, 19, 15, -1, 28, 30, 32, -1, 33, 31, 29, -1, 26, 28, 32, -1, 33, 29, 27, -1, 30, 16, 32, -1, 33, 17, 31, -1, 18, 16, 30, -1, 31, 17, 19, -1, 26, 32, 22, -1, 23, 33, 27, -1, 30, 28, 18, -1, 19, 29, 31, -1
+                    ]
+                    creaseAngle 1.5
+                  }
+                }
+              ]
+              name "work_head_lights"
+              color [
+                1 1 1
+              ]
+            }
+            DEF ROAD_HEAD_LIGHTS LED {
+              children [
+                Shape {
+                  appearance PBRAppearance {
+                    roughness 0.3
+                    metalness 0
+                  }
+                  geometry IndexedFaceSet {
+                    coord DEF coord_RoadLights Coordinate {
+                      point [
+                        0.27606 0.289107 -2.17166, -0.27606 0.287979 -2.17166, 0.398855 0.291012 -2.12725, -0.398855 0.291012 -2.12725, 0.411119 0.292316 -2.10825, -0.411119 0.292316 -2.10825, 0.417245 0.293993 -2.08066, -0.417245 0.293993 -2.08066, 0.293736 0.28944 -2.17012, -0.293736 0.28944 -2.17012, 0.317291 0.289921 -2.16386, -0.317291 0.289921 -2.16386, 0.385907 0.291583 -2.14065, -0.385907 0.291583 -2.14065, 0.417245 0.293643 -2.09049, -0.417245 0.293643 -2.09049, 0.239505 0.29704 -2.17956, -0.239505 0.298168 -2.17956, 0.417245 0.169133 -2.07258, -0.417245 0.169133 -2.07258, 0.417245 0.266604 -2.08322, -0.417245 0.266604 -2.08322, 0.256055 0.156612 -2.19446, -0.256055 0.156612 -2.19446, 0.386683 0.156612 -2.1654, -0.386683 0.156612 -2.1654, 0.207478 0.156612 -2.20527, -0.207478 0.156612 -2.20527, 0.417245 0.156612 -2.11852, -0.417245 0.156612 -2.11852
+                      ]
+                    }
+                    coordIndex [
+                      28, 14, 20, -1, 15, 29, 21, -1, 14, 6, 20, -1, 21, 7, 15, -1, 12, 24, 10, -1, 11, 25, 13, -1, 10, 24, 22, -1, 23, 25, 11, -1, 24, 2, 28, -1, 29, 3, 25, -1, 2, 4, 28, -1, 29, 5, 3, -1, 0, 8, 22, -1, 23, 9, 1, -1, 16, 0, 22, -1, 23, 1, 17, -1, 24, 12, 2, -1, 3, 13, 25, -1, 14, 28, 4, -1, 5, 29, 15, -1, 22, 8, 10, -1, 11, 9, 23, -1, 16, 22, 26, -1, 27, 23, 17, -1, 18, 28, 20, -1, 21, 29, 19, -1
+                    ]
+                    creaseAngle 1.5
+                  }
+                }
+              ]
+              name "road_head_lights"
+              color [
+                1 1 1
+              ]
+            }
+            DEF STEERING_WHEEL Transform {
+              translation 0 0.71 -0.8
+              rotation 1 0 0 -1.170796
+              children [
+                DEF AXIS Shape {
+                  appearance PBRAppearance {
+                    baseColor 0 0 0
+                    roughness 0.3
+                    metalness 0
+                  }
+                  geometry Cylinder {
+                    bottom FALSE
+                    height 0.3
+                    radius 0.02
+                    top FALSE
+                  }
+                }
+                Transform {
+                  translation 0 -0.008 0.14
+                  children [
+                    Shape {
+                      appearance PBRAppearance {
+                        baseColorMap ImageTexture {
+                          url [
+                            "https://raw.githubusercontent.com/cyberbotics/webots/R2023a/projects/vehicles/protos/generic/textures/steering_wheel.png"
+                          ]
+                        }
+                        roughness 0.3
+                        metalness 0
+                      }
+                      geometry Cylinder {
+                        height 0.02
+                        radius 0.19
+                        side FALSE
+                        subdivision 20
+                      }
+                    }
+                    Shape {
+                      appearance PBRAppearance {
+                        baseColor 0 0 0
+                        roughness 0.3
+                        metalness 0
+                      }
+                      geometry Cylinder {
+                        bottom FALSE
+                        height 0.02
+                        radius 0.19
+                        top FALSE
+                        subdivision 20
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+        Group {
+          children [
+            Compass {
+            }
+            Accelerometer {
+            }
+            Camera {
+              translation 1.98899 0 0.973449
+              rotation 0 1 0 -0.1499953071795863
+              children [
+                Transform {
+                  translation -0.05 0 0
+                  rotation 0 -1 0 1.5708
+                  children [
+                    Shape {
+                      appearance PBRAppearance {
+                        roughness 1
+                        metalness 0
+                      }
+                      geometry Cylinder {
+                        height 0.1
+                        radius 0.04
+                      }
+                    }
+                  ]
+                }
+              ]
+              fieldOfView 1
+              width 128
+            }
+            Lidar {
+              translation 2.31169 0 0.574009
+              rotation 0 -1 0 0.140345
+              children [
+                Transform {
+                  translation 0.0085 0 0
+                  scale 1 1 0.88
+                  children [
+                    Shape {
+                      appearance PBRAppearance {
+                        baseColorMap ImageTexture {
+                          url [
+                            "https://raw.githubusercontent.com/cyberbotics/webots/R2023a/projects/devices/sick/protos/textures/sick_lms291.png"
+                          ]
+                        }
+                        roughnessMap ImageTexture {
+                          url [
+                            "https://raw.githubusercontent.com/cyberbotics/webots/R2023a/projects/devices/sick/protos/textures/sick_lms291_roughness.jpg"
+                          ]
+                        }
+                        metalness 0
+                      }
+                      geometry IndexedFaceSet {
+                        coord Coordinate {
+                          point [
+                            -0.1014248 -0.0780011 0.1388218, -0.101424 -0.0779989 -0.0711779, -0.1014235 0.0780011 -0.0711761, -0.1014242 0.0779989 0.1388235, 0.0471568 -0.0780016 0.1388223, 0.0471576 -0.0779993 -0.0711774, 0.0471581 0.0780007 -0.0711756, 0.0471574 0.0779984 0.138824, 0.0471575 -0.0779994 -0.060126, 0.0471581 0.0780006 -0.0601243, 0.0471571 -0.0780007 0.0496384, 0.0471577 0.0779993 0.0496401, -0.0699699 0.0779997 0.0496397, -0.0699705 -0.0780003 0.049638, -0.0699695 0.078001 -0.0601247, -0.0699701 -0.077999 -0.0601264, -0.0699699 0.0647871 0.0496395, -0.0699696 0.0647883 -0.0601249, -0.0699704 -0.0647876 0.0496382, -0.06997 -0.0647864 -0.0601262, 0.033246 -0.0445677 -0.0601256, 0.0332456 -0.0445689 0.0496388, 0.0332463 0.0445689 -0.0601247, 0.0332459 0.0445678 0.0496397, -0.0279908 0.064787 0.0496397, -0.0279913 -0.0647877 0.0496383, -0.0279909 -0.0647866 -0.0601261, -0.0279905 0.0647881 -0.0601247, 0.0493967 0 -0.0601251, 0.0493963 0 0.0496393, 0.0112001 0.0589501 0.0496398, 0.0112005 0.0589513 -0.0601246, 0.0449914 0.0222847 -0.0601249, 0.044991 0.0222835 0.0496395, 0.0449912 -0.0222836 -0.0601254, 0.0449908 -0.0222848 0.049639, 0.0111997 -0.0589512 0.0496385, 0.0112001 -0.05895 -0.0601259, 0.0535765 0 -0.0711765, 0.0535757 0 0.1388232, 0.0535764 0 -0.0601251, 0.053576 0 0.0496393, 0.0514966 -0.0389993 -0.0711769, 0.0514969 0.0390007 -0.071176, 0.0514959 -0.0349177 0.1388228, 0.0514961 0.0349145 0.1388236, 0.0514966 -0.0389995 -0.0601255, 0.0514969 0.0390005 -0.0601247, 0.0514962 -0.0349168 0.0496389, 0.0514964 0.0349154 0.0496397, -0.027991 -0.0647867 -0.0441892, 0.0112001 -0.0589501 -0.0505195, 0.0332459 -0.0445678 -0.0505192, 0.0111997 -0.0589511 0.040032, -0.0279913 -0.0647876 0.0337013, 0.0332456 -0.0445688 0.0400323, 0.0493964 0 0.0400329, 0.0449909 -0.0222847 0.0400326, 0.0449912 -0.0222837 -0.050519, 0.0493967 0 -0.0505187, 0.044991 0.0222836 0.0400331, 0.0332459 0.0445679 0.0400333, 0.0449914 0.0222846 -0.0505185, 0.0332462 0.0445688 -0.0505182, 0.0112005 0.0589512 -0.0505181, -0.0279905 0.064788 -0.0441877, -0.0279908 0.0647871 0.0337028, 0.0112002 0.0589502 0.0400334, 0.0126635 -0.0470537 0.0337536, 0.0241052 -0.0407244 0.0337537, 0.0143084 -0.0331133 -0.0378582, 0.0057803 -0.0382597 -0.0378583, -0.025634 -0.0538333 0.0337533, 0.0011659 -0.0510892 0.0337535, -0.0027895 -0.041541 -0.0378583, -0.0256622 -0.0437723 -0.0378585, 0.0423803 -0.01363 0.033754, 0.0443303 -0.0052664 0.0337541, 0.0293832 -0.0042815 -0.0378577, 0.0279298 -0.0110822 -0.0378578, 0.032359 -0.0330429 0.0337538, 0.0382008 -0.0236447 0.0337539, 0.0248147 -0.0192253 -0.0378579, 0.0204604 -0.0268672 -0.037858, 0.038201 0.0236437 0.0337545, 0.0323592 0.0330419 0.0337546, 0.0204606 0.0268679 -0.0378574, 0.0248148 0.019226 -0.0378575, 0.0443303 0.0052655 0.0337542, 0.0423804 0.0136291 0.0337543, 0.0279299 0.0110829 -0.0378576, 0.0293833 0.0042822 -0.0378576, 0.0057806 0.0382606 -0.0378574, 0.0143087 0.033114 -0.0378574, 0.0241055 0.0407237 0.0337546, 0.0126638 0.047053 0.0337546, -0.0256619 0.0437734 -0.0378574, -0.0027892 0.0415419 -0.0378574, 0.0011663 0.0510885 0.0337546, -0.0256336 0.0538328 0.0337546, 0.0514963 0.0349149 0.0992989, 0.0514964 0.0349152 0.0667977, 0.051496 -0.0349173 0.0992981, 0.0514961 -0.034917 0.0667969, 0.053576 0 0.0667973, 0.0535758 0 0.0992985, 0.0525358 -0.0174596 0.138823, 0.052536 0.0174565 0.1388234, 0.0514962 0.0349147 0.1190616, 0.0514959 -0.0349175 0.1190608, 0.0525361 0.0174569 0.0992987, 0.0535758 0 0.1190612, 0.052536 -0.0174592 0.0992983, 0.052536 0.0174567 0.1190614, 0.0525359 -0.0174594 0.119061, 0.0293493 0.0174565 0.1388233, 0.0293491 -0.0174596 0.1388229
+                          ]
+                        }
+                        texCoord TextureCoordinate {
+                          point [
+                            0.0617 0.0422, 0.4617 0.4422, 0.4617 0.0422, 0.0617 0.0422, 0.4617 0.4422, 0.4617 0.0422, 0.0617 0.0422, 0.4617 0.4422, 0.4617 0.0422, 0.0617 0.0422, 0.4617 0.4422, 0.4617 0.0422, 0.0617 0.0422, 0.4617 0.0422, 0.4617 0.4422, 0.0617 0.0422, 0.4617 0.0422, 0.4617 0.4422, 0.0617 0.0422, 0.4617 0.4422, 0.4617 0.0422, 0.0617 0.0422, 0.4617 0.4422, 0.4617 0.0422, 0.0617 0.0422, 0.4617 0.0422, 0.4617 0.4422, 0.0617 0.0422, 0.4617 0.0422, 0.4617 0.4422, 0.0617 0.0422, 0.4617 0.4422, 0.4617 0.0422, 0.0617 0.0422, 0.4617 0.4422, 0.4617 0.0422, 0.0617 0.0422, 0.4617 0.4422, 0.4617 0.0422, 0.0617 0.0422, 0.4617 0.4422, 0.4617 0.0422, 0.0617 0.0422, 0.4617 0.4422, 0.4617 0.0422, 0.0617 0.0422, 0.4617 0.4422, 0.4617 0.0422, 0.0617 0.0422, 0.4617 0.4422, 0.4617 0.0422, 0.673 0.1145, 0.8152 0.2879, 0.8211 0.1047, 0.673 0.1145, 0.8152 0.2879, 0.8211 0.1047, 0.673 0.1145, 0.8152 0.2879, 0.8211 0.1047, 0.673 0.1145, 0.8152 0.2879, 0.8211 0.1047, 0.673 0.1145, 0.8152 0.2879, 0.8211 0.1047, 0.673 0.1145, 0.8152 0.2879, 0.8211 0.1047, 0.673 0.1145, 0.8152 0.2879, 0.8211 0.1047, 0.673 0.1145, 0.8152 0.2879, 0.8211 0.1047, 0.673 0.1145, 0.8152 0.2879, 0.8211 0.1047, 0.673 0.1145, 0.8152 0.2879, 0.8211 0.1047, 0.673 0.1145, 0.8152 0.2879, 0.8211 0.1047, 0.673 0.1145, 0.8152 0.2879, 0.8211 0.1047, 0.673 0.1145, 0.8152 0.2879, 0.8211 0.1047, 0.673 0.1145, 0.8152 0.2879, 0.8211 0.1047, 0.0617 0.0422, 0.4617 0.4422, 0.4617 0.0422, 0.0617 0.0422, 0.4617 0.4422, 0.4617 0.0422, 0.0617 0.0422, 0.4617 0.4422, 0.4617 0.0422, 0.0617 0.0422, 0.4617 0.4422, 0.4617 0.0422, 0.0617 0.0422, 0.4617 0.4422, 0.4617 0.0422, 0.0617 0.0422, 0.4617 0.4422, 0.4617 0.0422, 0.5 0.9891, 0.5 0.6263, 0.7461 0.9891, 0.0078 0.9891, 0.0078 0.6263, 0.2539 0.9891, 0.4617 0.0422, 0.0617 0.4422, 0.4617 0.4422, 0.0617 0.0422, 0.4617 0.4422, 0.4617 0.0422, 0.0617 0.0422, 0.0617 0.4422, 0.4617 0.4422, 0.0617 0.0422, 0.4617 0.4422, 0.4617 0.0422, 0.0617 0.0422, 0.0617 0.4422, 0.4617 0.4422, 0.4617 0.0422, 0.0617 0.4422, 0.4617 0.4422, 0.4617 0.0422, 0.0617 0.0422, 0.0617 0.4422, 0.0617 0.0422, 0.0617 0.4422, 0.4617 0.0422, 0.4617 0.0422, 0.0617 0.4422, 0.4617 0.4422, 0.0617 0.0422, 0.0617 0.4422, 0.4617 0.0422, 0.4617 0.0422, 0.0617 0.4422, 0.4617 0.4422, 0.0617 0.0422, 0.0617 0.4422, 0.4617 0.0422, 0.4617 0.0422, 0.0617 0.4422, 0.4617 0.4422, 0.0617 0.0422, 0.0617 0.4422, 0.4617 0.0422, 0.4617 0.0422, 0.0617 0.4422, 0.4617 0.4422, 0.4617 0.0422, 0.0617 0.0422, 0.4617 0.4422, 0.4617 0.4422, 0.0617 0.0422, 0.0617 0.4422, 0.0617 0.0422, 0.0617 0.4422, 0.4617 0.0422, 0.4617 0.0422, 0.0617 0.4422, 0.4617 0.4422, 0.4617 0.0422, 0.0617 0.4422, 0.4617 0.4422, 0.4617 0.0422, 0.0617 0.0422, 0.0617 0.4422, 0.4617 0.0422, 0.0617 0.4422, 0.4617 0.4422, 0.4617 0.0422, 0.0617 0.0422, 0.0617 0.4422, 0.8211 0.1047, 0.6809 0.284, 0.8152 0.2879, 0.8211 0.1047, 0.673 0.1145, 0.6809 0.284, 0.8211 0.1047, 0.6809 0.284, 0.8152 0.2879, 0.8211 0.1047, 0.673 0.1145, 0.6809 0.284, 0.4617 0.0422, 0.0617 0.4422, 0.4617 0.4422, 0.4617 0.0422, 0.0617 0.0422, 0.0617 0.4422, 0.4617 0.0422, 0.0617 0.4422, 0.4617 0.4422, 0.4617 0.0422, 0.0617 0.0422, 0.0617 0.4422, 0.4617 0.0422, 0.0617 0.4422, 0.4617 0.4422, 0.4617 0.0422, 0.0617 0.0422, 0.0617 0.4422, 0.4617 0.0422, 0.0617 0.4422, 0.4617 0.4422, 0.4617 0.0422, 0.0617 0.0422, 0.0617 0.4422, 0.4617 0.0422, 0.0617 0.4422, 0.4617 0.4422, 0.4617 0.0422, 0.0617 0.0422, 0.0617 0.4422, 0.4617 0.0422, 0.0617 0.4422, 0.4617 0.4422, 0.4617 0.0422, 0.0617 0.0422, 0.0617 0.4422, 0.673 0.1145, 0.6809 0.284, 0.8211 0.1047, 0.8211 0.1047, 0.6809 0.284, 0.8152 0.2879, 0.8211 0.1047, 0.6809 0.284, 0.8152 0.2879, 0.8211 0.1047, 0.673 0.1145, 0.6809 0.284, 0.8211 0.1047, 0.673 0.1145, 0.8152 0.2879, 0.8152 0.2879, 0.673 0.1145, 0.6809 0.284, 0.8211 0.1047, 0.6809 0.284, 0.8152 0.2879, 0.8211 0.1047, 0.673 0.1145, 0.6809 0.284, 0.8211 0.1047, 0.6809 0.284, 0.8152 0.2879, 0.8211 0.1047, 0.673 0.1145, 0.6809 0.284, 0.8211 0.1047, 0.6809 0.284, 0.8152 0.2879, 0.8211 0.1047, 0.673 0.1145, 0.6809 0.284, 0.8211 0.1047, 0.6809 0.284, 0.8152 0.2879, 0.8211 0.1047, 0.673 0.1145, 0.6809 0.284, 0.8211 0.1047, 0.6809 0.284, 0.8152 0.2879, 0.8211 0.1047, 0.673 0.1145, 0.6809 0.284, 0.8211 0.1047, 0.6809 0.284, 0.8152 0.2879, 0.8211 0.1047, 0.673 0.1145, 0.6809 0.284, 0.8211 0.1047, 0.6809 0.284, 0.8152 0.2879, 0.8211 0.1047, 0.673 0.1145, 0.6809 0.284, 0.8211 0.1047, 0.6809 0.284, 0.8152 0.2879, 0.8211 0.1047, 0.673 0.1145, 0.6809 0.284, 0.8211 0.1047, 0.6809 0.284, 0.8152 0.2879, 0.8211 0.1047, 0.673 0.1145, 0.6809 0.284, 0.8211 0.1047, 0.673 0.1145, 0.8152 0.2879, 0.8152 0.2879, 0.673 0.1145, 0.6809 0.284, 0.8211 0.1047, 0.6809 0.284, 0.8152 0.2879, 0.8211 0.1047, 0.673 0.1145, 0.6809 0.284, 0.673 0.1145, 0.6809 0.284, 0.8211 0.1047, 0.8211 0.1047, 0.6809 0.284, 0.8152 0.2879, 0.8211 0.1047, 0.6809 0.284, 0.8152 0.2879, 0.8211 0.1047, 0.673 0.1145, 0.6809 0.284, 0.8211 0.1047, 0.673 0.1145, 0.8152 0.2879, 0.8152 0.2879, 0.673 0.1145, 0.6809 0.284, 0.8211 0.1047, 0.673 0.1145, 0.8152 0.2879, 0.8152 0.2879, 0.673 0.1145, 0.6809 0.284, 0.8211 0.1047, 0.673 0.1145, 0.8152 0.2879, 0.8152 0.2879, 0.673 0.1145, 0.6809 0.284, 0.8211 0.1047, 0.673 0.1145, 0.8152 0.2879, 0.8152 0.2879, 0.673 0.1145, 0.6809 0.284, 0.673 0.1145, 0.6809 0.284, 0.8211 0.1047, 0.8211 0.1047, 0.6809 0.284, 0.8152 0.2879, 0.673 0.1145, 0.6809 0.284, 0.8211 0.1047, 0.8211 0.1047, 0.6809 0.284, 0.8152 0.2879, 0.673 0.1145, 0.6809 0.284, 0.8211 0.1047, 0.8211 0.1047, 0.6809 0.284, 0.8152 0.2879, 0.673 0.1145, 0.6809 0.284, 0.8211 0.1047, 0.8211 0.1047, 0.6809 0.284, 0.8152 0.2879, 0.8211 0.1047, 0.673 0.1145, 0.8152 0.2879, 0.8152 0.2879, 0.673 0.1145, 0.6809 0.284, 0.8211 0.1047, 0.673 0.1145, 0.8152 0.2879, 0.8152 0.2879, 0.673 0.1145, 0.6809 0.284, 0.673 0.1145, 0.6809 0.284, 0.8211 0.1047, 0.8211 0.1047, 0.6809 0.284, 0.8152 0.2879, 0.8211 0.1047, 0.673 0.1145, 0.8152 0.2879, 0.8152 0.2879, 0.673 0.1145, 0.6809 0.284, 0.8211 0.1047, 0.673 0.1145, 0.8152 0.2879, 0.8152 0.2879, 0.673 0.1145, 0.6809 0.284, 0.8211 0.1047, 0.673 0.1145, 0.8152 0.2879, 0.8152 0.2879, 0.673 0.1145, 0.6809 0.284, 0.8211 0.1047, 0.673 0.1145, 0.8152 0.2879, 0.8152 0.2879, 0.673 0.1145, 0.6809 0.284, 0.673 0.1145, 0.6809 0.284, 0.8211 0.1047, 0.8211 0.1047, 0.6809 0.284, 0.8152 0.2879, 0.673 0.1145, 0.6809 0.284, 0.8211 0.1047, 0.8211 0.1047, 0.6809 0.284, 0.8152 0.2879, 0.673 0.1145, 0.6809 0.284, 0.8211 0.1047, 0.8211 0.1047, 0.6809 0.284, 0.8152 0.2879, 0.673 0.1145, 0.6809 0.284, 0.8211 0.1047, 0.8211 0.1047, 0.6809 0.284, 0.8152 0.2879, 0.8211 0.1047, 0.673 0.1145, 0.8152 0.2879, 0.8152 0.2879, 0.673 0.1145, 0.6809 0.284, 0.673 0.1145, 0.6809 0.284, 0.8211 0.1047, 0.8211 0.1047, 0.6809 0.284, 0.8152 0.2879, 0.673 0.1145, 0.6809 0.284, 0.8211 0.1047, 0.8211 0.1047, 0.6809 0.284, 0.8152 0.2879, 0.8211 0.1047, 0.673 0.1145, 0.8152 0.2879, 0.8152 0.2879, 0.673 0.1145, 0.6809 0.284, 0.673 0.1145, 0.6809 0.284, 0.8211 0.1047, 0.8211 0.1047, 0.6809 0.284, 0.8152 0.2879, 0.8211 0.1047, 0.673 0.1145, 0.8152 0.2879, 0.8152 0.2879, 0.673 0.1145, 0.6809 0.284, 0.673 0.1145, 0.6809 0.284, 0.8211 0.1047, 0.8211 0.1047, 0.6809 0.284, 0.8152 0.2879, 0.8211 0.1047, 0.673 0.1145, 0.8152 0.2879, 0.8152 0.2879, 0.673 0.1145, 0.6809 0.284, 0.8211 0.1047, 0.673 0.1145, 0.8152 0.2879, 0.8152 0.2879, 0.673 0.1145, 0.6809 0.284, 0.8211 0.1047, 0.6809 0.284, 0.8152 0.2879, 0.8211 0.1047, 0.673 0.1145, 0.6809 0.284, 0.8211 0.1047, 0.673 0.1145, 0.8152 0.2879, 0.8152 0.2879, 0.673 0.1145, 0.6809 0.284, 0.673 0.1145, 0.6809 0.284, 0.8211 0.1047, 0.8211 0.1047, 0.6809 0.284, 0.8152 0.2879, 0.673 0.1145, 0.6809 0.284, 0.8211 0.1047, 0.8211 0.1047, 0.6809 0.284, 0.8152 0.2879, 0.673 0.1145, 0.6809 0.284, 0.8211 0.1047, 0.8211 0.1047, 0.6809 0.284, 0.8152 0.2879, 0.0617 0.0422, 0.0617 0.4422, 0.4617 0.0422, 0.4617 0.0422, 0.0617 0.4422, 0.4617 0.4422, 0.0617 0.0422, 0.0617 0.4422, 0.4617 0.0422, 0.4617 0.0422, 0.0617 0.4422, 0.4617 0.4422, 0.4617 0.0422, 0.0617 0.4422, 0.4617 0.4422, 0.4617 0.0422, 0.0617 0.0422, 0.0617 0.4422, 0.4617 0.0422, 0.0617 0.4422, 0.4617 0.4422, 0.4617 0.0422, 0.0617 0.0422, 0.0617 0.4422, 0.4617 0.0422, 0.0617 0.4422, 0.4617 0.4422, 0.4617 0.0422, 0.0617 0.0422, 0.0617 0.4422, 0.8211 0.1047, 0.6809 0.284, 0.8152 0.2879, 0.8211 0.1047, 0.673 0.1145, 0.6809 0.284, 0.4617 0.0422, 0.0617 0.4422, 0.4617 0.4422, 0.4617 0.0422, 0.0617 0.0422, 0.0617 0.4422, 0.4617 0.0422, 0.0617 0.4422, 0.4617 0.4422, 0.4617 0.0422, 0.0617 0.0422, 0.0617 0.4422, 0.8211 0.1047, 0.6809 0.284, 0.8152 0.2879, 0.8211 0.1047, 0.673 0.1145, 0.6809 0.284, 0.4617 0.0422, 0.0617 0.4422, 0.4617 0.4422, 0.4617 0.0422, 0.0617 0.0422, 0.0617 0.4422, 0.4617 0.0422, 0.0617 0.4422, 0.4617 0.4422, 0.4617 0.0422, 0.0617 0.0422, 0.0617 0.4422, 0.4617 0.0422, 0.0617 0.4422, 0.4617 0.4422, 0.4617 0.0422, 0.0617 0.0422, 0.0617 0.4422, 0.8211 0.1047, 0.673 0.1145, 0.8152 0.2879, 0.8152 0.2879, 0.673 0.1145, 0.6809 0.284, 0.4617 0.0422, 0.0617 0.4422, 0.4617 0.4422, 0.4617 0.0422, 0.0617 0.0422, 0.0617 0.4422, 0.7844 0.1125, 0.6824 0.1223, 0.7879 0.259, 0.4266 0.0461, 0.0633 0.0383, 0.0617 0.4422, 0.0078 0.6263, 0.5 0.6263, 0.2539 0.9891, 0.2539 0.9891, 0.5 0.6263, 0.5 0.9891, 0.5 0.6263, 0.9922 0.6263, 0.7461 0.9891, 0.7461 0.9891, 0.9922 0.6263, 0.9922 0.9891, 0.0617 0.0422, 0.4617 0.4422, 0.4617 0.0422, 0.4617 0.0422, 0.4617 0.4422, 0.4617 0.0422, 0.0617 0.0422, 0.4617 0.4422, 0.4617 0.0422, 0.4617 0.0422, 0.4617 0.4422, 0.4617 0.0422, 0.4617 0.0422, 0.4617 0.4422, 0.4617 0.0422, 0.4617 0.0422, 0.0617 0.4422, 0.4617 0.0422, 0.0617 0.0422, 0.0617 0.4422, 0.4617 0.0422, 0.0617 0.0422, 0.0617 0.0422, 0.0617 0.4422, 0.0617 0.0422, 0.4617 0.0422, 0.4617 0.0422, 0.0617 0.0422, 0.4617 0.4422, 0.4617 0.0422, 0.4617 0.4422, 0.4617 0.4422, 0.0617 0.0422, 0.0617 0.0422, 0.4617 0.4422, 0.4617 0.0422, 0.4617 0.4422, 0.4617 0.4422, 0.0617 0.0422, 0.0617 0.0422, 0.4617 0.4422, 0.4617 0.0422, 0.4617 0.0422, 0.4617 0.0422, 0.4617 0.4422, 0.4617 0.4422, 0.4617 0.0422, 0.0617 0.0422, 0.4617 0.4422, 0.4617 0.4422, 0.0617 0.0422, 0.0617 0.0422, 0.4617 0.4422, 0.4617 0.0422, 0.4617 0.0422, 0.4617 0.0422, 0.4617 0.4422, 0.4617 0.4422, 0.4617 0.0422, 0.0617 0.0422
+                          ]
+                        }
+                        coordIndex [
+                          24, 11, 30, -1, 30, 11, 23, -1, 22, 9, 31, -1, 31, 9, 27, -1, 29, 33, 11, -1, 33, 23, 11, -1, 28, 9, 32, -1, 32, 9, 22, -1, 21, 35, 10, -1, 35, 29, 10, -1, 20, 8, 34, -1, 34, 8, 28, -1, 21, 10, 36, -1, 36, 10, 25, -1, 26, 8, 37, -1, 37, 8, 20, -1, 43, 2, 6, -1, 51, 71, 74, -1, 52, 83, 70, -1, 73, 68, 53, -1, 69, 80, 55, -1, 77, 88, 56, -1, 57, 81, 76, -1, 59, 91, 78, -1, 79, 82, 58, -1, 89, 84, 60, -1, 85, 94, 61, -1, 62, 87, 90, -1, 63, 93, 86, -1, 97, 92, 64, -1, 67, 95, 98, -1, 108, 101, 49, -1, 100, 101, 108, -1, 108, 49, 45, -1, 109, 48, 103, -1, 44, 48, 109, -1, 109, 103, 102, -1, 105, 104, 110, -1, 102, 103, 112, -1, 45, 115, 107, -1, 65, 24, 66, -1, 65, 27, 24, -1, 54, 26, 50, -1, 54, 25, 26, -1, 1, 3, 2, -1, 1, 0, 3, -1, 1, 5, 15, -1, 15, 5, 8, -1, 0, 1, 13, -1, 13, 1, 15, -1, 0, 13, 4, -1, 4, 13, 10, -1, 2, 14, 6, -1, 6, 14, 9, -1, 14, 2, 12, -1, 12, 2, 3, -1, 3, 7, 12, -1, 12, 7, 11, -1, 13, 19, 18, -1, 13, 15, 19, -1, 14, 16, 17, -1, 14, 12, 16, -1, 27, 16, 24, -1, 27, 17, 16, -1, 25, 19, 26, -1, 25, 18, 19, -1, 43, 9, 47, -1, 43, 6, 9, -1, 38, 47, 40, -1, 38, 43, 47, -1, 42, 40, 46, -1, 42, 38, 40, -1, 5, 46, 8, -1, 5, 42, 46, -1, 44, 10, 48, -1, 44, 4, 10, -1, 49, 7, 45, -1, 49, 11, 7, -1, 50, 26, 51, -1, 51, 26, 37, -1, 52, 37, 20, -1, 52, 51, 37, -1, 54, 53, 25, -1, 25, 53, 36, -1, 53, 21, 36, -1, 53, 55, 21, -1, 57, 29, 35, -1, 57, 56, 29, -1, 55, 35, 21, -1, 55, 57, 35, -1, 59, 34, 28, -1, 59, 58, 34, -1, 58, 20, 34, -1, 58, 52, 20, -1, 56, 33, 29, -1, 56, 60, 33, -1, 60, 23, 33, -1, 60, 61, 23, -1, 62, 28, 32, -1, 62, 59, 28, -1, 63, 32, 22, -1, 63, 62, 32, -1, 65, 64, 27, -1, 27, 64, 31, -1, 64, 22, 31, -1, 64, 63, 22, -1, 66, 24, 67, -1, 67, 24, 30, -1, 61, 30, 23, -1, 61, 67, 30, -1, 71, 70, 68, -1, 68, 70, 69, -1, 75, 74, 72, -1, 72, 74, 73, -1, 79, 78, 76, -1, 76, 78, 77, -1, 83, 82, 80, -1, 80, 82, 81, -1, 86, 85, 87, -1, 87, 85, 84, -1, 90, 89, 91, -1, 91, 89, 88, -1, 94, 93, 95, -1, 95, 93, 92, -1, 98, 97, 99, -1, 99, 97, 96, -1, 51, 74, 50, -1, 50, 74, 75, -1, 52, 70, 51, -1, 51, 70, 71, -1, 53, 54, 73, -1, 73, 54, 72, -1, 69, 55, 68, -1, 68, 55, 53, -1, 57, 76, 56, -1, 56, 76, 77, -1, 81, 57, 80, -1, 80, 57, 55, -1, 79, 58, 78, -1, 78, 58, 59, -1, 82, 83, 58, -1, 58, 83, 52, -1, 60, 56, 89, -1, 89, 56, 88, -1, 61, 60, 85, -1, 85, 60, 84, -1, 90, 91, 62, -1, 62, 91, 59, -1, 63, 86, 62, -1, 62, 86, 87, -1, 64, 65, 97, -1, 97, 65, 96, -1, 92, 93, 64, -1, 64, 93, 63, -1, 67, 98, 66, -1, 66, 98, 99, -1, 67, 61, 95, -1, 95, 61, 94, -1, 72, 54, 75, -1, 75, 54, 50, -1, 99, 96, 66, -1, 66, 96, 65, -1, 80, 69, 83, -1, 83, 69, 70, -1, 68, 73, 71, -1, 71, 73, 74, -1, 78, 88, 77, -1, 78, 91, 88, -1, 82, 79, 81, -1, 81, 79, 76, -1, 93, 94, 86, -1, 86, 94, 85, -1, 87, 84, 90, -1, 90, 84, 89, -1, 95, 92, 98, -1, 98, 92, 97, -1, 11, 49, 29, -1, 29, 49, 41, -1, 10, 29, 48, -1, 48, 29, 41, -1, 41, 101, 104, -1, 41, 49, 101, -1, 48, 104, 103, -1, 48, 41, 104, -1, 45, 113, 108, -1, 45, 107, 113, -1, 107, 111, 113, -1, 107, 39, 111, -1, 108, 110, 100, -1, 108, 113, 110, -1, 113, 105, 110, -1, 113, 111, 105, -1, 39, 114, 111, -1, 39, 106, 114, -1, 106, 109, 114, -1, 106, 44, 109, -1, 111, 112, 105, -1, 111, 114, 112, -1, 114, 102, 112, -1, 114, 109, 102, -1, 116, 39, 115, -1, 115, 39, 107, -1, 3, 116, 115, -1, 3, 0, 116, -1, 39, 116, 106, -1, 106, 116, 44, -1, 103, 104, 112, -1, 112, 104, 105, -1, 104, 101, 110, -1, 110, 101, 100, -1, 40, 28, 46, -1, 46, 28, 8, -1, 9, 28, 47, -1, 47, 28, 40, -1, 116, 0, 4, -1, 4, 44, 116, -1, 7, 115, 45, -1, 7, 3, 115, -1, 5, 38, 42, -1, 5, 1, 38, -1, 1, 2, 38, -1, 38, 2, 43, -1, 9, 14, 27, -1, 27, 14, 17, -1, 8, 26, 15, -1, 15, 26, 19, -1, 10, 13, 25, -1, 25, 13, 18, -1, 11, 24, 12, -1, 12, 24, 16, -1
+                        ]
+                        texCoordIndex [
+                          0, 1, 2, -1, 3, 4, 5, -1, 6, 7, 8, -1, 9, 10, 11, -1, 12, 13, 14, -1, 15, 16, 17, -1, 18, 19, 20, -1, 21, 22, 23, -1, 24, 25, 26, -1, 27, 28, 29, -1, 30, 31, 32, -1, 33, 34, 35, -1, 36, 37, 38, -1, 39, 40, 41, -1, 42, 43, 44, -1, 45, 46, 47, -1, 48, 49, 50, -1, 51, 52, 53, -1, 54, 55, 56, -1, 57, 58, 59, -1, 60, 61, 62, -1, 63, 64, 65, -1, 66, 67, 68, -1, 69, 70, 71, -1, 72, 73, 74, -1, 75, 76, 77, -1, 78, 79, 80, -1, 81, 82, 83, -1, 84, 85, 86, -1, 87, 88, 89, -1, 90, 91, 92, -1, 93, 94, 95, -1, 96, 97, 98, -1, 99, 100, 101, -1, 102, 103, 104, -1, 105, 106, 107, -1, 108, 109, 110, -1, 111, 112, 113, -1, 114, 115, 116, -1, 117, 118, 119, -1, 120, 121, 122, -1, 123, 124, 125, -1, 126, 127, 128, -1, 129, 130, 131, -1, 132, 133, 134, -1, 135, 136, 137, -1, 138, 139, 140, -1, 141, 142, 143, -1, 144, 145, 146, -1, 147, 148, 149, -1, 150, 151, 152, -1, 153, 154, 155, -1, 156, 157, 158, -1, 159, 160, 161, -1, 162, 163, 164, -1, 165, 166, 167, -1, 168, 169, 170, -1, 171, 172, 173, -1, 174, 175, 176, -1, 177, 178, 179, -1, 180, 181, 182, -1, 183, 184, 185, -1, 186, 187, 188, -1, 189, 190, 191, -1, 192, 193, 194, -1, 195, 196, 197, -1, 198, 199, 200, -1, 201, 202, 203, -1, 204, 205, 206, -1, 207, 208, 209, -1, 210, 211, 212, -1, 213, 214, 215, -1, 216, 217, 218, -1, 219, 220, 221, -1, 222, 223, 224, -1, 225, 226, 227, -1, 228, 229, 230, -1, 231, 232, 233, -1, 234, 235, 236, -1, 237, 238, 239, -1, 240, 241, 242, -1, 243, 244, 245, -1, 246, 247, 248, -1, 249, 250, 251, -1, 252, 253, 254, -1, 255, 256, 257, -1, 258, 259, 260, -1, 261, 262, 263, -1, 264, 265, 266, -1, 267, 268, 269, -1, 270, 271, 272, -1, 273, 274, 275, -1, 276, 277, 278, -1, 279, 280, 281, -1, 282, 283, 284, -1, 285, 286, 287, -1, 288, 289, 290, -1, 291, 292, 293, -1, 294, 295, 296, -1, 297, 298, 299, -1, 300, 301, 302, -1, 303, 304, 305, -1, 306, 307, 308, -1, 309, 310, 311, -1, 312, 313, 314, -1, 315, 316, 317, -1, 318, 319, 320, -1, 321, 322, 323, -1, 324, 325, 326, -1, 327, 328, 329, -1, 330, 331, 332, -1, 333, 334, 335, -1, 336, 337, 338, -1, 339, 340, 341, -1, 342, 343, 344, -1, 345, 346, 347, -1, 348, 349, 350, -1, 351, 352, 353, -1, 354, 355, 356, -1, 357, 358, 359, -1, 360, 361, 362, -1, 363, 364, 365, -1, 366, 367, 368, -1, 369, 370, 371, -1, 372, 373, 374, -1, 375, 376, 377, -1, 378, 379, 380, -1, 381, 382, 383, -1, 384, 385, 386, -1, 387, 388, 389, -1, 390, 391, 392, -1, 393, 394, 395, -1, 396, 397, 398, -1, 399, 400, 401, -1, 402, 403, 404, -1, 405, 406, 407, -1, 408, 409, 410, -1, 411, 412, 413, -1, 414, 415, 416, -1, 417, 418, 419, -1, 420, 421, 422, -1, 423, 424, 425, -1, 426, 427, 428, -1, 429, 430, 431, -1, 432, 433, 434, -1, 435, 436, 437, -1, 438, 439, 440, -1, 441, 442, 443, -1, 444, 445, 446, -1, 447, 448, 449, -1, 450, 451, 452, -1, 453, 454, 455, -1, 456, 457, 458, -1, 459, 460, 461, -1, 462, 463, 464, -1, 465, 466, 467, -1, 468, 469, 470, -1, 471, 472, 473, -1, 474, 475, 476, -1, 477, 478, 479, -1, 480, 481, 482, -1, 483, 484, 485, -1, 486, 487, 488, -1, 489, 490, 491, -1, 492, 493, 494, -1, 495, 496, 497, -1, 498, 499, 500, -1, 501, 502, 503, -1, 504, 505, 506, -1, 507, 508, 509, -1, 510, 511, 512, -1, 513, 514, 515, -1, 516, 517, 518, -1, 519, 520, 521, -1, 522, 523, 524, -1, 525, 526, 527, -1, 528, 529, 530, -1, 531, 532, 533, -1, 534, 535, 536, -1, 537, 538, 539, -1, 540, 541, 542, -1, 543, 544, 545, -1, 546, 547, 548, -1, 549, 550, 551, -1, 552, 553, 554, -1, 555, 556, 557, -1, 558, 559, 560, -1, 561, 562, 563, -1, 564, 565, 566, -1, 567, 568, 569, -1, 570, 571, 572, -1, 573, 574, 575, -1, 576, 577, 578, -1, 579, 580, 581, -1, 582, 583, 584, -1, 585, 586, 587, -1, 588, 589, 590, -1, 591, 592, 593, -1, 594, 595, 596, -1, 597, 598, 599, -1, 600, 601, 602, -1, 603, 604, 605, -1, 606, 607, 608, -1, 609, 610, 611, -1, 612, 613, 614, -1, 615, 616, 617, -1, 618, 619, 620, -1, 621, 622, 623, -1, 624, 625, 626, -1, 627, 628, 629, -1, 630, 631, 632, -1, 633, 634, 635, -1, 636, 637, 638, -1, 639, 640, 641, -1, 642, 643, 644, -1, 645, 646, 647, -1, 648, 649, 650, -1, 651, 652, 653, -1, 654, 655, 656, -1, 657, 658, 659, -1, 660, 661, 662, -1, 663, 664, 665, -1, 666, 667, 668, -1, 669, 670, 671, -1, 672, 673, 674, -1, 675, 676, 677, -1, 678, 679, 680, -1, 681, 682, 683, -1, 684, 685, 686, -1, 687, 688, 689, -1
+                        ]
+                        creaseAngle 1
+                      }
+                    }
+                  ]
+                }
+              ]
+              name "Sick LMS 291"
+              model "Sick LMS291"
+              horizontalResolution 180
+              fieldOfView 3.14159
+              verticalFieldOfView 0.017453277777777776
+              numberOfLayers 1
+              maxRange 80
+            }
+            GPS {
+            }
+            Gyro {
+            }
+          ]
+        }
+      ]
+    }
+  ]
+  name "vehicle"
+  model "tractor"
+  boundingObject Group {
+    children [
+      DEF BONNET_MAIN_BO Transform {
+        translation 1.35 0 0.52
+        rotation 0.5462450491385681 0.5462450491385681 0.6350060571232423 2.010069
+        children [
+          Box {
+            size 0.8 0.81 1
+          }
+        ]
+      }
+      DEF BONNET_FRONT_BO Transform {
+        translation 1.79 0 0.57
+        rotation -0.35507091706059196 -0.35507091706059196 0.8647827979993012 1.715565
+        children [
+          Box {
+            size 0.8 0.6 0.6
+          }
+        ]
+      }
+      DEF SEAT_BO Transform {
+        translation 0.14 0 0.36
+        rotation 0.5462450491385681 0.5462450491385681 0.6350060571232423 2.010069
+        children [
+          Box {
+            size 0.8 0.88 0.7
+          }
+        ]
+      }
+      DEF FRONT_BRACKET_BO Transform {
+        translation 2.11 0 0.41
+        rotation 0.5462450491385681 0.5462450491385681 0.6350060571232423 2.010069
+        children [
+          Box {
+            size 0.6 0.1 0.5
+          }
+        ]
+      }
+      DEF BOTTOM_FRONT_BO Transform {
+        translation 1.7 0 0.01
+        rotation 0.5462450491385681 0.5462450491385681 0.6350060571232423 2.010069
+        children [
+          Box {
+            size 0.32 0.25 0.28
+          }
+        ]
+      }
+      DEF BOTTOM_REAR_BO Transform {
+        translation 0.1 0 -0.23
+        rotation 0.5462450491385681 0.5462450491385681 0.6350060571232423 2.010069
+        children [
+          Box {
+            size 0.32 0.25 0.48
+          }
+        ]
+      }
+      DEF CABIN_FLOOR_BO Transform {
+        translation 0.65 0 0.186
+        rotation 0.5462450491385681 0.5462450491385681 0.6350060571232423 2.010069
+        children [
+          Box {
+            size 0.8 0.36 0.49
+          }
+        ]
+      }
+      DEF ROPS_BO Transform {
+        translation -0.26 0 1.25
+        rotation 0.5052141286737607 0.5052141286737607 0.6996551781962496 1.920604
+        children [
+          Box {
+            size 1.2 1 0.06
+          }
+        ]
+      }
+    ]
+  }
+  physics Physics {
+    density -1
+    mass 1000
+    centerOfMass [
+      0.94506902 0 0.46081786
+    ]
+    inertiaMatrix [
+      634.25855 3004.5628 2557.88
+      0 -792.28908 0
+    ]
+  }
+  radarCrossSection 100
+  controller "simulink_control_app"
+  customData "1.76 1.4 1.4 0.38 0.6 700 5 C 250 50000 1000 4500 150 0.1 0 0.25 3000 1000 6 17 -12 10 6.5 4.5 3.5 2.75 sounds/engine.wav "
+  window "automobile"
+}
+Horse {
+  translation 23.3 5.77 0
+  rotation 0 0 1 -0.261795307179586
+}
+Horse {
+  translation 36.515 11.8887 3.19744e-14
+  rotation 0 0 1 1.309
+  name "horse(1)"
+  colorBody 0.466667 0.462745 0.482353
+  colorHair 0.141176 0.121569 0.192157
+}
+HouseWithGarage {
+  translation 9.50308 -30.3309 -4.44089e-13
+  rotation 0 0 1 -1.5707953071795862
+}
+Deer {
+  translation -26.88 -19.47 0
+  color 1 0.639216 0.282353
+}
+Deer {
+  translation -26.88 -25.48 0
+  rotation 0 0 1 -0.785395307179586
+  name "deer(1)"
+}
+Deer {
+  translation -21.8845 -20.4845 0
+  rotation 0 0 1 -2.3561953071795863
+  name "deer(2)"
+}
