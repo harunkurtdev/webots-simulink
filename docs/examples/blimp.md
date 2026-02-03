@@ -103,6 +103,209 @@ b_angular = 0.8;          % Angular damping
 
 ---
 
+## Control Architecture
+
+### System Block Diagram
+
+```mermaid
+flowchart TB
+    subgraph Reference["Reference Inputs"]
+        R1[/"Position Reference<br/>(x_d, y_d, z_d)"/]
+        R2[/"Heading Reference<br/>(ψ_d)"/]
+        R3[/"Velocity Reference<br/>(v_d)"/]
+    end
+
+    subgraph Sensors["Sensor Suite"]
+        GPS["GPS<br/>Position"]
+        IMU["IMU<br/>Orientation"]
+        GYRO["Gyroscope<br/>Angular Rates"]
+        ALT["Altimeter<br/>Altitude"]
+    end
+
+    subgraph Controllers["Cascaded Control Structure"]
+        subgraph Outer["Outer Loop - Position"]
+            PC["Position<br/>Controller"]
+            HC["Heading<br/>Controller"]
+        end
+        subgraph Inner["Inner Loop - Velocity/Rate"]
+            VC["Velocity<br/>Controller"]
+            RC["Rate<br/>Controller"]
+        end
+    end
+
+    subgraph Actuators["Actuator System"]
+        MIX["Motor<br/>Mixer"]
+        LM["Left Motor"]
+        RM["Right Motor"]
+        TM["Tail Motor"]
+    end
+
+    subgraph Plant["Blimp Dynamics"]
+        DYN["6-DOF<br/>Dynamics"]
+        BUOY["Buoyancy<br/>Forces"]
+    end
+
+    R1 --> PC
+    R2 --> HC
+    R3 --> VC
+
+    PC --> VC
+    HC --> RC
+
+    VC --> MIX
+    RC --> MIX
+
+    MIX --> LM
+    MIX --> RM
+    MIX --> TM
+
+    LM --> DYN
+    RM --> DYN
+    TM --> DYN
+    BUOY --> DYN
+
+    DYN --> GPS
+    DYN --> IMU
+    DYN --> GYRO
+    DYN --> ALT
+
+    GPS --> PC
+    IMU --> HC
+    GYRO --> RC
+    ALT --> PC
+
+    style Reference fill:#e1f5fe
+    style Sensors fill:#fff3e0
+    style Controllers fill:#e8f5e9
+    style Actuators fill:#fce4ec
+    style Plant fill:#f3e5f5
+```
+
+### State-Space Model Diagram
+
+```mermaid
+flowchart LR
+    subgraph Inputs["Control Inputs u"]
+        U1["T_left<br/>Left Thrust"]
+        U2["T_right<br/>Right Thrust"]
+        U3["T_tail<br/>Tail Thrust"]
+    end
+
+    subgraph StateSpace["State-Space Model<br/>ẋ = Ax + Bu + F_ext"]
+        A["A Matrix<br/>12x12"]
+        B["B Matrix<br/>12x3"]
+        F["External Forces<br/>Buoyancy, Drag"]
+    end
+
+    subgraph States["State Vector x"]
+        S1["x, y, z<br/>Position"]
+        S2["φ, θ, ψ<br/>Orientation"]
+        S3["v_x, v_y, v_z<br/>Velocity"]
+        S4["p, q, r<br/>Angular Rates"]
+    end
+
+    subgraph Outputs["Outputs y"]
+        Y1["Position<br/>GPS"]
+        Y2["Orientation<br/>IMU"]
+        Y3["Altitude<br/>Altimeter"]
+    end
+
+    U1 --> B
+    U2 --> B
+    U3 --> B
+    B --> StateSpace
+    A --> StateSpace
+    F --> StateSpace
+    StateSpace --> S1
+    StateSpace --> S2
+    StateSpace --> S3
+    StateSpace --> S4
+    S1 --> Y1
+    S2 --> Y2
+    S1 --> Y3
+
+    style Inputs fill:#ffcdd2
+    style StateSpace fill:#c8e6c9
+    style States fill:#bbdefb
+    style Outputs fill:#fff9c4
+```
+
+### Control Loop Detail
+
+```mermaid
+flowchart TB
+    subgraph AltitudeLoop["Altitude Control Loop"]
+        ZD["z_desired"] --> EALT["Σ"]
+        ZM["z_measured"] --> EALT
+        EALT --> PIDZ["PID<br/>Altitude"]
+        PIDZ --> PITCH["Pitch<br/>Command"]
+    end
+
+    subgraph HeadingLoop["Heading Control Loop"]
+        PSID["ψ_desired"] --> EPSI["Σ"]
+        PSIM["ψ_measured"] --> EPSI
+        EPSI --> PIDPSI["PID<br/>Heading"]
+        PIDPSI --> YAWCMD["Yaw<br/>Torque"]
+    end
+
+    subgraph VelocityLoop["Velocity Control Loop"]
+        VD["v_desired"] --> EVEL["Σ"]
+        VM["v_measured"] --> EVEL
+        EVEL --> PIDV["PID<br/>Velocity"]
+        PIDV --> THRUST["Base<br/>Thrust"]
+    end
+
+    subgraph Mixer["Motor Mixer"]
+        PITCH --> MX["Mixing<br/>Matrix"]
+        YAWCMD --> MX
+        THRUST --> MX
+        MX --> WL["ω_left"]
+        MX --> WR["ω_right"]
+        MX --> WT["ω_tail"]
+    end
+
+    style AltitudeLoop fill:#e3f2fd
+    style HeadingLoop fill:#fce4ec
+    style VelocityLoop fill:#e8f5e9
+    style Mixer fill:#fff3e0
+```
+
+### State-Space Matrices
+
+```matlab
+% 12-state Blimp Model
+% State: x = [x, y, z, φ, θ, ψ, vx, vy, vz, p, q, r]'
+% Input: u = [T_left, T_right, T_tail]'
+
+% A Matrix (12x12) - Linearized dynamics at hover
+A = zeros(12, 12);
+A(1:3, 7:9) = eye(3);           % Position from velocity
+A(4:6, 10:12) = eye(3);         % Orientation from angular rates
+A(7:9, 7:9) = -b_linear/m * eye(3);    % Velocity damping
+A(10:12, 10:12) = -b_angular * diag([1/Ix, 1/Iy, 1/Iz]); % Angular damping
+
+% B Matrix (12x3) - Input mapping
+B = zeros(12, 3);
+% Left motor thrust contribution
+B(7, 1) = 1/m;                  % Forward thrust
+B(10, 1) = -d_motor/(2*Ix);     % Roll moment
+% Right motor thrust contribution
+B(7, 2) = 1/m;                  % Forward thrust
+B(10, 2) = d_motor/(2*Ix);      % Roll moment
+% Tail motor contribution
+B(12, 3) = l_tail/Iz;           % Yaw moment
+
+% C Matrix (6x12) - Output selection
+C = zeros(6, 12);
+C(1:3, 1:3) = eye(3);           % Position output
+C(4:6, 4:6) = eye(3);           % Orientation output
+
+% D Matrix (6x3) - Direct feedthrough (none)
+D = zeros(6, 3);
+```
+
+---
+
 ## Blimp Dynamics
 
 ### Forces and Moments
