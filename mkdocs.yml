@@ -17,16 +17,23 @@ nav:
       - Debugging: advanced/debugging.md
       - Export ROS2 Package: advanced/export-ros2.md
   - Examples:
-      - Inverted Pendulum Example: examples/inverted-pendulum.md
-      - Rotary Inverted Pendulum Example: examples/rotary-inverted-pendulum.md
-      - Wheel Chair Example: examples/wheel-chair.md
-      - Crazyflie Drone Example: examples/crazyflie-drone.md
-      - BlueBoat USV Example: examples/blueboat-usv.md
-      - Pirana USV Example: examples/pirana-usv.md
-      - TurtleBot3 Example: examples/turtlebot3.md
-      - Scout V2.0 Example: examples/scout-v2.md
+      - Control Systems:
+          - Inverted Pendulum: examples/inverted-pendulum.md
+          - Rotary Inverted Pendulum: examples/rotary-inverted-pendulum.md
+      - Aerial Vehicles:
+          - Crazyflie Drone: examples/crazyflie-drone.md
+      - Ground Vehicles:
+          - TurtleBot3: examples/turtlebot3.md
+          - Scout V2.0: examples/scout-v2.md
+          - Wheel Chair: examples/wheel-chair.md
+          - Tractor (Boomer): examples/tractor.md
+      - Marine Vehicles:
+          - BlueBoat USV: examples/blueboat-usv.md
+          - Pirana USV: examples/pirana-usv.md
   - Troubleshooting: troubleshooting.md
   - FAQ: faq.md
+  - Contributing:
+      - Adding New Examples: contributing/adding-new-examples.md
   - Contributors: contributors.md
   - References: references.md
 

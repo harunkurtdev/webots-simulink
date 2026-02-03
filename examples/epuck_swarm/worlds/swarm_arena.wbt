@@ -1,0 +1,68 @@
+#VRML_SIM R2023b utf8
+
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/backgrounds/protos/TexturedBackground.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/backgrounds/protos/TexturedBackgroundLight.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/floors/protos/RectangleArena.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/robots/gctronic/e-puck/protos/E-puck.proto"
+
+WorldInfo {
+  info [
+    "E-puck Swarm Robotics Simulation"
+    "Multiple robots demonstrating collective behavior"
+  ]
+  title "E-puck Swarm"
+  basicTimeStep 16
+}
+Viewpoint {
+  orientation -0.5 0.5 0.7 1.8
+  position 0 -1.5 1.5
+}
+TexturedBackground {
+}
+TexturedBackgroundLight {
+}
+RectangleArena {
+  floorSize 2 2
+  floorTileSize 0.5 0.5
+  wallHeight 0.1
+}
+E-puck {
+  translation -0.3 0.3 0
+  name "e-puck_0"
+  controller "simulink_control_app"
+}
+E-puck {
+  translation 0.3 0.3 0
+  name "e-puck_1"
+  controller "simulink_control_app"
+}
+E-puck {
+  translation -0.3 -0.3 0
+  name "e-puck_2"
+  controller "simulink_control_app"
+}
+E-puck {
+  translation 0.3 -0.3 0
+  name "e-puck_3"
+  controller "simulink_control_app"
+}
+E-puck {
+  translation 0 0 0
+  name "e-puck_4"
+  controller "simulink_control_app"
+}
+E-puck {
+  translation 0.5 0 0
+  name "e-puck_5"
+  controller "simulink_control_app"
+}
+E-puck {
+  translation -0.5 0 0
+  name "e-puck_6"
+  controller "simulink_control_app"
+}
+E-puck {
+  translation 0 0.5 0
+  name "e-puck_7"
+  controller "simulink_control_app"
+}
