@@ -213,6 +213,222 @@ m4_motor = wb_robot_get_device('m4_motor');
 
 ## Control System Design
 
+### System Block Diagram
+
+```mermaid
+flowchart TB
+    subgraph Reference["Reference Inputs"]
+        R1[/"Position<br/>(x_d, y_d, z_d)"/]
+        R2[/"Yaw<br/>(ψ_d)"/]
+    end
+
+    subgraph Control["Cascaded Control System"]
+        subgraph OuterLoop["Outer Loop - Position"]
+            PC[Position<br/>Controller]
+        end
+        subgraph MiddleLoop["Middle Loop - Attitude"]
+            AC[Attitude<br/>Controller]
+        end
+        subgraph InnerLoop["Inner Loop - Rate"]
+            RC[Rate<br/>Controller]
+        end
+    end
+
+    subgraph Mixer["Motor Mixer"]
+        MIX[X-Config<br/>Mixing]
+    end
+
+    subgraph Motors["Motors"]
+        M1[M1<br/>Front-Right]
+        M2[M2<br/>Back-Right]
+        M3[M3<br/>Back-Left]
+        M4[M4<br/>Front-Left]
+    end
+
+    subgraph Plant["Crazyflie Quadcopter"]
+        QUAD[Vehicle<br/>Dynamics]
+    end
+
+    subgraph Sensors["Sensor Suite"]
+        IMU_S[IMU]
+        GPS_S[GPS]
+        GYRO_S[Gyro]
+        RANGE[Range<br/>Sensors]
+    end
+
+    R1 --> PC
+    R2 --> AC
+    PC --> AC
+    AC --> RC
+    RC --> MIX
+
+    MIX --> M1
+    MIX --> M2
+    MIX --> M3
+    MIX --> M4
+
+    M1 --> QUAD
+    M2 --> QUAD
+    M3 --> QUAD
+    M4 --> QUAD
+
+    QUAD --> IMU_S
+    QUAD --> GPS_S
+    QUAD --> GYRO_S
+    QUAD --> RANGE
+
+    IMU_S --> AC
+    GPS_S --> PC
+    GYRO_S --> RC
+    RANGE --> PC
+
+    style Reference fill:#e1f5fe
+    style Control fill:#e8f5e9
+    style Mixer fill:#fff8e1
+    style Motors fill:#ffebee
+    style Plant fill:#fce4ec
+    style Sensors fill:#f3e5f5
+```
+
+### Cascaded Control Architecture
+
+```mermaid
+flowchart LR
+    subgraph Position["Position Control (10 Hz)"]
+        POS_D[/"x_d, y_d, z_d"/]
+        POS[/"x, y, z"/]
+        POS_ERR((Δ))
+        POS_CTRL[Position PID]
+        ATT_CMD["φ_d, θ_d, T"]
+
+        POS_D --> POS_ERR
+        POS --> POS_ERR
+        POS_ERR --> POS_CTRL
+        POS_CTRL --> ATT_CMD
+    end
+
+    subgraph Attitude["Attitude Control (250 Hz)"]
+        ATT_D[/"φ_d, θ_d, ψ_d"/]
+        ATT[/"φ, θ, ψ"/]
+        ATT_ERR((Δ))
+        ATT_CTRL[Attitude PID]
+        RATE_CMD["p_d, q_d, r_d"]
+
+        ATT_CMD --> ATT_D
+        ATT_D --> ATT_ERR
+        ATT --> ATT_ERR
+        ATT_ERR --> ATT_CTRL
+        ATT_CTRL --> RATE_CMD
+    end
+
+    subgraph Rate["Rate Control (500 Hz)"]
+        RATE_D[/"p_d, q_d, r_d"/]
+        RATE[/"p, q, r"/]
+        RATE_ERR((Δ))
+        RATE_CTRL[Rate PID]
+        MOMENT["τ_φ, τ_θ, τ_ψ"]
+
+        RATE_CMD --> RATE_D
+        RATE_D --> RATE_ERR
+        RATE --> RATE_ERR
+        RATE_ERR --> RATE_CTRL
+        RATE_CTRL --> MOMENT
+    end
+
+    style Position fill:#e3f2fd
+    style Attitude fill:#fff3e0
+    style Rate fill:#e8f5e9
+```
+
+### Motor Mixing (X-Configuration)
+
+```mermaid
+flowchart TB
+    subgraph MixerInput["Control Commands"]
+        T["Thrust (T)"]
+        TAU_PHI["Roll Moment (τ_φ)"]
+        TAU_THETA["Pitch Moment (τ_θ)"]
+        TAU_PSI["Yaw Moment (τ_ψ)"]
+    end
+
+    subgraph MixingMatrix["X-Configuration Mixing"]
+        MIX["Motor Mixing Matrix"]
+    end
+
+    subgraph MotorOut["Motor Commands"]
+        W1["ω₁ = T + τ_φ - τ_θ - τ_ψ"]
+        W2["ω₂ = T - τ_φ - τ_θ + τ_ψ"]
+        W3["ω₃ = T - τ_φ + τ_θ - τ_ψ"]
+        W4["ω₄ = T + τ_φ + τ_θ + τ_ψ"]
+    end
+
+    subgraph Layout["Motor Layout (Top View)"]
+        L1["    M4(CCW)   M1(CW)    "]
+        L2["        ╲   ╱           "]
+        L3["         ╲ ╱            "]
+        L4["          ×             "]
+        L5["         ╱ ╲            "]
+        L6["        ╱   ╲           "]
+        L7["    M3(CW)   M2(CCW)   "]
+    end
+
+    T --> MIX
+    TAU_PHI --> MIX
+    TAU_THETA --> MIX
+    TAU_PSI --> MIX
+
+    MIX --> W1
+    MIX --> W2
+    MIX --> W3
+    MIX --> W4
+
+    style MixerInput fill:#e1f5fe
+    style MixingMatrix fill:#fff8e1
+    style MotorOut fill:#e8f5e9
+    style Layout fill:#f5f5f5
+```
+
+### Control Loop Details
+
+```mermaid
+flowchart TB
+    subgraph AltitudeControl["Altitude Control"]
+        Z_D[/"z_d"/]
+        Z[/"z"/]
+        VZ[/"v_z"/]
+        ERR_Z((+<br/>-))
+        PID_Z[PID<br/>Kp=50, Ki=5, Kd=15]
+        THRUST["Thrust Command"]
+
+        Z_D --> ERR_Z
+        Z --> ERR_Z
+        ERR_Z --> PID_Z
+        VZ --> PID_Z
+        PID_Z --> THRUST
+    end
+
+    subgraph AttitudeLoop["Attitude Loop (Roll Example)"]
+        PHI_D[/"φ_d"/]
+        PHI[/"φ"/]
+        P[/"p"/]
+        ERR_PHI((+<br/>-))
+        PID_PHI[PID<br/>Kp=25, Ki=1, Kd=8]
+        TAU_ROLL["τ_φ"]
+
+        PHI_D --> ERR_PHI
+        PHI --> ERR_PHI
+        ERR_PHI --> PID_PHI
+        P --> PID_PHI
+        PID_PHI --> TAU_ROLL
+    end
+
+    THRUST --> MIXER[Motor<br/>Mixer]
+    TAU_ROLL --> MIXER
+
+    style AltitudeControl fill:#e3f2fd
+    style AttitudeLoop fill:#f3e5f5
+```
+
 ### Attitude Control
 
 The inner loop controls roll, pitch, and yaw using PID controllers:

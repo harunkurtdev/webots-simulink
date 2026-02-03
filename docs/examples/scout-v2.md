@@ -73,6 +73,326 @@ The system includes a Simulink model (`state_space_modeling.slx`) for:
 
 ---
 
+## Control Architecture
+
+### System Block Diagram
+
+```mermaid
+flowchart TB
+    subgraph Reference["Reference Inputs"]
+        R1[/"Position Goal<br/>(x_g, y_g)"/]
+        R2[/"Velocity Command<br/>(v_d, ω_d)"/]
+    end
+
+    subgraph Planning["Path Planning"]
+        GP[Global<br/>Planner]
+        LP[Local<br/>Planner]
+        OA[Obstacle<br/>Avoidance]
+    end
+
+    subgraph Perception["Perception System"]
+        LIDAR[LiDAR<br/>Scanner]
+        IMU[IMU<br/>Sensor]
+        ENC[Wheel<br/>Encoders]
+        LOC[Localization<br/>EKF]
+    end
+
+    subgraph Control["Motion Control"]
+        subgraph HighLevel["High-Level Control"]
+            TC[Trajectory<br/>Controller]
+        end
+        subgraph LowLevel["Low-Level Control"]
+            VC[Velocity<br/>Controller]
+            WC[Wheel<br/>Controller]
+        end
+    end
+
+    subgraph Actuators["Drive System"]
+        MIX[Skid-Steer<br/>Mixer]
+        FL[Front Left<br/>Motor]
+        FR[Front Right<br/>Motor]
+        RL[Rear Left<br/>Motor]
+        RR[Rear Right<br/>Motor]
+    end
+
+    subgraph Plant["Scout V2 Robot"]
+        ROBOT[Vehicle<br/>Dynamics]
+    end
+
+    R1 --> GP
+    GP --> LP
+    LP --> OA
+    LIDAR --> OA
+    OA --> TC
+    R2 --> VC
+
+    TC --> VC
+    VC --> WC
+    WC --> MIX
+
+    MIX --> FL
+    MIX --> FR
+    MIX --> RL
+    MIX --> RR
+
+    FL --> ROBOT
+    FR --> ROBOT
+    RL --> ROBOT
+    RR --> ROBOT
+
+    ROBOT --> LIDAR
+    ROBOT --> IMU
+    ROBOT --> ENC
+    IMU --> LOC
+    ENC --> LOC
+    LIDAR --> LOC
+
+    LOC --> TC
+    LOC --> VC
+
+    style Reference fill:#e1f5fe
+    style Planning fill:#fff3e0
+    style Perception fill:#f3e5f5
+    style Control fill:#e8f5e9
+    style Actuators fill:#ffebee
+    style Plant fill:#fce4ec
+```
+
+### State-Space Model Diagram
+
+```mermaid
+flowchart LR
+    subgraph Inputs["Control Inputs u"]
+        U1["v (Linear Velocity)"]
+        U2["ω (Angular Velocity)"]
+    end
+
+    subgraph StateSpace["State-Space Model<br/>ẋ = f(x,u)<br/>y = h(x)"]
+        subgraph States["State Vector x"]
+            S1["x - X Position"]
+            S2["y - Y Position"]
+            S3["θ - Heading"]
+            S4["v - Velocity"]
+            S5["ω - Angular Velocity"]
+        end
+    end
+
+    subgraph Outputs["Outputs y"]
+        Y1["Position (x, y)"]
+        Y2["Orientation (θ)"]
+        Y3["Velocities (v, ω)"]
+    end
+
+    Inputs --> StateSpace
+    StateSpace --> Outputs
+
+    style Inputs fill:#ffcdd2
+    style StateSpace fill:#c8e6c9
+    style Outputs fill:#bbdefb
+```
+
+### Skid-Steer Kinematics
+
+```mermaid
+flowchart TB
+    subgraph Kinematics["Skid-Steer Kinematic Model"]
+        subgraph ForwardKin["Forward Kinematics"]
+            FK1["ẋ = v·cos(θ)"]
+            FK2["ẏ = v·sin(θ)"]
+            FK3["θ̇ = ω"]
+        end
+
+        subgraph VelRelation["Velocity Relations"]
+            VR1["v = (v_R + v_L) / 2"]
+            VR2["ω = (v_R - v_L) / W"]
+        end
+
+        subgraph InverseKin["Inverse Kinematics"]
+            IK1["v_L = v - (ω·W/2)"]
+            IK2["v_R = v + (ω·W/2)"]
+        end
+    end
+
+    subgraph WheelConfig["4-Wheel Configuration"]
+        WC1["v_FL = v_RL = v_L"]
+        WC2["v_FR = v_RR = v_R"]
+    end
+
+    ForwardKin --> VelRelation
+    VelRelation --> InverseKin
+    InverseKin --> WheelConfig
+
+    style Kinematics fill:#e8f5e9
+    style WheelConfig fill:#fff8e1
+```
+
+### State-Space Matrices
+
+```matlab
+%% Scout V2.0 State-Space Model
+% State vector: x = [x, y, theta, v, omega]'
+% x, y: Position [m]
+% theta: Heading angle [rad]
+% v: Linear velocity [m/s]
+% omega: Angular velocity [rad/s]
+
+% Physical Parameters
+m = 40;           % Mass [kg]
+Iz = 8;           % Yaw moment of inertia [kg*m^2]
+W = 0.38;         % Track width [m]
+L = 0.925;        % Wheelbase [m]
+r = 0.165;        % Wheel radius [m]
+
+% Friction and damping coefficients
+mu_l = 0.8;       % Longitudinal friction
+mu_s = 0.5;       % Lateral (skid) friction
+b_v = 5;          % Linear velocity damping [N*s/m]
+b_omega = 3;      % Angular velocity damping [N*m*s/rad]
+
+% Linearized State-Space (at operating point v0, omega0 = 0)
+% State: [x, y, theta, v, omega]'
+% Input: [F_drive, M_turn]' (total drive force and turning moment)
+
+A = [0, 0, 0, 1, 0;
+     0, 0, 0, 0, 0;
+     0, 0, 0, 0, 1;
+     0, 0, 0, -b_v/m, 0;
+     0, 0, 0, 0, -b_omega/Iz];
+
+B = [0, 0;
+     0, 0;
+     0, 0;
+     1/m, 0;
+     0, 1/Iz];
+
+C = eye(5);
+
+D = zeros(5, 2);
+
+% Alternative: Velocity-input model
+% Input: [v_cmd, omega_cmd]'
+% First-order velocity dynamics
+
+tau_v = 0.2;      % Velocity time constant [s]
+tau_omega = 0.15; % Angular velocity time constant [s]
+
+A_vel = [0, 0, 0, 1, 0;
+         0, 0, 0, 0, 0;
+         0, 0, 0, 0, 1;
+         0, 0, 0, -1/tau_v, 0;
+         0, 0, 0, 0, -1/tau_omega];
+
+B_vel = [0, 0;
+         0, 0;
+         0, 0;
+         1/tau_v, 0;
+         0, 1/tau_omega];
+
+% Create state-space system
+sys = ss(A_vel, B_vel, C, D);
+sys.StateName = {'x', 'y', 'theta', 'v', 'omega'};
+sys.InputName = {'v_cmd', 'omega_cmd'};
+```
+
+### Velocity Control Loop
+
+```mermaid
+flowchart TB
+    subgraph VelocityControl["Velocity Control System"]
+        subgraph LinearVel["Linear Velocity Control"]
+            V_D[/"v_d<br/>(Desired)"/]
+            V[/"v<br/>(Actual)"/]
+            ERR_V((+<br/>-))
+            PID_V[PID Controller<br/>Kp=100, Ki=10, Kd=5]
+            F_D["F_drive"]
+
+            V_D --> ERR_V
+            V --> ERR_V
+            ERR_V --> PID_V
+            PID_V --> F_D
+        end
+
+        subgraph AngularVel["Angular Velocity Control"]
+            W_D[/"ω_d<br/>(Desired)"/]
+            W[/"ω<br/>(Actual)"/]
+            ERR_W((+<br/>-))
+            PID_W[PID Controller<br/>Kp=50, Ki=5, Kd=2]
+            M_T["M_turn"]
+
+            W_D --> ERR_W
+            W --> ERR_W
+            ERR_W --> PID_W
+            PID_W --> M_T
+        end
+    end
+
+    subgraph WheelAllocation["Wheel Velocity Allocation"]
+        ALLOC[Skid-Steer<br/>Mixer]
+        VL["v_L (Left)"]
+        VR["v_R (Right)"]
+
+        F_D --> ALLOC
+        M_T --> ALLOC
+        ALLOC --> VL
+        ALLOC --> VR
+    end
+
+    subgraph MotorDist["Motor Distribution"]
+        MD1["v_FL = v_RL = v_L"]
+        MD2["v_FR = v_RR = v_R"]
+    end
+
+    VL --> MD1
+    VR --> MD2
+
+    style VelocityControl fill:#e3f2fd
+    style WheelAllocation fill:#fff8e1
+    style MotorDist fill:#f3e5f5
+```
+
+### Obstacle Avoidance Architecture
+
+```mermaid
+flowchart TB
+    subgraph Sensors["LiDAR Perception"]
+        LIDAR[LiDAR<br/>360° Scan]
+        PROC[Point Cloud<br/>Processing]
+        OBS[Obstacle<br/>Detection]
+    end
+
+    subgraph Planning["Local Planning"]
+        VFF[Virtual Force<br/>Field]
+        DWA[Dynamic Window<br/>Approach]
+        PATH[Safe Path<br/>Selection]
+    end
+
+    subgraph Avoidance["Avoidance Behavior"]
+        GOAL[Goal<br/>Attraction]
+        REP[Obstacle<br/>Repulsion]
+        RES[Resultant<br/>Vector]
+    end
+
+    LIDAR --> PROC
+    PROC --> OBS
+    OBS --> VFF
+    OBS --> DWA
+
+    VFF --> GOAL
+    VFF --> REP
+    GOAL --> RES
+    REP --> RES
+    RES --> PATH
+    DWA --> PATH
+
+    PATH --> |v_d, ω_d| CTRL[Motion<br/>Controller]
+
+    style Sensors fill:#e1f5fe
+    style Planning fill:#fff3e0
+    style Avoidance fill:#e8f5e9
+```
+
+---
+
 ## Control Algorithms
 
 ### Basic Movement Control

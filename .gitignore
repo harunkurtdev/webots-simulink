@@ -11,6 +11,8 @@ examples/**/controllers/**/**.mexmaca64
 examples/**/controllers/**/**.r*
 examples/**/controllers/**/**.asv
 
+.claude
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]

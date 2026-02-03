@@ -132,6 +132,188 @@ D = [0;
 
 ![State-Space Diagram 1](../assets/images/inverted_pendulum/state_space1.png)
 
+### System Block Diagram
+
+```mermaid
+flowchart TB
+    subgraph Reference["Reference Inputs"]
+        R1[/"Cart Position<br/>(x_d)"/]
+        R2[/"Pendulum Angle<br/>(θ_d = 0)"/]
+    end
+
+    subgraph Controller["Control System"]
+        subgraph StateEstimator["State Estimator"]
+            OBS[State<br/>Observer]
+        end
+        subgraph Feedback["Full-State Feedback"]
+            LQR[LQR<br/>Controller]
+        end
+    end
+
+    subgraph Plant["Inverted Pendulum System"]
+        MOTOR[Linear<br/>Motor]
+        CART[Cart<br/>Dynamics]
+        PEND[Pendulum<br/>Dynamics]
+    end
+
+    subgraph Sensors["Sensors"]
+        POS_S[Position<br/>Sensor]
+        ANG_S[Angle<br/>Sensor]
+    end
+
+    R1 --> LQR
+    R2 --> LQR
+    OBS --> LQR
+    LQR --> |"F"| MOTOR
+    MOTOR --> CART
+    CART <--> PEND
+
+    CART --> POS_S
+    PEND --> ANG_S
+
+    POS_S --> OBS
+    ANG_S --> OBS
+
+    style Reference fill:#e1f5fe
+    style Controller fill:#e8f5e9
+    style Plant fill:#ffebee
+    style Sensors fill:#f3e5f5
+```
+
+### Control Architecture
+
+```mermaid
+flowchart LR
+    subgraph FullStateFeedback["Full-State Feedback Control"]
+        subgraph States["State Vector x"]
+            X["x (cart position)"]
+            XDOT["ẋ (cart velocity)"]
+            THETA["θ (pendulum angle)"]
+            THETADOT["θ̇ (angular velocity)"]
+        end
+
+        subgraph Gains["LQR Gain Matrix K"]
+            K["K = [k₁, k₂, k₃, k₄]"]
+        end
+
+        subgraph ControlLaw["Control Law"]
+            CL["u = -K·x = -k₁x - k₂ẋ - k₃θ - k₄θ̇"]
+        end
+    end
+
+    States --> Gains
+    Gains --> ControlLaw
+
+    style FullStateFeedback fill:#e8f5e9
+```
+
+### State-Space Model Diagram
+
+```mermaid
+flowchart LR
+    subgraph Input["Control Input"]
+        U["F (Force on Cart)"]
+    end
+
+    subgraph StateSpace["State-Space Model<br/>ẋ = Ax + Bu<br/>y = Cx"]
+        subgraph StateVector["State Vector x"]
+            S1["x - Cart Position"]
+            S2["ẋ - Cart Velocity"]
+            S3["θ - Pendulum Angle"]
+            S4["θ̇ - Angular Velocity"]
+        end
+    end
+
+    subgraph Output["Outputs y"]
+        Y1["x (cart position)"]
+        Y2["θ (pendulum angle)"]
+    end
+
+    Input --> StateSpace
+    StateSpace --> Output
+
+    style Input fill:#ffcdd2
+    style StateSpace fill:#c8e6c9
+    style Output fill:#bbdefb
+```
+
+### LQR Control Design
+
+```mermaid
+flowchart TB
+    subgraph LQRDesign["LQR Controller Design"]
+        subgraph Weights["Weighting Matrices"]
+            Q["Q = diag([10, 1, 100, 10])<br/>State Penalty"]
+            R["R = 1<br/>Control Penalty"]
+        end
+
+        subgraph Riccati["Algebraic Riccati Equation"]
+            ARE["A'P + PA - PBR⁻¹B'P + Q = 0"]
+        end
+
+        subgraph GainCalc["Gain Calculation"]
+            GAIN["K = R⁻¹B'P"]
+        end
+
+        subgraph ClosedLoop["Closed-Loop System"]
+            CL["ẋ = (A - BK)x"]
+        end
+    end
+
+    Weights --> Riccati
+    Riccati --> GainCalc
+    GainCalc --> ClosedLoop
+
+    style LQRDesign fill:#e3f2fd
+```
+
+### Control Loop Detail
+
+```mermaid
+flowchart TB
+    subgraph ControlLoop["Inverted Pendulum Control Loop"]
+        X_D[/"x_d = 0<br/>(equilibrium)"/]
+        X[/"x (state vector)"/]
+        ERR((+<br/>-))
+        K_GAIN["-K<br/>LQR Gain"]
+        F["Force F"]
+
+        X_D --> ERR
+        X --> ERR
+        ERR --> K_GAIN
+        K_GAIN --> F
+    end
+
+    subgraph SystemDynamics["System Dynamics"]
+        CART_DYN["Cart: Mẍ + bẋ + N = F"]
+        PEND_DYN["Pend: (I+ml²)θ̈ + mglsinθ = -mlẍcosθ"]
+    end
+
+    F --> CART_DYN
+    CART_DYN <--> PEND_DYN
+    PEND_DYN --> |"θ, θ̇"| X
+    CART_DYN --> |"x, ẋ"| X
+
+    style ControlLoop fill:#e8f5e9
+    style SystemDynamics fill:#fff3e0
+```
+
+### Pole Placement Alternative
+
+```mermaid
+flowchart LR
+    subgraph PolePlacement["Pole Placement Design"]
+        POLES["Desired Poles<br/>p = [-2, -3, -4, -5]"]
+        PLACE["K = place(A, B, p)"]
+        STABILITY["All poles in LHP<br/>→ Stable system"]
+    end
+
+    POLES --> PLACE
+    PLACE --> STABILITY
+
+    style PolePlacement fill:#fff8e1
+```
+
 ### State Variables
 
 | State | Symbol | Description |

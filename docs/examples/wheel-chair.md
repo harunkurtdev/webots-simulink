@@ -86,6 +86,301 @@ wheel_chair/
 
 ## 3. Differential Drive Kinematics
 
+### System Block Diagram
+
+```mermaid
+flowchart TB
+    subgraph Reference["Reference Inputs"]
+        R1[/"Velocity Command<br/>(v_d, ω_d)"/]
+        R2[/"Joystick Input"/]
+    end
+
+    subgraph Control["Control System"]
+        subgraph HighLevel["High-Level Control"]
+            OA[Obstacle<br/>Avoidance]
+            NAV[Navigation<br/>Controller]
+        end
+        subgraph LowLevel["Low-Level Control"]
+            VC[Velocity<br/>Controller]
+            PID_L[PID Left<br/>Wheel]
+            PID_R[PID Right<br/>Wheel]
+        end
+    end
+
+    subgraph Sensors["Sensor Suite"]
+        IR_L[Left IR<br/>Sensor]
+        IR_R[Right IR<br/>Sensor]
+        IMU[IMU<br/>Accel + Gyro]
+        ENC[Wheel<br/>Encoders]
+        CAM[Camera]
+    end
+
+    subgraph Actuators["Drive System"]
+        ML[Left<br/>Motor]
+        MR[Right<br/>Motor]
+    end
+
+    subgraph Plant["WheelChair"]
+        WC[Differential<br/>Drive Dynamics]
+    end
+
+    R1 --> NAV
+    R2 --> NAV
+    IR_L --> OA
+    IR_R --> OA
+    OA --> NAV
+    NAV --> VC
+    VC --> PID_L
+    VC --> PID_R
+
+    PID_L --> ML
+    PID_R --> MR
+    ML --> WC
+    MR --> WC
+
+    WC --> IR_L
+    WC --> IR_R
+    WC --> IMU
+    WC --> ENC
+    WC --> CAM
+
+    IMU --> VC
+    ENC --> PID_L
+    ENC --> PID_R
+
+    style Reference fill:#e1f5fe
+    style Control fill:#e8f5e9
+    style Sensors fill:#f3e5f5
+    style Actuators fill:#ffebee
+    style Plant fill:#fce4ec
+```
+
+### State-Space Model Diagram
+
+```mermaid
+flowchart LR
+    subgraph Inputs["Control Inputs u"]
+        U1["v_L (Left Wheel)"]
+        U2["v_R (Right Wheel)"]
+    end
+
+    subgraph StateSpace["State-Space Model<br/>ẋ = f(x,u)"]
+        subgraph States["State Vector x"]
+            S1["x - X Position [m]"]
+            S2["y - Y Position [m]"]
+            S3["θ - Heading [rad]"]
+        end
+    end
+
+    subgraph Outputs["Outputs y"]
+        Y1["Position (x, y)"]
+        Y2["Orientation (θ)"]
+    end
+
+    Inputs --> StateSpace
+    StateSpace --> Outputs
+
+    style Inputs fill:#ffcdd2
+    style StateSpace fill:#c8e6c9
+    style Outputs fill:#bbdefb
+```
+
+### Differential Drive Model
+
+```mermaid
+flowchart TB
+    subgraph DiffDrive["Differential Drive Kinematics"]
+        subgraph Forward["Forward Kinematics"]
+            F1["ẋ = v·cos(θ)"]
+            F2["ẏ = v·sin(θ)"]
+            F3["θ̇ = ω"]
+        end
+
+        subgraph WheelVel["Wheel-Body Velocity"]
+            W1["v = (v_R + v_L) / 2"]
+            W2["ω = (v_R - v_L) / L"]
+        end
+
+        subgraph Inverse["Inverse Kinematics"]
+            I1["v_L = v - (ω·L/2)"]
+            I2["v_R = v + (ω·L/2)"]
+        end
+    end
+
+    Forward --> WheelVel
+    WheelVel --> Inverse
+
+    style DiffDrive fill:#e8f5e9
+```
+
+### State-Space Matrices
+
+```matlab
+%% WheelChair State-Space Model
+% Nonlinear kinematic model (differential drive)
+% State vector: x = [x, y, theta]'
+% Input vector: u = [v, omega]'
+
+% Physical Parameters
+L = 0.5;          % Wheelbase (wheel separation) [m]
+r = 0.1;          % Wheel radius [m]
+m = 100;          % Total mass (with user) [kg]
+Iz = 15;          % Yaw moment of inertia [kg*m^2]
+
+% Motor parameters
+tau_motor = 0.1;  % Motor time constant [s]
+K_motor = 10;     % Motor gain
+
+% Velocity limits (safety)
+v_max = 1.5;      % Maximum linear velocity [m/s]
+omega_max = 1.0;  % Maximum angular velocity [rad/s]
+
+% Kinematic model (nonlinear)
+% dx/dt = v * cos(theta)
+% dy/dt = v * sin(theta)
+% dtheta/dt = omega
+
+% Extended state-space with velocity dynamics
+% State: [x, y, theta, v, omega]'
+% Input: [v_cmd, omega_cmd]'
+
+A = [0, 0, 0, 1, 0;
+     0, 0, 0, 0, 0;
+     0, 0, 0, 0, 1;
+     0, 0, 0, -1/tau_motor, 0;
+     0, 0, 0, 0, -1/tau_motor];
+
+B = [0, 0;
+     0, 0;
+     0, 0;
+     K_motor/tau_motor, 0;
+     0, K_motor/tau_motor];
+
+C = [1, 0, 0, 0, 0;
+     0, 1, 0, 0, 0;
+     0, 0, 1, 0, 0];
+
+D = zeros(3, 2);
+
+%% Wheel velocity conversion
+function [v_left, v_right] = bodyToWheel(v, omega, L)
+    v_left = v - omega * L / 2;
+    v_right = v + omega * L / 2;
+end
+
+function [v, omega] = wheelToBody(v_left, v_right, L)
+    v = (v_right + v_left) / 2;
+    omega = (v_right - v_left) / L;
+end
+
+%% Velocity saturation for safety
+function [v_sat, omega_sat] = saturateVelocity(v, omega, v_max, omega_max)
+    v_sat = max(min(v, v_max), -v_max);
+    omega_sat = max(min(omega, omega_max), -omega_max);
+end
+```
+
+### Obstacle Avoidance Architecture
+
+```mermaid
+flowchart TB
+    subgraph ObstacleAvoid["Obstacle Avoidance System"]
+        subgraph Sensing["IR Sensing"]
+            IR_L[Left IR<br/>Sensor]
+            IR_R[Right IR<br/>Sensor]
+            THRESH["Threshold<br/>MIN_DT = 850"]
+        end
+
+        subgraph Decision["Decision Logic"]
+            DET["Obstacle<br/>Detected?"]
+            DIR["Direction<br/>Selection"]
+        end
+
+        subgraph Action["Avoidance Action"]
+            TURN["Turn Away"]
+            FWD["Continue<br/>Forward"]
+        end
+    end
+
+    IR_L --> THRESH
+    IR_R --> THRESH
+    THRESH --> DET
+
+    DET --> |Yes| DIR
+    DET --> |No| FWD
+
+    DIR --> |"LIR > RIR"| TURN
+    DIR --> |"LIR < RIR"| TURN
+
+    style ObstacleAvoid fill:#fff3e0
+```
+
+### Velocity Control Loop
+
+```mermaid
+flowchart TB
+    subgraph VelocityControl["Velocity Control System"]
+        subgraph Linear["Linear Velocity"]
+            V_D[/"v_d"/]
+            V[/"v_actual"/]
+            ERR_V((+<br/>-))
+            PID_V[PID<br/>Kp=1.0, Ki=0.1, Kd=0.05]
+        end
+
+        subgraph Angular["Angular Velocity"]
+            W_D[/"ω_d"/]
+            W[/"ω_actual"/]
+            ERR_W((+<br/>-))
+            PID_W[PID<br/>Kp=1.0, Ki=0.1, Kd=0.05]
+        end
+    end
+
+    subgraph WheelConvert["Wheel Velocity Conversion"]
+        CONV["v_L = v - ωL/2<br/>v_R = v + ωL/2"]
+    end
+
+    V_D --> ERR_V
+    V --> ERR_V
+    ERR_V --> PID_V
+
+    W_D --> ERR_W
+    W --> ERR_W
+    ERR_W --> PID_W
+
+    PID_V --> CONV
+    PID_W --> CONV
+
+    style VelocityControl fill:#e3f2fd
+    style WheelConvert fill:#fff8e1
+```
+
+### Sensor Filtering
+
+```mermaid
+flowchart LR
+    subgraph Filtering["Sensor Filtering"]
+        subgraph LowPass["Low-Pass Filter (IMU)"]
+            RAW_IMU["Raw IMU"]
+            ALPHA["α = 0.85"]
+            FILT_IMU["filtered = α·new + (1-α)·old"]
+        end
+
+        subgraph MovingAvg["Moving Average (IR)"]
+            RAW_IR["Raw IR"]
+            BUFFER["Buffer[5]"]
+            AVG_IR["filtered = mean(buffer)"]
+        end
+    end
+
+    RAW_IMU --> ALPHA
+    ALPHA --> FILT_IMU
+
+    RAW_IR --> BUFFER
+    BUFFER --> AVG_IR
+
+    style Filtering fill:#f3e5f5
+```
+
 ### Motion Equations
 
 For a differential drive robot:

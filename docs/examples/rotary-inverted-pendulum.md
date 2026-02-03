@@ -103,6 +103,201 @@ rotary_inverted_pendulum/
 
 ![dynamics2](../assets/images/rotary_inverted_pendulum/dynamics2.png)
 
+### System Block Diagram
+
+```mermaid
+flowchart TB
+    subgraph Reference["Reference Inputs"]
+        R1[/"Arm Angle<br/>(θ_d)"/]
+        R2[/"Pendulum Angle<br/>(α_d = 0)"/]
+    end
+
+    subgraph Controller["Control System"]
+        subgraph SwingUp["Swing-Up Controller"]
+            ENERGY[Energy-Based<br/>Controller]
+        end
+        subgraph Balance["Balancing Controller"]
+            LQR[LQR<br/>Controller]
+        end
+        subgraph Switch["Mode Switch"]
+            SW["|α| < 15°?"]
+        end
+    end
+
+    subgraph Plant["Rotary Pendulum System"]
+        MOTOR[Rotary<br/>Motor]
+        ARM[Arm<br/>Dynamics]
+        PEND[Pendulum<br/>Dynamics]
+    end
+
+    subgraph Sensors["Sensors"]
+        ARM_S[Arm Position<br/>Sensor]
+        PEND_S[Pendulum<br/>Sensor]
+    end
+
+    R1 --> LQR
+    R2 --> LQR
+    R2 --> ENERGY
+
+    ENERGY --> SW
+    LQR --> SW
+    SW --> |"τ"| MOTOR
+
+    MOTOR --> ARM
+    ARM <--> PEND
+
+    ARM --> ARM_S
+    PEND --> PEND_S
+
+    ARM_S --> ENERGY
+    ARM_S --> LQR
+    PEND_S --> ENERGY
+    PEND_S --> LQR
+    PEND_S --> SW
+
+    style Reference fill:#e1f5fe
+    style Controller fill:#e8f5e9
+    style Plant fill:#ffebee
+    style Sensors fill:#f3e5f5
+```
+
+### Control Architecture
+
+```mermaid
+flowchart LR
+    subgraph HybridControl["Hybrid Control Strategy"]
+        subgraph SwingUpMode["Swing-Up Mode (|α| > 15°)"]
+            E_DES["E_desired = mgl"]
+            E_CUR["E_current = ½Iα̇² - mgl·cos(α)"]
+            E_ERR["ΔE = E_desired - E_current"]
+            U_SW["u = k·sign(α̇·cos(α))·ΔE"]
+        end
+
+        subgraph BalanceMode["Balance Mode (|α| < 15°)"]
+            STATE["x = [θ, θ̇, α, α̇]ᵀ"]
+            K_LQR["K = lqr(A, B, Q, R)"]
+            U_BAL["u = -K·x"]
+        end
+
+        subgraph Switching["Smooth Switching"]
+            SWITCH["Blend controllers<br/>near boundary"]
+        end
+    end
+
+    SwingUpMode --> Switching
+    BalanceMode --> Switching
+
+    style HybridControl fill:#e8f5e9
+```
+
+### State-Space Model Diagram
+
+```mermaid
+flowchart LR
+    subgraph Input["Control Input"]
+        U["τ (Motor Torque)"]
+    end
+
+    subgraph StateSpace["State-Space Model<br/>ẋ = Ax + Bu"]
+        subgraph StateVector["State Vector x"]
+            S1["θ - Arm Angle"]
+            S2["θ̇ - Arm Angular Velocity"]
+            S3["α - Pendulum Angle"]
+            S4["α̇ - Pendulum Angular Velocity"]
+        end
+    end
+
+    subgraph Output["Outputs y"]
+        Y1["θ (arm angle)"]
+        Y2["α (pendulum angle)"]
+    end
+
+    Input --> StateSpace
+    StateSpace --> Output
+
+    style Input fill:#ffcdd2
+    style StateSpace fill:#c8e6c9
+    style Output fill:#bbdefb
+```
+
+### Swing-Up Control
+
+```mermaid
+flowchart TB
+    subgraph EnergyControl["Energy-Based Swing-Up"]
+        subgraph EnergyCalc["Energy Calculation"]
+            KE["Kinetic: KE = ½I·α̇²"]
+            PE["Potential: PE = -mgl·cos(α)"]
+            TE["Total: E = KE + PE"]
+        end
+
+        subgraph TargetEnergy["Target Energy"]
+            E_UP["E_upright = mgl<br/>(pendulum at top)"]
+        end
+
+        subgraph ControlLaw["Control Law"]
+            SIGN["sign(α̇·cos(α))"]
+            DELTA["ΔE = E_upright - E_current"]
+            TORQUE["τ = k_swing · sign · ΔE"]
+        end
+    end
+
+    EnergyCalc --> TargetEnergy
+    TargetEnergy --> ControlLaw
+    EnergyCalc --> ControlLaw
+
+    style EnergyControl fill:#fff3e0
+```
+
+### LQR Balancing Control
+
+```mermaid
+flowchart TB
+    subgraph LQRBalance["LQR Balancing Controller"]
+        subgraph Linearization["Linearization at α=0"]
+            LIN["Linearize about upright<br/>equilibrium point"]
+        end
+
+        subgraph Weights["LQR Weights"]
+            Q_MAT["Q = diag([10, 1, 100, 10])"]
+            R_MAT["R = 1"]
+        end
+
+        subgraph GainCalc["Gain Calculation"]
+            SOLVE["Solve Riccati Equation"]
+            K_GAIN["K = [k₁, k₂, k₃, k₄]"]
+        end
+
+        subgraph Control["Control Application"]
+            U_CTRL["u = -k₁θ - k₂θ̇ - k₃α - k₄α̇"]
+        end
+    end
+
+    Linearization --> Weights
+    Weights --> GainCalc
+    GainCalc --> Control
+
+    style LQRBalance fill:#e3f2fd
+```
+
+### Mode Switching Logic
+
+```mermaid
+stateDiagram-v2
+    [*] --> SwingUp: Start
+
+    SwingUp --> Balancing: |α| < 15° and |α̇| < 1 rad/s
+    Balancing --> SwingUp: |α| > 30°
+
+    SwingUp: Swing-Up Mode
+    SwingUp: Energy-based control
+    SwingUp: Pumping motion
+
+    Balancing: Balance Mode
+    Balancing: LQR full-state feedback
+    Balancing: Stabilize at upright
+```
+
 The mathematical model of a rotary inverted pendulum system can be described using the following equations:
 
 1. **Equilibrium Point**: The system has an unstable equilibrium point, where both the rotation and swing are at their maximum values.

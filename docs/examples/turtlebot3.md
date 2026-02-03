@@ -109,6 +109,313 @@ Where:
 4. **SLAM**: Simultaneous localization and mapping
 5. **Behavior**: Task-level behavior coordination
 
+### System Block Diagram
+
+```mermaid
+flowchart TB
+    subgraph Reference["Reference Inputs"]
+        R1[/"Goal Position<br/>(x_g, y_g)"/]
+        R2[/"Velocity Command<br/>(v, ω)"/]
+    end
+
+    subgraph Navigation["Navigation Stack"]
+        SLAM[SLAM<br/>Module]
+        GP[Global<br/>Planner]
+        LP[Local<br/>Planner]
+        AMCL[AMCL<br/>Localization]
+    end
+
+    subgraph Perception["Perception"]
+        LIDAR[LiDAR<br/>LDS-01]
+        IMU[IMU<br/>9-Axis]
+        ODOM[Wheel<br/>Odometry]
+    end
+
+    subgraph Control["Motion Control"]
+        subgraph VelCtrl["Velocity Controller"]
+            VC[Twist to<br/>Wheel Velocity]
+        end
+        subgraph MotorCtrl["Motor Controller"]
+            PID_L[PID<br/>Left]
+            PID_R[PID<br/>Right]
+        end
+    end
+
+    subgraph Actuators["Drive System"]
+        ML[Left<br/>Dynamixel]
+        MR[Right<br/>Dynamixel]
+    end
+
+    subgraph Plant["TurtleBot3"]
+        ROBOT[Robot<br/>Dynamics]
+    end
+
+    R1 --> GP
+    GP --> LP
+    LP --> VC
+    R2 --> VC
+
+    LIDAR --> SLAM
+    LIDAR --> LP
+    ODOM --> SLAM
+    ODOM --> AMCL
+    IMU --> AMCL
+    SLAM --> GP
+    AMCL --> LP
+
+    VC --> PID_L
+    VC --> PID_R
+    PID_L --> ML
+    PID_R --> MR
+
+    ML --> ROBOT
+    MR --> ROBOT
+
+    ROBOT --> LIDAR
+    ROBOT --> IMU
+    ROBOT --> ODOM
+
+    style Reference fill:#e1f5fe
+    style Navigation fill:#fff3e0
+    style Perception fill:#f3e5f5
+    style Control fill:#e8f5e9
+    style Actuators fill:#ffebee
+    style Plant fill:#fce4ec
+```
+
+### State-Space Model
+
+```mermaid
+flowchart LR
+    subgraph Inputs["Control Inputs u"]
+        U1["v (Linear Velocity)"]
+        U2["ω (Angular Velocity)"]
+    end
+
+    subgraph StateSpace["State-Space Model<br/>ẋ = f(x,u)"]
+        subgraph States["State Vector x"]
+            S1["x - X Position [m]"]
+            S2["y - Y Position [m]"]
+            S3["θ - Heading [rad]"]
+        end
+    end
+
+    subgraph Outputs["Outputs y"]
+        Y1["Position (x, y)"]
+        Y2["Orientation (θ)"]
+    end
+
+    Inputs --> StateSpace
+    StateSpace --> Outputs
+
+    style Inputs fill:#ffcdd2
+    style StateSpace fill:#c8e6c9
+    style Outputs fill:#bbdefb
+```
+
+### Differential Drive Model
+
+```mermaid
+flowchart TB
+    subgraph DiffDrive["Differential Drive Kinematics"]
+        subgraph Forward["Forward Kinematics"]
+            F1["ẋ = v·cos(θ)"]
+            F2["ẏ = v·sin(θ)"]
+            F3["θ̇ = ω"]
+        end
+
+        subgraph WheelVel["Wheel-Body Velocity"]
+            W1["v = r(ω_R + ω_L)/2"]
+            W2["ω = r(ω_R - ω_L)/L"]
+        end
+
+        subgraph Inverse["Inverse Kinematics"]
+            I1["ω_L = (v - ωL/2)/r"]
+            I2["ω_R = (v + ωL/2)/r"]
+        end
+    end
+
+    subgraph Params["TurtleBot3 Parameters"]
+        P1["r = 0.033 m (wheel radius)"]
+        P2["L = 0.160 m (wheelbase)"]
+        P3["v_max = 0.22 m/s"]
+        P4["ω_max = 2.84 rad/s"]
+    end
+
+    Forward --> WheelVel
+    WheelVel --> Inverse
+
+    style DiffDrive fill:#e8f5e9
+    style Params fill:#fff8e1
+```
+
+### State-Space Matrices
+
+```matlab
+%% TurtleBot3 State-Space Model
+% Nonlinear kinematic model (differential drive)
+% State vector: x = [x, y, theta]'
+% Input vector: u = [v, omega]'
+
+% TurtleBot3 Burger Parameters
+r = 0.033;        % Wheel radius [m]
+L = 0.160;        % Wheelbase (wheel separation) [m]
+v_max = 0.22;     % Maximum linear velocity [m/s]
+omega_max = 2.84; % Maximum angular velocity [rad/s]
+
+% Nonlinear dynamics (for simulation)
+% dx/dt = v * cos(theta)
+% dy/dt = v * sin(theta)
+% dtheta/dt = omega
+
+% Linearized model around operating point (theta_0)
+% For small deviations from straight-line motion
+
+theta_0 = 0;  % Operating point heading
+
+A = [0, 0, 0;
+     0, 0, 0;
+     0, 0, 0];
+
+B = [cos(theta_0), 0;
+     sin(theta_0), 0;
+     0, 1];
+
+C = eye(3);
+D = zeros(3, 2);
+
+% Extended state-space with velocity dynamics
+% State: [x, y, theta, v, omega]'
+% Input: [v_cmd, omega_cmd]'
+
+tau_v = 0.1;      % Velocity time constant [s]
+tau_omega = 0.1;  % Angular velocity time constant [s]
+
+A_ext = [0, 0, 0, 1, 0;
+         0, 0, 0, 0, 0;
+         0, 0, 0, 0, 1;
+         0, 0, 0, -1/tau_v, 0;
+         0, 0, 0, 0, -1/tau_omega];
+
+B_ext = [0, 0;
+         0, 0;
+         0, 0;
+         1/tau_v, 0;
+         0, 1/tau_omega];
+
+C_ext = [1, 0, 0, 0, 0;
+         0, 1, 0, 0, 0;
+         0, 0, 1, 0, 0];
+
+D_ext = zeros(3, 2);
+
+%% Wheel velocity to body velocity conversion
+function [v, omega] = wheelToBody(omega_L, omega_R, r, L)
+    v = r * (omega_R + omega_L) / 2;
+    omega = r * (omega_R - omega_L) / L;
+end
+
+%% Body velocity to wheel velocity conversion
+function [omega_L, omega_R] = bodyToWheel(v, omega, r, L)
+    omega_L = (v - omega * L / 2) / r;
+    omega_R = (v + omega * L / 2) / r;
+end
+
+%% Velocity saturation
+function [v_sat, omega_sat] = saturateVelocity(v, omega, v_max, omega_max)
+    v_sat = max(min(v, v_max), -v_max);
+    omega_sat = max(min(omega, omega_max), -omega_max);
+end
+```
+
+### Velocity Control Loop
+
+```mermaid
+flowchart TB
+    subgraph TwistCmd["Twist Command (cmd_vel)"]
+        V_D[/"v_cmd"/]
+        W_D[/"ω_cmd"/]
+    end
+
+    subgraph Conversion["Inverse Kinematics"]
+        CONV["ω_L = (v - ωL/2)/r<br/>ω_R = (v + ωL/2)/r"]
+    end
+
+    subgraph MotorControl["Motor PID Control"]
+        subgraph Left["Left Wheel"]
+            WL_D[/"ω_L_cmd"/]
+            WL[/"ω_L_actual"/]
+            ERR_L((+<br/>-))
+            PID_L[PID<br/>Kp=1.0]
+            PWM_L["PWM_L"]
+        end
+        subgraph Right["Right Wheel"]
+            WR_D[/"ω_R_cmd"/]
+            WR[/"ω_R_actual"/]
+            ERR_R((+<br/>-))
+            PID_R[PID<br/>Kp=1.0]
+            PWM_R["PWM_R"]
+        end
+    end
+
+    V_D --> CONV
+    W_D --> CONV
+    CONV --> WL_D
+    CONV --> WR_D
+
+    WL_D --> ERR_L
+    WL --> ERR_L
+    ERR_L --> PID_L
+    PID_L --> PWM_L
+
+    WR_D --> ERR_R
+    WR --> ERR_R
+    ERR_R --> PID_R
+    PID_R --> PWM_R
+
+    style TwistCmd fill:#e1f5fe
+    style Conversion fill:#fff8e1
+    style MotorControl fill:#e8f5e9
+```
+
+### SLAM Architecture
+
+```mermaid
+flowchart TB
+    subgraph SLAMSystem["SLAM System"]
+        subgraph Frontend["Front-End"]
+            SCAN[LiDAR<br/>Scan]
+            MATCH[Scan<br/>Matching]
+            ODOM[Odometry<br/>Integration]
+        end
+
+        subgraph Backend["Back-End"]
+            GRAPH[Pose<br/>Graph]
+            OPT[Graph<br/>Optimization]
+            LOOP[Loop<br/>Closure]
+        end
+
+        subgraph Output["Outputs"]
+            MAP[Occupancy<br/>Grid Map]
+            POSE[Robot<br/>Pose]
+        end
+    end
+
+    SCAN --> MATCH
+    ODOM --> MATCH
+    MATCH --> GRAPH
+    GRAPH --> OPT
+    LOOP --> OPT
+    MATCH --> LOOP
+
+    OPT --> MAP
+    OPT --> POSE
+
+    style Frontend fill:#e3f2fd
+    style Backend fill:#fff3e0
+    style Output fill:#e8f5e9
+```
+
 ---
 
 ## Navigation and SLAM
