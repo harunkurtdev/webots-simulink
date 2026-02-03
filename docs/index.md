@@ -6,12 +6,14 @@ Welcome to the documentation for the **Webots-Simulink Bridge**, a framework tha
 
 ## Overview
 
-This project enables real-time interaction between Simulink and Webots allowing:
+The Webots-Simulink Bridge establishes a bidirectional communication channel between the Webots physics simulator and MATLAB/Simulink control environment. This integration enables:
 
-- **Simulation of robotic systems** using Webots' physics engine
-- **Control algorithms** to be implemented in Simulink
-- **Direct function calls** from MATLAB to Webots for data exchange
-- **ROS 2 integration** for advanced robotic applications
+| Capability | Description |
+|------------|-------------|
+| **Physics Simulation** | Webots provides realistic 3D dynamics, collision detection, and sensor modeling |
+| **Control Design** | Simulink enables block-diagram based controller development with state-space, PID, and advanced control methods |
+| **Real-Time Data Exchange** | Sensor readings (IMU, LiDAR, GPS, encoders) flow to Simulink; motor commands return to Webots |
+| **ROS 2 Deployment** | Export validated Simulink controllers as ROS 2 packages for physical robot deployment |
 
 ---
 
@@ -154,20 +156,29 @@ This project enables real-time interaction between Simulink and Webots allowing:
 
 | Feature | Description |
 |---------|-------------|
-| **Multi-Platform Support** | Ground vehicles, aerial robots, marine vessels, and control systems |
-| **Real-Time Data Exchange** | Bidirectional communication between Webots and Simulink |
-| **Customizable Bridge** | Adapt the implementation for different use cases |
-| **ROS 2 Integration** | Export Simulink models to ROS 2 packages |
-| **Sensor Integration** | LiDAR, IMU, GPS, cameras, and more |
+| **19 Robot Examples** | Pre-configured models for drones, mobile robots, marine vehicles, manipulators, and control systems |
+| **State-Space Modeling** | Each example includes linearized A, B, C, D matrices for controller design |
+| **Cascaded Control** | Hierarchical control architectures with position, velocity, and attitude loops |
+| **Sensor Fusion** | Integration of LiDAR, IMU, GPS, encoders, and cameras with Extended Kalman Filter examples |
+| **ROS 2 Compatibility** | Export Simulink models as ROS 2 nodes using MATLAB Coder |
 
 ---
 
 ## Quick Start
 
-1. **Install Prerequisites**: Check the [Requirements](installation/requirements.md) page
-2. **Setup Environment**: Follow the [Setup Guide](installation/setup.md)
-3. **Connect Webots & Simulink**: Read [Connecting Guide](usage/connecting.md)
-4. **Run Your First Simulation**: See [Running Simulations](usage/running.md)
+Follow these four steps to begin using the Webots-Simulink Bridge:
+
+### Step 1: Install Prerequisites
+Ensure that MATLAB/Simulink (R2020b or later) and Webots (R2023a or later) are installed on your system. Both applications must be properly licensed and configured. See the [Requirements](installation/requirements.md) page for version compatibility and system specifications.
+
+### Step 2: Configure Your Environment
+Set up the required environment variables and add the bridge files to your MATLAB path. The [Setup Guide](installation/setup.md) provides platform-specific instructions for Windows, macOS, and Linux.
+
+### Step 3: Establish the Connection
+Open your Webots world file and configure MATLAB as the external controller. The [Connecting Guide](usage/connecting.md) explains how to initialize the TCP/IP communication between Webots and Simulink.
+
+### Step 4: Run a Simulation
+Load a Simulink model and start the Webots simulation. Sensor data flows from Webots to Simulink, and control commands return to Webots in real-time. The [Running Simulations](usage/running.md) guide provides detailed instructions for each example project.
 
 ---
 
@@ -203,12 +214,35 @@ webots-simulink/
 
 ## Documentation Structure
 
-- **[Installation](installation/requirements.md)**: System requirements and setup instructions
-- **[Usage](usage/connecting.md)**: Connecting Webots and Simulink, running simulations
-- **[Advanced Topics](advanced/debugging.md)**: Debugging, performance tuning, ROS 2 export
-- **[Examples](examples/inverted-pendulum.md)**: Detailed documentation for each example
-- **[Troubleshooting](troubleshooting.md)**: Common issues and solutions
-- **[FAQ](faq.md)**: Frequently asked questions
+### Installation
+
+| Page | Description |
+|------|-------------|
+| [Requirements](installation/requirements.md) | Software versions, operating system support, and hardware specifications |
+| [Setup](installation/setup.md) | Environment configuration for Windows, macOS, and Linux |
+
+### Usage
+
+| Page | Description |
+|------|-------------|
+| [Connecting](usage/connecting.md) | TCP/IP communication setup between Webots and Simulink |
+| [Running](usage/running.md) | Starting simulations and monitoring data exchange |
+| [Customization](usage/customization.md) | Modifying the bridge for custom robot models |
+
+### Advanced Topics
+
+| Page | Description |
+|------|-------------|
+| [Debugging](advanced/debugging.md) | Diagnosing communication errors and timing issues |
+| [ROS 2 Export](advanced/export-ros2.md) | Converting Simulink models to ROS 2 nodes for hardware deployment |
+
+### Reference
+
+| Page | Description |
+|------|-------------|
+| [Troubleshooting](troubleshooting.md) | Common errors and their solutions |
+| [FAQ](faq.md) | Frequently asked questions |
+| [Contributing](contributing/adding-new-examples.md) | Guidelines for adding new robot examples |
 
 ---
 
