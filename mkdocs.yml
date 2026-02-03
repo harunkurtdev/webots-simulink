@@ -22,14 +22,29 @@ nav:
           - Rotary Inverted Pendulum: examples/rotary-inverted-pendulum.md
       - Aerial Vehicles:
           - Crazyflie Drone: examples/crazyflie-drone.md
+          - Mavic 2 Pro Drone: examples/mavic-2-pro.md
+          - Blimp (Airship): examples/blimp.md
       - Ground Vehicles:
           - TurtleBot3: examples/turtlebot3.md
           - Scout V2.0: examples/scout-v2.md
           - Wheel Chair: examples/wheel-chair.md
           - Tractor (Boomer): examples/tractor.md
+          - Tesla Model 3: examples/tesla-model3.md
       - Marine Vehicles:
           - BlueBoat USV: examples/blueboat-usv.md
           - Pirana USV: examples/pirana-usv.md
+      - Industrial Robots:
+          - UR5e Robot Arm: examples/ur5e-arm.md
+      - Humanoid Robots:
+          - NAO Humanoid: examples/nao-humanoid.md
+      - Legged Robots:
+          - Spot Quadruped: examples/spot-quadruped.md
+      - Swarm Robotics:
+          - E-puck Swarm: examples/epuck-swarm.md
+      - Educational Robots:
+          - Khepera IV: examples/khepera-iv.md
+          - Thymio II: examples/thymio-ii.md
+          - Firebird 6: examples/firebird-6.md
   - Troubleshooting: troubleshooting.md
   - FAQ: faq.md
   - Contributing:

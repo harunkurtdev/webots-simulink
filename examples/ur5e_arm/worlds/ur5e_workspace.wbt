@@ -1,0 +1,73 @@
+#VRML_SIM R2023b utf8
+
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/backgrounds/protos/TexturedBackground.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/backgrounds/protos/TexturedBackgroundLight.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/floors/protos/Floor.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/robots/universal_robots/protos/UR5e.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/tables/protos/Table.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/factory/containers/protos/WoodenBox.proto"
+
+WorldInfo {
+  info [
+    "UR5e Robot Arm Simulation"
+    "6-DOF Collaborative Robot Manipulator"
+  ]
+  title "UR5e Workspace"
+  basicTimeStep 16
+}
+Viewpoint {
+  orientation -0.3 0.1 0.95 2.2
+  position 2 -3 2
+}
+TexturedBackground {
+  texture "factory"
+}
+TexturedBackgroundLight {
+  texture "factory"
+}
+Floor {
+  size 10 10
+  appearance PBRAppearance {
+    baseColor 0.5 0.5 0.5
+    roughness 1
+    metalness 0
+  }
+}
+Table {
+  translation 0 0 0
+  size 1.5 1 0.74
+}
+UR5e {
+  translation 0 0 0.74
+  controller "simulink_control_app"
+  selfCollision FALSE
+  toolSlot [
+    Solid {
+      translation 0 0 0.05
+      children [
+        Shape {
+          appearance PBRAppearance {
+            baseColor 0.2 0.2 0.2
+          }
+          geometry Cylinder {
+            height 0.1
+            radius 0.02
+          }
+        }
+      ]
+      name "gripper"
+    }
+  ]
+}
+WoodenBox {
+  translation 0.4 0.3 0.8
+  size 0.05 0.05 0.05
+}
+WoodenBox {
+  translation 0.4 -0.3 0.8
+  size 0.05 0.05 0.05
+}
+WoodenBox {
+  translation 0.5 0 0.8
+  size 0.05 0.05 0.05
+}

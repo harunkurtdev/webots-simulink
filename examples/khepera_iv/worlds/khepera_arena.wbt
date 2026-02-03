@@ -1,0 +1,49 @@
+#VRML_SIM R2023b utf8
+
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/backgrounds/protos/TexturedBackground.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/backgrounds/protos/TexturedBackgroundLight.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/floors/protos/RectangleArena.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/robots/k-team/khepera4/protos/Khepera4.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/obstacles/protos/OilBarrel.proto"
+
+WorldInfo {
+  info [
+    "Khepera IV Mobile Robot Simulation"
+    "Navigation and obstacle avoidance"
+  ]
+  title "Khepera IV Arena"
+  basicTimeStep 16
+}
+Viewpoint {
+  orientation -0.5 0.5 0.7 1.8
+  position 0 -1.5 1.5
+}
+TexturedBackground {
+}
+TexturedBackgroundLight {
+}
+RectangleArena {
+  floorSize 2 2
+  floorTileSize 0.5 0.5
+  wallHeight 0.1
+}
+Khepera4 {
+  translation 0 0 0
+  name "Khepera IV"
+  controller "simulink_control_app"
+}
+OilBarrel {
+  translation 0.5 0.3 0.05
+  height 0.1
+  radius 0.05
+}
+OilBarrel {
+  translation -0.4 -0.2 0.05
+  height 0.1
+  radius 0.05
+}
+OilBarrel {
+  translation 0.2 -0.5 0.05
+  height 0.1
+  radius 0.05
+}

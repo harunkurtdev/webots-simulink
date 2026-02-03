@@ -1,0 +1,244 @@
+#VRML_SIM R2023b utf8
+
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/backgrounds/protos/TexturedBackground.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/backgrounds/protos/TexturedBackgroundLight.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/floors/protos/Floor.proto"
+
+WorldInfo {
+  info [
+    "Blimp (Airship) Simulation"
+    "Lighter-than-air vehicle control"
+  ]
+  title "Blimp Outdoor"
+  basicTimeStep 16
+  defaultDamping Damping {
+    linear 0.5
+    angular 0.5
+  }
+}
+Viewpoint {
+  orientation -0.2 0.1 0.97 2.5
+  position 10 -20 15
+  follow "Blimp"
+}
+TexturedBackground {
+  texture "noon_sunny_empty"
+}
+TexturedBackgroundLight {
+}
+Floor {
+  size 200 200
+  tileSize 10 10
+  appearance PBRAppearance {
+    baseColorMap ImageTexture {
+      url [
+        "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/default/worlds/textures/grass.jpg"
+      ]
+    }
+    roughness 1
+    metalness 0
+  }
+}
+Robot {
+  translation 0 0 5
+  children [
+    DEF ENVELOPE Shape {
+      appearance PBRAppearance {
+        baseColor 0.8 0.8 0.9
+        transparency 0.3
+        metalness 0
+        roughness 0.8
+      }
+      geometry Capsule {
+        height 2
+        radius 0.5
+        subdivision 24
+      }
+    }
+    DEF GONDOLA Transform {
+      translation 0 0 -0.7
+      children [
+        Shape {
+          appearance PBRAppearance {
+            baseColor 0.2 0.2 0.2
+          }
+          geometry Box {
+            size 0.3 0.15 0.1
+          }
+        }
+        DEF LEFT_PROP Transform {
+          translation -0.2 0 0
+          children [
+            HingeJoint {
+              jointParameters HingeJointParameters {
+                axis 0 1 0
+              }
+              device [
+                RotationalMotor {
+                  name "left_motor"
+                  maxVelocity 100
+                  maxTorque 1
+                }
+              ]
+              endPoint Solid {
+                children [
+                  Shape {
+                    appearance PBRAppearance {
+                      baseColor 0.5 0.5 0.5
+                    }
+                    geometry Cylinder {
+                      height 0.02
+                      radius 0.08
+                    }
+                  }
+                ]
+                name "left_propeller"
+              }
+            }
+          ]
+        }
+        DEF RIGHT_PROP Transform {
+          translation 0.2 0 0
+          children [
+            HingeJoint {
+              jointParameters HingeJointParameters {
+                axis 0 1 0
+              }
+              device [
+                RotationalMotor {
+                  name "right_motor"
+                  maxVelocity 100
+                  maxTorque 1
+                }
+              ]
+              endPoint Solid {
+                children [
+                  Shape {
+                    appearance PBRAppearance {
+                      baseColor 0.5 0.5 0.5
+                    }
+                    geometry Cylinder {
+                      height 0.02
+                      radius 0.08
+                    }
+                  }
+                ]
+                name "right_propeller"
+              }
+            }
+          ]
+        }
+      ]
+    }
+    DEF TAIL Transform {
+      translation 0 1.2 0
+      children [
+        HingeJoint {
+          jointParameters HingeJointParameters {
+            axis 1 0 0
+          }
+          device [
+            RotationalMotor {
+              name "tail_motor"
+              maxVelocity 50
+              maxTorque 0.5
+            }
+          ]
+          endPoint Solid {
+            children [
+              Shape {
+                appearance PBRAppearance {
+                  baseColor 0.5 0.5 0.5
+                }
+                geometry Cylinder {
+                  height 0.02
+                  radius 0.06
+                }
+              }
+            ]
+            name "tail_propeller"
+          }
+        }
+        DEF FINS Group {
+          children [
+            Transform {
+              rotation 1 0 0 1.5708
+              children [
+                Shape {
+                  appearance PBRAppearance {
+                    baseColor 0.8 0.2 0.2
+                  }
+                  geometry Box {
+                    size 0.02 0.3 0.2
+                  }
+                }
+              ]
+            }
+            Transform {
+              rotation 0 0 1 1.5708
+              children [
+                Shape {
+                  appearance PBRAppearance {
+                    baseColor 0.8 0.2 0.2
+                  }
+                  geometry Box {
+                    size 0.02 0.3 0.2
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+    Accelerometer {
+      name "accelerometer"
+    }
+    Gyro {
+      name "gyro"
+    }
+    InertialUnit {
+      name "inertial unit"
+    }
+    GPS {
+      name "gps"
+    }
+    DistanceSensor {
+      translation 0 0 -0.8
+      rotation 0 1 0 -1.5708
+      name "altimeter"
+      lookupTable [
+        0 0 0
+        50 50 0
+      ]
+    }
+    Camera {
+      translation 0 -0.8 -0.7
+      rotation 0 1 0 -1.5708
+      name "camera"
+      width 640
+      height 480
+    }
+  ]
+  name "Blimp"
+  boundingObject Group {
+    children [
+      Capsule {
+        height 2
+        radius 0.5
+      }
+    ]
+  }
+  physics Physics {
+    density 100
+    mass 2
+    centerOfMass [
+      0 0 -0.3
+    ]
+    damping Damping {
+      linear 0.8
+      angular 0.8
+    }
+  }
+  controller "simulink_control_app"
+}

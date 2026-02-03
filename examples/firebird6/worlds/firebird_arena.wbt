@@ -1,0 +1,131 @@
+#VRML_SIM R2023b utf8
+
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/backgrounds/protos/TexturedBackground.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/backgrounds/protos/TexturedBackgroundLight.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/floors/protos/RectangleArena.proto"
+
+WorldInfo {
+  info [
+    "Firebird 6 Mobile Robot Simulation"
+    "Navigation and obstacle avoidance"
+  ]
+  title "Firebird Arena"
+  basicTimeStep 16
+}
+Viewpoint {
+  orientation -0.5 0.5 0.7 1.8
+  position 0 -2 2
+}
+TexturedBackground {
+}
+TexturedBackgroundLight {
+}
+RectangleArena {
+  floorSize 3 3
+  floorTileSize 0.5 0.5
+  wallHeight 0.15
+}
+Robot {
+  translation 0 0 0.05
+  name "Firebird 6"
+  controller "simulink_control_app"
+  children [
+    DEF BODY Shape {
+      appearance PBRAppearance {
+        baseColor 0.8 0.2 0.2
+        roughness 0.5
+        metalness 0
+      }
+      geometry Cylinder {
+        height 0.08
+        radius 0.0975
+      }
+    }
+    DEF LEFT_WHEEL HingeJoint {
+      jointParameters HingeJointParameters {
+        axis 0 1 0
+        anchor -0.06 0 -0.02
+      }
+      device [
+        RotationalMotor {
+          name "left wheel motor"
+        }
+        PositionSensor {
+          name "left wheel sensor"
+        }
+      ]
+      endPoint Solid {
+        translation -0.06 0 -0.02
+        rotation 1 0 0 1.5708
+        children [
+          Shape {
+            appearance PBRAppearance {
+              baseColor 0.1 0.1 0.1
+            }
+            geometry Cylinder {
+              height 0.02
+              radius 0.025
+            }
+          }
+        ]
+        name "left wheel"
+        boundingObject Cylinder {
+          height 0.02
+          radius 0.025
+        }
+        physics Physics {
+        }
+      }
+    }
+    DEF RIGHT_WHEEL HingeJoint {
+      jointParameters HingeJointParameters {
+        axis 0 1 0
+        anchor 0.06 0 -0.02
+      }
+      device [
+        RotationalMotor {
+          name "right wheel motor"
+        }
+        PositionSensor {
+          name "right wheel sensor"
+        }
+      ]
+      endPoint Solid {
+        translation 0.06 0 -0.02
+        rotation 1 0 0 1.5708
+        children [
+          Shape {
+            appearance PBRAppearance {
+              baseColor 0.1 0.1 0.1
+            }
+            geometry Cylinder {
+              height 0.02
+              radius 0.025
+            }
+          }
+        ]
+        name "right wheel"
+        boundingObject Cylinder {
+          height 0.02
+          radius 0.025
+        }
+        physics Physics {
+        }
+      }
+    }
+    Accelerometer {
+      name "accelerometer"
+    }
+    Gyro {
+      name "gyro"
+    }
+  ]
+  boundingObject Cylinder {
+    height 0.08
+    radius 0.0975
+  }
+  physics Physics {
+    density -1
+    mass 1.5
+  }
+}

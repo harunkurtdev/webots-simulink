@@ -1,0 +1,65 @@
+#VRML_SIM R2023b utf8
+
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/backgrounds/protos/TexturedBackground.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/backgrounds/protos/TexturedBackgroundLight.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/floors/protos/Floor.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/robots/dji/mavic/protos/Mavic2Pro.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/buildings/protos/SimpleBuilding.proto"
+
+WorldInfo {
+  info [
+    "Mavic 2 Pro Drone Flight Simulation"
+    "Quadrotor UAV with camera and GPS"
+  ]
+  title "Mavic 2 Pro Flight"
+  basicTimeStep 8
+  defaultDamping Damping {
+    linear 0.5
+    angular 0.5
+  }
+}
+Viewpoint {
+  orientation -0.3 0.1 0.95 2.5
+  position 5 -10 5
+  follow "Mavic 2 PRO"
+}
+TexturedBackground {
+  texture "noon_cloudy_countryside"
+}
+TexturedBackgroundLight {
+  texture "noon_cloudy_countryside"
+}
+Floor {
+  size 100 100
+  tileSize 2 2
+  appearance PBRAppearance {
+    baseColorMap ImageTexture {
+      url [
+        "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/default/worlds/textures/grass.jpg"
+      ]
+    }
+    roughness 1
+    metalness 0
+  }
+}
+Mavic2Pro {
+  translation 0 0 0.1
+  name "Mavic 2 PRO"
+  controller "simulink_control_app"
+  cameraSlot [
+    Camera {
+      width 640
+      height 480
+    }
+  ]
+}
+SimpleBuilding {
+  translation 20 20 0
+  floorHeight 3
+  floorNumber 5
+}
+SimpleBuilding {
+  translation -15 25 0
+  floorHeight 2.5
+  floorNumber 3
+}

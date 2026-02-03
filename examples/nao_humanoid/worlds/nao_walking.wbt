@@ -1,0 +1,34 @@
+#VRML_SIM R2023b utf8
+
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/backgrounds/protos/TexturedBackground.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/backgrounds/protos/TexturedBackgroundLight.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/floors/protos/RectangleArena.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/robots/softbank/nao/protos/Nao.proto"
+
+WorldInfo {
+  info [
+    "NAO Humanoid Robot Walking Simulation"
+    "Bipedal locomotion and balance control"
+  ]
+  title "NAO Walking"
+  basicTimeStep 16
+}
+Viewpoint {
+  orientation -0.2 0 0.98 2.0
+  position 1.5 -2 1.2
+  follow "NAO"
+}
+TexturedBackground {
+}
+TexturedBackgroundLight {
+}
+RectangleArena {
+  floorSize 10 10
+  floorTileSize 1 1
+  wallHeight 0.5
+}
+Nao {
+  translation 0 0 0.334
+  name "NAO"
+  controller "simulink_control_app"
+}

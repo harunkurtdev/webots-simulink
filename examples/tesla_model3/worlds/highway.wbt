@@ -1,0 +1,40 @@
+#VRML_SIM R2023b utf8
+
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/backgrounds/protos/TexturedBackground.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/backgrounds/protos/TexturedBackgroundLight.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/StraightRoadSegment.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/vehicles/protos/TeslaModel3Simple.proto"
+
+WorldInfo {
+  info [
+    "Tesla Model 3 Autonomous Vehicle Simulation"
+    "ADAS features demonstration"
+  ]
+  title "Tesla Highway"
+  basicTimeStep 16
+  lineScale 1
+}
+Viewpoint {
+  orientation -0.15 0 0.99 3.0
+  position -5 -20 5
+  follow "Tesla Model 3"
+}
+TexturedBackground {
+  texture "noon_sunny_empty"
+}
+TexturedBackgroundLight {
+}
+StraightRoadSegment {
+  translation 0 0 0
+  length 500
+  numberOfLanes 3
+  dashedLine [
+    TRUE
+    TRUE
+  ]
+}
+TeslaModel3Simple {
+  translation 0 1.5 0.4
+  name "Tesla Model 3"
+  controller "simulink_control_app"
+}

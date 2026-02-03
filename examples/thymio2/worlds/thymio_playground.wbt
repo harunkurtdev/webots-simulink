@@ -1,0 +1,38 @@
+#VRML_SIM R2023b utf8
+
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/backgrounds/protos/TexturedBackground.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/backgrounds/protos/TexturedBackgroundLight.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/floors/protos/RectangleArena.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/robots/mobsya/thymio/protos/Thymio2.proto"
+
+WorldInfo {
+  info [
+    "Thymio II Educational Robot Simulation"
+    "Reactive behaviors and line following"
+  ]
+  title "Thymio Playground"
+  basicTimeStep 16
+}
+Viewpoint {
+  orientation -0.5 0.5 0.7 1.8
+  position 0 -1 1
+}
+TexturedBackground {
+}
+TexturedBackgroundLight {
+}
+RectangleArena {
+  floorSize 1.5 1.5
+  floorTileSize 0.5 0.5
+  wallHeight 0.05
+  floorAppearance PBRAppearance {
+    baseColor 0.9 0.9 0.9
+    roughness 1
+    metalness 0
+  }
+}
+Thymio2 {
+  translation 0 0 0
+  name "Thymio II"
+  controller "simulink_control_app"
+}
