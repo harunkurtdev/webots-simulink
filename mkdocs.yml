@@ -54,6 +54,7 @@ nav:
 
 theme:
   name: material
+  custom_dir: docs/overrides
   font:
     text: Merriweather Sans
     code: Red Hat Mono
